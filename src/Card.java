@@ -8,7 +8,7 @@ public class Card {
     private final Color color;
 
     //Constructs a random card from the initialized Value and Color enums.
-    public Card(Color color, Value value) {
+    public Card() {
         Random random = new Random();
         this.color = Color.values()[random.nextInt(Color.values().length)];
         this.value = Value.values()[random.nextInt(Value.values().length)];
