@@ -25,7 +25,7 @@ public class Card {
     }
 
     //Returns a string representation of the card. Returns value and color if the value of the card is not a wildcard.
-    //Returns value of the card only if card is a wildcard since color is irrelevant.
+    //if value of the card is a wildcard then it returns only the value of the card since color is irrelevant.
     public String stringCard(){
         if(value == Value.WILD){
             return "A" + value;
