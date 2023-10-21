@@ -5,8 +5,6 @@
 import java.util.ArrayList;
 public class Player {
     private Hand hand;      // A player's hand made up of cards
-    private ArrayList<Player> playerList; //List of players
-    private int numPlayer = 0; //Keep track of the number of players
     private int score;      // Player's score
     private boolean unoCalled;  // Indicates whether Uno has been called by the player
 
@@ -18,15 +16,6 @@ public class Player {
         this.score = 0;        // Initialize the player's score
         this.unoCalled = false; // Uno is initially not called
     }
-
-    /**
-    public Player(int i){
-        playerList = new ArrayList<Player>();
-        for(int j =0; j < i; j++){
-            playerList.add(new Player());
-            numPlayer += 1;
-        }
-    } */
 
     /**
      * Gets the player's current score.
