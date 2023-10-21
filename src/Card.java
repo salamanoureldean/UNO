@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class Card {
-    public enum Value{ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, REVERSE, SKIP, WILD, WILD_DRAW_TWO_CARDS};
+    public enum Value{ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, REVERSE, SKIP, WILD};
     public enum Color{RED, GREEN, BLUE, YELLOW};
 
     private final Value value;
