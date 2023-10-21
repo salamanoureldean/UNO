@@ -5,10 +5,12 @@ public class Game {
     /**
      * Initializing variables in order to perform the play function
      */
-    ArrayList<Player> playersInGame;
-    boolean gameOn = true;
-    Scanner userInput1;
-    String menuInput;
+    private ArrayList<Player> playersInGame;
+    private boolean gameOn = true; //Probably will end up deleting
+    private static boolean winner = false;
+    private Scanner userInput1;
+    private String menuInput;
+    private Card currentCard;
 
     public Game(){}
 
@@ -117,8 +119,40 @@ public class Game {
         }
     }
 
-    public void gameStart(){
+    public void playDisplay(){
 
+    }
+
+    //Do this Mahad
+    public boolean winner(){
+        return true;
+    }
+
+    public void gameStart(){
+        int i = 0;
+        while(winner){
+            //playDisplay
+
+            //Prompt what to play, Draw card or place (Allow player to choose)
+
+
+            //check if playable
+
+
+            //cardFunction
+
+
+            //Rotating players
+            if (i + 1 > playersInGame.size()){
+                i = 0;
+            }
+            else{
+                i += 1;
+            }
+
+            //Is winner will be placed here
+
+        }
     }
 
 }

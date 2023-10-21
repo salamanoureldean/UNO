@@ -5,7 +5,7 @@ public class Card {
     public enum Color{RED, GREEN, BLUE, YELLOW};
 
     private final Value value;
-    private final Color color;
+    private Color color;
 
     //Constructs a random card from the initialized Value and Color enums.
     public Card() {
@@ -22,6 +22,11 @@ public class Card {
     //Returns the randomized value of the card.
     public Value getValue(){
         return value;
+    }
+
+    //Sets color variable
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     //Returns a string representation of the card. Returns value and color if the value of the card is not a wildcard.
