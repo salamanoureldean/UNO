@@ -169,7 +169,7 @@ public class Game {
                 break;
             case WILD:
                 Scanner wildInput = new Scanner(System.in);
-                System.out.println("Choose a color\n: R, G, B, Y\n");
+                System.out.println("Choose a color: R, G, B, Y\n");
                 String newColor = wildInput.nextLine().toUpperCase();
 
                 // Changing current color based on user input
@@ -186,9 +186,7 @@ public class Game {
                     currentCard.setColor(Card.Color.YELLOW);
                 }
                 break;
-            case WILD_DRAW_TWO
-            }
-
+            //case WILD_DRAW_TWO
         }
     }
 }
