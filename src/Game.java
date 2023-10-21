@@ -9,8 +9,8 @@ public class Game {
     private ArrayList<Player> playersInGame;
     private boolean gameOn = true; //Probably will end up deleting
     private static boolean winner = false;
-    private Scanner userInput1;
-    private String menuInput;
+    private Scanner userInput;
+    private String userInputText;
     private Card currentCard;
     private int currentTurn = 0;
 
@@ -27,16 +27,16 @@ public class Game {
                 "(R)ules\n" +
                 "(Q)uit\n" +
                 "(H)elp\n");
-        userInput1 = new Scanner(System.in);
+        userInput = new Scanner(System.in);
         System.out.print("Please enter a command: ");
-        menuInput = userInput1.nextLine();
-        if (menuInput.toUpperCase().equals("P")) {
+        userInputText = userInput.nextLine();
+        if (userInputText.toUpperCase().equals("P")) {
             playMenu();
-        } else if (menuInput.toUpperCase().equals("R")) {
+        } else if (userInputText.toUpperCase().equals("R")) {
             rulesMenu();
-        } else if (menuInput.toUpperCase().equals("Q")) {
+        } else if (userInputText.toUpperCase().equals("Q")) {
             quit();
-        } else if (menuInput.toUpperCase().equals("H") || menuInput.toUpperCase().equals("HELP")) {
+        } else if (userInputText.toUpperCase().equals("H") || userInputText.toUpperCase().equals("HELP")) {
             helpMenu();
         } else {
             System.out.println("Thats not a valid option try again....");
@@ -50,9 +50,9 @@ public class Game {
                 "(2) Players\n" +
                 "(3) Players\n" +
                 "(4) Players\n");
-        userInput1 = new Scanner(System.in);
+        userInput = new Scanner(System.in);
         System.out.print("Enter the amount of players you want to play with: ");
-        playerInput = userInput1.nextLine();
+        playerInput = userInput.nextLine();
         if (playerInput.equals("2")) {
             playersInGame = new ArrayList<Player>();
             for (int j = 0; j < 2; j++) {
@@ -82,9 +82,9 @@ public class Game {
         System.out.println("Google the rules!\n" +
                 "Menu Options:" +
                 "(B)ack");
-        userInput1 = new Scanner(System.in);
+        userInput = new Scanner(System.in);
         System.out.print("Please enter a command: ");
-        back = userInput1.nextLine();
+        back = userInput.nextLine();
         if (back.toUpperCase().equals("B")) {
             mainMenu();
         } else {
@@ -103,9 +103,9 @@ public class Game {
         System.out.println("To navigate through the menus enter the letter in brackets for the selection,\n" +
                 "you'd like to make, here are your options:\n" +
                 "(B)ack");
-        userInput1 = new Scanner(System.in);
+        userInput = new Scanner(System.in);
         System.out.print("Enter 'B' to go back: ");
-        back = userInput1.nextLine();
+        back = userInput.nextLine();
         if (back.toUpperCase().equals("B")) {
             mainMenu();
         } else {
@@ -114,8 +114,37 @@ public class Game {
         }
     }
 
-    public void playDisplay(){
 
+    public void playDisplay(int playerTurn){
+        System.out.printf("Currently Player %d playing:\n", playerTurn+1);
+        System.out.printf("Cards in hand: ");
+        playersInGame.get(playerTurn).viewHand();
+    }
+
+    public void playPrompt(int index){
+        String input;
+        System.out.print("Options for actions: \n" +
+                "(P)lace\n" +
+                "(D)raw\n" +
+                "(Q)uit\n");
+        userInput = new Scanner(System.in);
+        System.out.print("Please input your option: ");
+        input = userInput.nextLine();
+        if(input.toUpperCase().equals("P")){
+            //Mahad finish this
+            System.out.println("Please select the card you want to place: ");
+            //place(null);
+        }
+        else if(input.toUpperCase().equals("D")){
+            playersInGame.get(index).drawCard();
+        }
+        else if(input.toUpperCase().equals("Q")){
+            quit();
+        }
+        else{
+            System.out.println("Not a valid input try again");
+            playPrompt(index);
+        }
     }
 
     //Do this Mahad
@@ -127,9 +156,9 @@ public class Game {
 
         while(winner){
             //playDisplay
-
+            playDisplay(currentTurn);
             //Prompt what to play, Draw card or place (Allow player to choose)
-
+            playPrompt(currentTurn);
 
             //check if playable
 
