@@ -143,10 +143,10 @@ public class Game {
                         if (cardIndex >= 0 && cardIndex < currentPlayer.getHand().getCards().size()) {
                             Card cardToPlay = currentPlayer.getHand().getCards().get(cardIndex);
                             if (isPlayable(cardToPlay)) {
-                                currentCard = cardToPlay;
                                 cardFunctionality(currentCard);
                                 theDeck.place(cardToPlay);
                                 currentPlayer.playCard(cardToPlay);
+                                currentCard = cardToPlay;
                                 break;
                             } else {
                                 System.out.println("Invalid move. You cannot play this card.");

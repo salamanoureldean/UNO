@@ -1,6 +1,14 @@
+/**
+ * @Author: Abody Majeed 101227327
+ *  Editors:
+ * @Date: 10/22/2023
+ * @Version: 1.00
+ */
+
 import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 
 import java.awt.*;
 
@@ -10,19 +18,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class DeckTest {
-    /**
-     * Worker: Abody
-     * Task: test ordering based off enum, compare size of the deck to set size, test draw and place functions based off sizes not content
-     */
     private static Deck deck;
-    private static int count = 0;
+    private static int count;
     private final static int DECKSIZE = 100;
 
 
-    public DeckTest(){
-
+    public DeckTest(){}
+    @BeforeAll
+    private static void setUp(){
+        count = 0;
     }
-
     @AfterEach
     public static void increment(){
         count += 1;

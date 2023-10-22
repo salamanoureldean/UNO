@@ -7,10 +7,10 @@ public class Hand {
     /**
      *Hand constructor, will randomly select 7 cards into the players hand from a shuffled deck
      */
-    public Hand(Stack<Card> deck){
+    public Hand(Deck deck){
         cards = new ArrayList<Card>();
         for(int i=0;i < 7; i++){
-            cards.add(deck.pop());
+            cards.add(deck.draw());
             cardNum += 1;
         }
     }
@@ -18,8 +18,8 @@ public class Hand {
     /**
      * addCard method, adds a card
      */
-    public void addCard(Stack<Card> deck){
-        cards.add(deck.pop());
+    public void addCard(Deck deck){
+        cards.add(deck.draw());
         cardNum +=1;
     }
 

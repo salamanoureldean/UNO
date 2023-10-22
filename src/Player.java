@@ -14,7 +14,7 @@ public class Player {
     /**
      * Constructs a new player with an empty hand, a score of 0, and Uno not called.
      */
-    public Player(String name, Stack<Card> deck) {
+    public Player(String name, Deck deck) {
         this.hand = new Hand(deck); // Initialize the player's hand
         this.score = 0;        // Initialize the player's score
         this.unoCalled = false; // Uno is initially not called
@@ -68,7 +68,7 @@ public class Player {
     /**
      * Draws a card and adds it to the player's hand.
      */
-    public void drawCard(Stack<Card> deck) {
+    public void drawCard(Deck deck) {
         hand.addCard(deck);
     }
 
