@@ -321,10 +321,15 @@ public class Game {
 
         public void winnerScore(){
             int winnerScore = 0;
+            //Iterating through each player to calculate their hand's score
             for (int i = 0; i < playersInGame.size(); i++) {
                 int sumOfPlayer = 0;
+
+                //Iterating through each card in players (i) hand
                 for (Card card : playersInGame.get(i).getHand().getCards()) {
                     int cardValue = card.getValue().ordinal();
+
+                    //Checking the value of each card (j)
                     if (cardValue >= 0 && cardValue < 10) {
                         sumOfPlayer += cardValue;
                     } else {
@@ -344,6 +349,7 @@ public class Game {
                         }
                     }
                 }
+                //Adding total value of player(i) score into the winner's score
                 winnerScore += sumOfPlayer;
             }
             System.out.println("The Winner has a score of: " + winnerScore);
