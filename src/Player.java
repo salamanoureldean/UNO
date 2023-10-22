@@ -54,6 +54,14 @@ public class Player {
     }
 
     /**
+     * Gets the player's hand
+     * @return Player's hand
+     */
+    public Hand getHand() {
+        return hand;
+    }
+
+    /**
      * Draws a card and adds it to the player's hand.
      */
     public void drawCard() {

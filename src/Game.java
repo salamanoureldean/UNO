@@ -177,6 +177,46 @@ public class Game {
             //Is winner will be placed here
 
         }
+
+        if (currentTurn == 0){
+            currentTurn = playersInGame.size()-1;
+        }
+        else {
+            currentTurn -=1;
+        }
+        int winnerScore = 0;
+        for (int i = 0; i < playersInGame.size(); i++){
+            int sumOfPlayer = 0;
+            for (int j = 0; j < playersInGame.get(i).getHand().getCardNum(); j++ ){
+
+                int cardValue = playersInGame.get(i).getHand().getCards().get(j).getValue().ordinal();
+
+
+                if (cardValue>-1 && cardValue<10){
+                    sumOfPlayer+= playersInGame.get(i).getHand().getCards().get(j).getValue().ordinal();
+
+                }
+                else {
+                    switch (cardValue){
+                        case 10:
+                            sumOfPlayer+= 20;
+                        case 11:
+                            sumOfPlayer+=30;
+                        case 12:
+                            sumOfPlayer+=40;
+                        case 13:
+                            sumOfPlayer+=50;
+
+                    }
+                }
+            }
+
+
+        winnerScore += sumOfPlayer;
+        }
+        System.out.println("The Winner has a score of: " + winnerScore);
+
+
     }
 
     public void cardFunctionality(Card playedCard) {

@@ -56,4 +56,7 @@ public class Hand {
     public int getCardNum() {
         return cardNum;
     }
+    public ArrayList<Card> getCards(){return cards;}
 }
+
+
