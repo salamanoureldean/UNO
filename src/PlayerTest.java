@@ -1,10 +1,13 @@
-import junit.framework.*;
+/**
+
+ @authors: Salama Noureldean 101154365, Pietro Adamvoski 101238885
+ @date: 10/22/2023
+ @version: 1.00
+ */
+
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-//import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.AfterAll;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,8 +1,7 @@
 /**
- * @Author: Abody Majeed 101227327
- *  Editors:
- * @Date: 10/22/2023
- * @Version: 1.00
+ * @author: Abody Majeed 101227327
+ * @date: 10/22/2023
+ * @version: 1.00
  */
 
 import org.junit.Test;

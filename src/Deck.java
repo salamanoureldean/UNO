@@ -1,3 +1,10 @@
+/**
+ * @authors: Abody Majeed 101227327
+ * @editors: Salama Noureldean 101154365
+ * @date: 10/22/2023
+ * @version: 1.00
+ */
+
 import java.util.Collections;
 import java.util.Stack;
 
@@ -5,8 +12,11 @@ public class Deck {
 
     private Stack<Card> completeDeck = new Stack<Card>();
     private Stack<Card> discardPile = new Stack<Card>();
-    public Deck(){
 
+    /**
+     * Constructor for deck class that inititalizes every that will be used in the game
+     */
+    public Deck(){
         //Zeros
         initialize(1, Card.Color.RED, Card.Value.ZERO);
         initialize(1, Card.Color.BLUE, Card.Value.ZERO);
@@ -78,40 +88,76 @@ public class Deck {
         shuffle(completeDeck);
     }
 
+    /**
+     * Draws from the completeDeck Stack
+     * @return the card at the top of the stack
+     */
     public Card draw(){
         return completeDeck.pop();
     }
 
+    /**
+     * places the card on the discard pile
+     * @param toPush, this is the card that will be pushed onto the stack
+     */
     public void place(Card toPush){
         discardPile.push(toPush);
     }
 
+    /**
+     * When deck is zero it the discard pile will become the deck with the exception of the current card
+     * @param currentCard this is the card that will remain in the discard pile and should be the current card being viewed in the game
+     */
     public void deckZero(Card currentCard){
         completeDeck = discardPile;
         completeDeck.pop();
         discardPile.clear();
         discardPile.push(currentCard);
+        shuffle(completeDeck);
     }
+
+    /**
+     * Shuffles a deck
+     * @param toShuffle the deck that will be shuffled
+     */
     public void shuffle(Stack<Card> toShuffle){
         Collections.shuffle(toShuffle);
     }
 
+    /**
+     * This will initialize various cards for whatever amount of times are passed through to this variable
+     * @param amount amount of cards you want as an int
+     * @param colorOfCard the color of the card as a Card.Color
+     * @param valueOfCard value of the card as a Card.Value
+     */
     public void initialize(int amount, Card.Color colorOfCard, Card.Value valueOfCard){
         for(int i=0; i < amount; i++){
             completeDeck.push(new Card(valueOfCard, colorOfCard));
         }
     }
 
+    /**
+     * If the card is zero it will call the isZero function
+     * @param currentCard the current card that is being played in the game
+     */
     public void isZero(Card currentCard){
         if(completeDeck.size() == 0){
             deckZero(currentCard);
         }
     }
 
+    /**
+     * Returns the deck stack
+     * @return the deck will be returned as a stack
+     */
     public Stack<Card> getCompleteDeck() {
         return completeDeck;
     }
 
+    /**
+     * Returns the discard pile stack
+     * @return the discard pile will be returned as a stack
+     */
     public Stack<Card> getDiscardPile() {
         return discardPile;
     }

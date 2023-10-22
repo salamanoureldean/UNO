@@ -1,5 +1,9 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+/**
+ * @author: Mahad Mohamed Yonis 101226808
+ * @editor: Abody Majeed 101227327
+ * @date: 10/22/2023
+ * @version: 1.00
+ */
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.

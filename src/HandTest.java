@@ -1,6 +1,5 @@
 /**
  * @Author: Abody Majeed 101227327
- *  Editors:
  * @Date: 10/22/2023
  * @Version: 1.00
  */
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class HandTest {
 

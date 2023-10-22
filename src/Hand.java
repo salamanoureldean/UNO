@@ -1,3 +1,10 @@
+/**
+ * @author: Abody Majeed 101227327
+ * @editor: Salama Noureldean 101154365
+ * @date: 10/22/2023
+ * @version: 1.00
+ */
+
 import java.util.ArrayList;
 import java.util.Stack;
 public class Hand {
@@ -14,6 +21,12 @@ public class Hand {
             cardNum += 1;
         }
     }
+
+    /**
+     * Constructor that allows for
+     * @param deck
+     * @param num
+     */
     public Hand(Deck deck, int num){
         cards = new ArrayList<Card>();
         for(int i=0;i < num; i++){
@@ -63,6 +76,11 @@ public class Hand {
     public int getCardNum() {
         return cardNum;
     }
+
+    /**
+     * returns the arraylist of cards
+     * @return an array of cards
+     */
     public ArrayList<Card> getCards(){return cards;}
 }
 

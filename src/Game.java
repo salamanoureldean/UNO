@@ -1,3 +1,8 @@
+/**
+ * @author: Abody Majeed 101227327, Mahad Mohamed Yonis 101226808, Salama Noureldean 101154365, Pietro Adamvoski 101238885
+ * @date: 10/22/2023
+ * @version: 1.00
+ */
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Collections;
@@ -11,15 +16,24 @@ public class Game {
     private Card currentCard;
     private int currentTurn = 0;
 
+    /**
+     * Game constructor
+     */
     public Game() {
         theDeck = new Deck();
         mainMenu();
     }
 
+    /**
+     * Play function which calls the main menu
+     */
     public void play() {
         mainMenu();
     }
 
+    /**
+     * Main menu function which allows for play, viewing the rules, quitting/exiting the game, and a help feature which shows how to use the UI
+     */
     public void mainMenu() {
         System.out.printf("Main Menu:\n" +
                 "(P)lay\n" +
@@ -43,6 +57,9 @@ public class Game {
         }
     }
 
+    /**
+     * Play menu which allows for choosing between 2-4 players to play with and calls the gameStart function
+     */
     public void playMenu() {
         String playerInput;
         System.out.println("How many players are there?:\n" +
@@ -72,6 +89,9 @@ public class Game {
         }
     }
 
+    /**
+     * Goes over the rules and allows for you to go back
+     */
     public void rulesMenu() {
         System.out.println("Google the rules!\n" +
                 "Menu Options:\n" +
@@ -87,11 +107,17 @@ public class Game {
         }
     }
 
+    /**
+     * allows for the user to quit
+     */
     public void quit() {
         System.out.println("Thank you for playing UNO!");
         System.exit(0);
     }
 
+    /**
+     * Teaches the user how to go through the UI
+     */
     public void helpMenu() {
         System.out.println("To navigate through the menus, enter the letter in brackets for the selection,\n" +
                 "you'd like to make. Here are your options:\n" +
@@ -107,24 +133,31 @@ public class Game {
         }
     }
 
-    public void playDisplay(int playerTurn) {
-        System.out.printf("Currently Player %d playing:\n", playerTurn + 1);
+    /**
+     * Displays the current player playing every round and shows the card in their hands
+     * @param playerTurn - should be which player is playing
+     */
+    public void playDisplay(Player playerTurn) {
+        System.out.printf("Currently Player %s playing:\n", playerTurn.getName());
         System.out.print("Cards in hand: ");
-        playersInGame.get(playerTurn).viewHand();
+        playerTurn.viewHand();
     }
 
+    /**
+     * brings up a prompt for the user to perform an action and performs the function based on the response
+     */
     public void playPrompt() {
         Player currentPlayer = playersInGame.get(currentTurn);
 
         // Prompt the player to choose an action
         while (true) {
             System.out.println("Current Card is: " + currentCard.stringCard());
-            playDisplay(currentTurn);
+            playDisplay(playersInGame.get(currentTurn));
             System.out.println();
             System.out.println(currentPlayer.getName() + ", choose your action:");
             System.out.println("  (D)raw a card");
             System.out.println("  (P)lay a card");
-            System.out.println("  (U)no");
+            System.out.println("  (C)all Uno Against Other Player");
 
 
             String playerInput = userInput.nextLine();
@@ -145,6 +178,7 @@ public class Game {
                             Card cardToPlay = currentPlayer.getHand().getCards().get(cardIndex);
                             if (isPlayable(cardToPlay)) {
                                 if (currentPlayer.getHand().getCards().size() == 2) {
+                                    System.out.println(currentPlayer.getName() + " has Uno!");
                                     System.out.print("You have one card left! Do you want to call 'Uno'? (Y/N): ");
                                     String unoInput = userInput.nextLine();
                                     if (unoInput.equalsIgnoreCase("Y")) {
@@ -166,40 +200,47 @@ public class Game {
                         System.out.println("Invalid input. Please enter a valid card index.");
                     }
                 }
-            } else if (playerInput.equalsIgnoreCase("U")) {
-                if (playerInput.equalsIgnoreCase("U")) {
-                    if (!currentPlayer.hasUno()) {
-                        System.out.println(currentPlayer.getName() + " called Uno Incorrectly.");
-                    } else {
-                        System.out.println(currentPlayer.getName() + " called Uno!");
-                        currentPlayer.callUno();
-                    }
-                } else {
-                    System.out.println("Invalid input. Please choose (D)raw, (P)lay, or (U)no if eligible.");
-                }
-
-                // Check if other players forgot to call Uno against the current player
-                for (int i = 0; i < playersInGame.size(); i++) {
-                    if (i == currentTurn) {
-                        continue; // Skip the current player
-                    }
-
-                    Player nextPlayer = playersInGame.get(i);
-
-                    if (nextPlayer.getHand().getCards().size() == 1 && !nextPlayer.hasUno()) {
-                        System.out.println(nextPlayer.getName() + " forgot to call Uno!");
-                        System.out.println(currentPlayer.getName() + " calls Uno against " + nextPlayer.getName() + "! " +
-                                nextPlayer.getName() + " draws 4 cards.");
-
-                        // Draw 4 cards for the next player
-                        for (int j = 0; j < 4; j++) {
-                            nextPlayer.drawCard(theDeck);
-                        }
-                    }
-                }
+            } else if (playerInput.equalsIgnoreCase("C")) {
+                // Call Uno against another player
+                callUnoAgainst(currentPlayer);
             }
         }
     }
+
+    /**
+     * Implements the function of calling uno against a player
+     * @param currentPlayer
+     */
+    public void callUnoAgainst(Player currentPlayer) {
+        System.out.print("Select a player to call Uno against (Enter player number): ");
+        int playerNumber;
+        try {
+            playerNumber = Integer.parseInt(userInput.nextLine()) - 1; // Adjust for 0-based indexing
+            if (playerNumber >= 0 && playerNumber < playersInGame.size() && playerNumber != currentTurn) {
+                Player targetPlayer = playersInGame.get(playerNumber);
+
+                if (targetPlayer.getHand().getCards().size() == 1 && !targetPlayer.hasUno()) {
+                    System.out.println(targetPlayer.getName() + " forgot to call Uno!");
+                    System.out.println(currentPlayer.getName() + " calls Uno against " + targetPlayer.getName() + "! " +
+                            targetPlayer.getName() + " draws 4 cards.");
+
+                    // Draw 4 cards for the target player
+                    for (int i = 0; i < 4; i++) {
+                        targetPlayer.drawCard(theDeck);
+                    }
+                } else {
+                    System.out.println(targetPlayer.getName() + " has more than one card or has already called Uno.");
+                }
+            } else {
+                System.out.println("Invalid player number. Please choose a valid player.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a valid player number.");
+        }
+    }
+    /**
+     * checks for the winner
+     */
     public void winner() {
         for (Player player : playersInGame) {
             if (player.getHand().getCards().isEmpty()) {
@@ -208,6 +249,12 @@ public class Game {
             }
         }
     }
+
+    /**
+     * checks if the card to be placed is playable
+     * @param card you want to place
+     * @return true if playable false if not playable
+     */
     public boolean isPlayable(Card card) {
         if (currentCard == null) {
             // If no card has been played yet, any card is playable.
@@ -225,6 +272,9 @@ public class Game {
         return false;
     }
 
+    /**
+     * Manages all of the other functions and centralizes them to make the game work
+     */
     public void gameStart() {
         // Draw the first card to set the current card
         currentCard = theDeck.draw();
@@ -241,35 +291,15 @@ public class Game {
             winner();
         }
 
-        int winnerScore = 0;
-        for (int i = 0; i < playersInGame.size(); i++) {
-            int sumOfPlayer = 0;
-            for (Card card : playersInGame.get(i).getHand().getCards()) {
-                int cardValue = card.getValue().ordinal();
-                if (cardValue >= 0 && cardValue < 10) {
-                    sumOfPlayer += cardValue;
-                } else {
-                    switch (cardValue) {
-                        case 10:
-                            sumOfPlayer += 20;
-                            break;
-                        case 11:
-                            sumOfPlayer += 30;
-                            break;
-                        case 12:
-                            sumOfPlayer += 40;
-                            break;
-                        case 13:
-                            sumOfPlayer += 50;
-                            break;
-                    }
-                }
-            }
-            winnerScore += sumOfPlayer;
-        }
-        System.out.println("The Winner has a score of: " + winnerScore);
+        winnerScore();
+
+
     }
 
+    /**
+     * Imeplements the special card functionalities such as REVERSE, WILD, SKIP
+     * @param playedCard the special card to be played
+     */
     public void cardFunctionality(Card playedCard) {
             Card.Value cardValue = playedCard.getValue();
             //Card.Color cardColor = playedCard.getColor();
@@ -341,5 +371,44 @@ public class Game {
                     }
                     break;
             }
+        }
+
+    /**
+     * Calculates and displays the winners score
+     */
+    public void winnerScore(){
+            int winnerScore = 0;
+            //Iterating through each player to calculate their hand's score
+            for (int i = 0; i < playersInGame.size(); i++) {
+                int sumOfPlayer = 0;
+
+                //Iterating through each card in players (i) hand
+                for (Card card : playersInGame.get(i).getHand().getCards()) {
+                    int cardValue = card.getValue().ordinal();
+
+                    //Checking the value of each card (j)
+                    if (cardValue >= 0 && cardValue < 10) {
+                        sumOfPlayer += cardValue;
+                    } else {
+                        switch (cardValue) {
+                            case 10:
+                                sumOfPlayer += 20;
+                                break;
+                            case 11:
+                                sumOfPlayer += 30;
+                                break;
+                            case 12:
+                                sumOfPlayer += 40;
+                                break;
+                            case 13:
+                                sumOfPlayer += 50;
+                                break;
+                        }
+                    }
+                }
+                //Adding total value of player(i) score into the winner's score
+                winnerScore += sumOfPlayer;
+            }
+            System.out.println("The Winner has a score of: " + winnerScore);
         }
     }

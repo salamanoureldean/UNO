@@ -1,6 +1,8 @@
 /**
- * Represents a player in the Uno card game.
+ * @author:  Mahad Mohamed Yonis 10122680, Pietro Adamvoski 101238885
+ * @editors: Abody Majeed 101227327, Salama Noureldean 101154365
  * @version 1.0
+ * @date: 10/22/2023
  */
 import java.util.ArrayList;
 import java.util.Stack;
@@ -115,16 +117,9 @@ public class Player {
     }
 
     /**
-     * Updates the player's score based on whether they have won the round.
-     *
-     * @param hasWon True if the player has won the round; otherwise, false.
+     * Getter for the name
+     * @return players name
      */
-    public void updateScore(boolean hasWon) {
-        if (hasWon) {
-            score += 1; // Increase the score by 1 if the player has won.
-        }
-    }
-
     public String getName() {
         return this.name;
     }
