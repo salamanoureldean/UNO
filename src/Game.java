@@ -143,6 +143,13 @@ public class Game {
                         if (cardIndex >= 0 && cardIndex < currentPlayer.getHand().getCards().size()) {
                             Card cardToPlay = currentPlayer.getHand().getCards().get(cardIndex);
                             if (isPlayable(cardToPlay)) {
+                                if (currentPlayer.getHand().getCards().size() == 2) {
+                                    System.out.print("You have one card left! Do you want to call 'Uno'? (Y/N): ");
+                                    String unoInput = userInput.nextLine();
+                                    if (unoInput.equalsIgnoreCase("Y")) {
+                                        currentPlayer.callUno();
+                                    }
+                                }
                                 currentCard = cardToPlay;
                                 cardFunctionality(currentCard);
                                 theDeck.place(cardToPlay);
@@ -220,6 +227,7 @@ public class Game {
     public void gameStart() {
         // Draw the first card to set the current card
         currentCard = theDeck.draw();
+        cardFunctionality(currentCard);
 
         while (!winner) {
             Player currentPlayer = playersInGame.get(currentTurn);
