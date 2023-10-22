@@ -11,8 +11,8 @@ public class Card {
 
         this.value = value;
         this.color = color;
-        }
     }
+
 
 
     //Returns the randomized color of the card.
