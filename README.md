@@ -84,7 +84,7 @@ When you have one card left, you will get prompted to call uno automatically. Th
 
 If a player fails to call Uno when they should have, you can challenge them. To challenge, say "Call Uno" before the challenged player plays their card.
 
-##Contributing
+## Contributing
 
 ### Contributors
 - Mahad Mohaned Yonis
