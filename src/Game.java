@@ -162,8 +162,6 @@ public class Game {
                 if (playerInput.equalsIgnoreCase("U")) {
                     if (!currentPlayer.hasUno()) {
                         System.out.println(currentPlayer.getName() + " called Uno Incorrectly.");
-                        currentPlayer.drawCard(theDeck.getCompleteDeck());
-                        currentPlayer.drawCard(theDeck.getCompleteDeck());
                     } else {
                         System.out.println(currentPlayer.getName() + " called Uno!");
                         currentPlayer.callUno();
