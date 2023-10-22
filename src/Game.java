@@ -273,6 +273,23 @@ public class Game {
                     for (int i = 0; i < 2; i++){
                         nextPlayer.drawCard(theDeck.getCompleteDeck());
                     }
+                    // Changing current color of cards being played based on user input
+                    wildInput = new Scanner(System.in);
+                    System.out.println("Choose a color: R, G, B, Y\n");
+                    newColor = wildInput.nextLine().toUpperCase();
+
+                    if (newColor.equals("R")) {
+                        currentCard.setColor(Card.Color.RED);
+                    }
+                    else if (newColor.equals("G")) {
+                        currentCard.setColor(Card.Color.GREEN);
+                    }
+                    else if (newColor.equals("B")) {
+                        currentCard.setColor(Card.Color.BLUE);
+                    }
+                    else if (newColor.equals("Y")) {
+                        currentCard.setColor(Card.Color.YELLOW);
+                    }
                     break;
             }
         }
