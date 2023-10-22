@@ -8,7 +8,6 @@ public class Card {
     private Color color;
 
     public Card(Value value, Color color) {
-
         this.value = value;
         this.color = color;
     }
