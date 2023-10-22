@@ -112,29 +112,7 @@ public class Game {
         System.out.print("Cards in hand: ");
         playersInGame.get(playerTurn).viewHand();
     }
-    public void callUnoAgainst(int currentPlayerIndex) {
-        Player currentPlayer = playersInGame.get(currentPlayerIndex);
 
-        // Iterate through all players to check if they have one card left and forgot to call Uno
-        for (int i = 0; i < playersInGame.size(); i++) {
-            if (i == currentPlayerIndex) {
-                continue; // Skip the current player
-            }
-
-            Player nextPlayer = playersInGame.get(i);
-
-            if (nextPlayer.getHand().getCards().size() == 1 && !nextPlayer.hasUno()) {
-                System.out.println(nextPlayer.getName() + " forgot to call Uno!");
-                System.out.println(currentPlayer.getName() + " calls Uno against " + nextPlayer.getName() + "! " +
-                        nextPlayer.getName() + " draws 4 cards.");
-
-                // Draw 4 cards for the next player
-                for (int j = 0; j < 4; j++) {
-                    nextPlayer.drawCard(theDeck.getCompleteDeck());
-                }
-            }
-        }
-    }
     public void playPrompt() {
         Player currentPlayer = playersInGame.get(currentTurn);
 
