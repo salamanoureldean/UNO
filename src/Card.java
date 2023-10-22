@@ -1,3 +1,10 @@
+/**
+ * @author: Salama Noureldean 101154365
+ * @editor: Pietro Adamvoski 101238885
+ * @date: 10/22/2023
+ * @version: 1.00
+ */
+
 import java.util.Random;
 
 public class Card {
