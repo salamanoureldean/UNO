@@ -241,33 +241,9 @@ public class Game {
             winner();
         }
 
-        int winnerScore = 0;
-        for (int i = 0; i < playersInGame.size(); i++) {
-            int sumOfPlayer = 0;
-            for (Card card : playersInGame.get(i).getHand().getCards()) {
-                int cardValue = card.getValue().ordinal();
-                if (cardValue >= 0 && cardValue < 10) {
-                    sumOfPlayer += cardValue;
-                } else {
-                    switch (cardValue) {
-                        case 10:
-                            sumOfPlayer += 20;
-                            break;
-                        case 11:
-                            sumOfPlayer += 30;
-                            break;
-                        case 12:
-                            sumOfPlayer += 40;
-                            break;
-                        case 13:
-                            sumOfPlayer += 50;
-                            break;
-                    }
-                }
-            }
-            winnerScore += sumOfPlayer;
-        }
-        System.out.println("The Winner has a score of: " + winnerScore);
+        winnerScore();
+
+
     }
 
     public void cardFunctionality(Card playedCard) {
@@ -341,5 +317,35 @@ public class Game {
                     }
                     break;
             }
+        }
+
+        public void winnerScore(){
+            int winnerScore = 0;
+            for (int i = 0; i < playersInGame.size(); i++) {
+                int sumOfPlayer = 0;
+                for (Card card : playersInGame.get(i).getHand().getCards()) {
+                    int cardValue = card.getValue().ordinal();
+                    if (cardValue >= 0 && cardValue < 10) {
+                        sumOfPlayer += cardValue;
+                    } else {
+                        switch (cardValue) {
+                            case 10:
+                                sumOfPlayer += 20;
+                                break;
+                            case 11:
+                                sumOfPlayer += 30;
+                                break;
+                            case 12:
+                                sumOfPlayer += 40;
+                                break;
+                            case 13:
+                                sumOfPlayer += 50;
+                                break;
+                        }
+                    }
+                }
+                winnerScore += sumOfPlayer;
+            }
+            System.out.println("The Winner has a score of: " + winnerScore);
         }
     }
