@@ -70,10 +70,10 @@ public class Deck {
         initialize(2, Card.Color.YELLOW, Card.Value.REVERSE);
 
         //Wilds
-        initialize(4, null, Card.Value.WILD);
+        initialize(4, Card.Color.BLANK, Card.Value.WILD);
 
         //Wild Draw 2s
-        //initialize(4, null, Card.Value.WILD_DRAW_TWO);
+        initialize(4, Card.Color.BLANK, Card.Value.WILD_DRAW_TWO);
 
         shuffle(completeDeck);
     }

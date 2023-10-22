@@ -2,30 +2,17 @@ import java.util.Random;
 
 public class Card {
     public enum Value{ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, REVERSE, SKIP, WILD, WILD_DRAW_TWO};
-    public enum Color{RED, GREEN, BLUE, YELLOW};
+    public enum Color{RED, GREEN, BLUE, YELLOW, BLANK};
 
     private final Value value;
     private Color color;
 
-    //Constructs a random card from the initialized Value and Color enums.
-    public Card() {
-        Random random = new Random();
-        this.value = Value.values()[random.nextInt(Value.values().length)];
-        // If the card is not a wildcard, give it a color.
-        if(value != Value.WILD && value != Value.WILD_DRAW_TWO){
-            this.color = Color.values()[random.nextInt(Color.values().length)];
-        }
-    }
     public Card(Value value, Color color) {
 
         this.value = value;
-        // If the card is not a wildcard, give it a color.
-        if (value != Value.WILD && value != Value.WILD_DRAW_TWO) {
-            this.color = color;
-        } else {
-            this.color = null;
-        }
+        this.color = color;
     }
+
 
 
     //Returns the randomized color of the card.
