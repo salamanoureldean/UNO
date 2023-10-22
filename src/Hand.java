@@ -21,6 +21,12 @@ public class Hand {
             cardNum += 1;
         }
     }
+
+    /**
+     * Constructor that allows for
+     * @param deck
+     * @param num
+     */
     public Hand(Deck deck, int num){
         cards = new ArrayList<Card>();
         for(int i=0;i < num; i++){

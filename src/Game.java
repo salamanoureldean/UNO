@@ -1,3 +1,8 @@
+/**
+ * @author: Abody Majeed 101227327, Mahad, Salama, Pietro
+ * @date: 10/22/2023
+ * @version: 1.00
+ */
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Collections;
@@ -11,15 +16,24 @@ public class Game {
     private Card currentCard;
     private int currentTurn = 0;
 
+    /**
+     * Game constructor
+     */
     public Game() {
         theDeck = new Deck();
         mainMenu();
     }
 
+    /**
+     * Play function which calls the main menu
+     */
     public void play() {
         mainMenu();
     }
 
+    /**
+     * Main menu function which allows for play, viewing the rules, quitting/exiting the game, and a help feature which shows how to use the UI
+     */
     public void mainMenu() {
         System.out.printf("Main Menu:\n" +
                 "(P)lay\n" +
@@ -43,6 +57,9 @@ public class Game {
         }
     }
 
+    /**
+     * Play menu which allows for choosing between 2-4 players to play with and calls the gameStart function
+     */
     public void playMenu() {
         String playerInput;
         System.out.println("How many players are there?:\n" +
@@ -72,6 +89,9 @@ public class Game {
         }
     }
 
+    /**
+     * Goes over the rules and allows for you to go back
+     */
     public void rulesMenu() {
         System.out.println("Google the rules!\n" +
                 "Menu Options:\n" +
@@ -87,11 +107,17 @@ public class Game {
         }
     }
 
+    /**
+     * allows for the user to quit
+     */
     public void quit() {
         System.out.println("Thank you for playing UNO!");
         System.exit(0);
     }
 
+    /**
+     * Teaches the user how to go through the UI
+     */
     public void helpMenu() {
         System.out.println("To navigate through the menus, enter the letter in brackets for the selection,\n" +
                 "you'd like to make. Here are your options:\n" +
@@ -107,10 +133,14 @@ public class Game {
         }
     }
 
-    public void playDisplay(int playerTurn) {
-        System.out.printf("Currently Player %d playing:\n", playerTurn + 1);
+    /**
+     * Displays the current player playing every round and shows the card in their hands
+     * @param playerTurn - should be which player is playing
+     */
+    public void playDisplay(Player playerTurn) {
+        System.out.printf("Currently Player %d playing:\n", playerTurn.getName());
         System.out.print("Cards in hand: ");
-        playersInGame.get(playerTurn).viewHand();
+        playerTurn.viewHand();
     }
 
     public void playPrompt() {
@@ -119,7 +149,7 @@ public class Game {
         // Prompt the player to choose an action
         while (true) {
             System.out.println("Current Card is: " + currentCard.stringCard());
-            playDisplay(currentTurn);
+            playDisplay(playersInGame.get(currentTurn));
             System.out.println();
             System.out.println(currentPlayer.getName() + ", choose your action:");
             System.out.println("  (D)raw a card");
