@@ -37,7 +37,7 @@ public class Hand {
      */
     public void printAll(){
         for(Card card : cards){
-            System.out.print(card.getColor().toString() + " " + card.getValue().toString() + ", ");
+            System.out.print(card.stringCard() + ", ");
         }
     }
 
