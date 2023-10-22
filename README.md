@@ -87,8 +87,8 @@ If a player fails to call Uno when they should have, you can challenge them. To 
 ## Contributing
 
 ### Contributors
-- Mahad Mohaned Yonis
-- Abody Majeed
+- Mahad Mohamed Yonis
+- Abody Majeed - JavaDocs
 - Salama Noureldean
 - Pietro Adamvoski
 
