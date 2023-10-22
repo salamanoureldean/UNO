@@ -37,8 +37,16 @@ public class Hand {
      */
     public void printAll(){
         for(Card card : cards){
-            System.out.print(card.stringCard() + ", ");
+            System.out.print(card.getColor().toString() + " " + card.getValue().toString() + ", ");
         }
+    }
+
+    /**
+     * getHand will return whatever is in the hand
+     * @return - the arraylist
+     */
+    public ArrayList<Card> getHand() {
+        return cards;
     }
 
     /**
@@ -48,11 +56,6 @@ public class Hand {
     public int getCardNum() {
         return cardNum;
     }
-
-    /**
-     * getCards will return whatever is in the hand
-     * @return - the arraylist
-     */
     public ArrayList<Card> getCards(){return cards;}
 }
 

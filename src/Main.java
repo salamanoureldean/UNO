@@ -5,8 +5,10 @@ import java.util.Scanner;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        Game game1 = new Game();
-        game1.play();
+        Hand newHand = new Hand();
+        newHand.printAll();
+        //Game game1 = new Game();
+        //game1.play();
 
     }
 }
