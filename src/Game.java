@@ -124,7 +124,7 @@ public class Game {
             System.out.println(currentPlayer.getName() + ", choose your action:");
             System.out.println("  (D)raw a card");
             System.out.println("  (P)lay a card");
-            System.out.println("  (U)no");
+            System.out.println("  (C)all Uno Against Other Player");
 
 
             String playerInput = userInput.nextLine();
@@ -145,6 +145,7 @@ public class Game {
                             Card cardToPlay = currentPlayer.getHand().getCards().get(cardIndex);
                             if (isPlayable(cardToPlay)) {
                                 if (currentPlayer.getHand().getCards().size() == 2) {
+                                    System.out.println(currentPlayer.getName() + " has Uno!");
                                     System.out.print("You have one card left! Do you want to call 'Uno'? (Y/N): ");
                                     String unoInput = userInput.nextLine();
                                     if (unoInput.equalsIgnoreCase("Y")) {
@@ -166,40 +167,44 @@ public class Game {
                         System.out.println("Invalid input. Please enter a valid card index.");
                     }
                 }
-            } else if (playerInput.equalsIgnoreCase("U")) {
-                if (playerInput.equalsIgnoreCase("U")) {
-                    if (!currentPlayer.hasUno()) {
-                        System.out.println(currentPlayer.getName() + " called Uno Incorrectly.");
-                    } else {
-                        System.out.println(currentPlayer.getName() + " called Uno!");
-                        currentPlayer.callUno();
-                    }
-                } else {
-                    System.out.println("Invalid input. Please choose (D)raw, (P)lay, or (U)no if eligible.");
-                }
-
-                // Check if other players forgot to call Uno against the current player
-                for (int i = 0; i < playersInGame.size(); i++) {
-                    if (i == currentTurn) {
-                        continue; // Skip the current player
-                    }
-
-                    Player nextPlayer = playersInGame.get(i);
-
-                    if (nextPlayer.getHand().getCards().size() == 1 && !nextPlayer.hasUno()) {
-                        System.out.println(nextPlayer.getName() + " forgot to call Uno!");
-                        System.out.println(currentPlayer.getName() + " calls Uno against " + nextPlayer.getName() + "! " +
-                                nextPlayer.getName() + " draws 4 cards.");
-
-                        // Draw 4 cards for the next player
-                        for (int j = 0; j < 4; j++) {
-                            nextPlayer.drawCard(theDeck);
-                        }
-                    }
-                }
+            } else if (playerInput.equalsIgnoreCase("C")) {
+                // Call Uno against another player
+                callUnoAgainst(currentPlayer);
             }
         }
     }
+
+
+
+
+    public void callUnoAgainst(Player currentPlayer) {
+        System.out.print("Select a player to call Uno against (Enter player number): ");
+        int playerNumber;
+        try {
+            playerNumber = Integer.parseInt(userInput.nextLine()) - 1; // Adjust for 0-based indexing
+            if (playerNumber >= 0 && playerNumber < playersInGame.size() && playerNumber != currentTurn) {
+                Player targetPlayer = playersInGame.get(playerNumber);
+
+                if (targetPlayer.getHand().getCards().size() == 1 && !targetPlayer.hasUno()) {
+                    System.out.println(targetPlayer.getName() + " forgot to call Uno!");
+                    System.out.println(currentPlayer.getName() + " calls Uno against " + targetPlayer.getName() + "! " +
+                            targetPlayer.getName() + " draws 4 cards.");
+
+                    // Draw 4 cards for the target player
+                    for (int i = 0; i < 4; i++) {
+                        targetPlayer.drawCard(theDeck);
+                    }
+                } else {
+                    System.out.println(targetPlayer.getName() + " has more than one card or has already called Uno.");
+                }
+            } else {
+                System.out.println("Invalid player number. Please choose a valid player.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a valid player number.");
+        }
+    }
+
     public void winner() {
         for (Player player : playersInGame) {
             if (player.getHand().getCards().isEmpty()) {
