@@ -3,6 +3,8 @@
  * @version 1.0
  */
 import java.util.ArrayList;
+import java.util.Stack;
+
 public class Player {
     private Hand hand;      // A player's hand made up of cards
     private int score;      // Player's score
@@ -12,8 +14,8 @@ public class Player {
     /**
      * Constructs a new player with an empty hand, a score of 0, and Uno not called.
      */
-    public Player(String name) {
-        this.hand = new Hand(); // Initialize the player's hand
+    public Player(String name, Stack<Card> deck) {
+        this.hand = new Hand(deck); // Initialize the player's hand
         this.score = 0;        // Initialize the player's score
         this.unoCalled = false; // Uno is initially not called
         this.name = name;
@@ -66,8 +68,8 @@ public class Player {
     /**
      * Draws a card and adds it to the player's hand.
      */
-    public void drawCard() {
-        hand.addCard();
+    public void drawCard(Stack<Card> deck) {
+        hand.addCard(deck);
     }
 
     /**
