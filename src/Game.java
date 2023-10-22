@@ -130,7 +130,7 @@ public class Game {
             String playerInput = userInput.nextLine();
             if (playerInput.equalsIgnoreCase("D")) {
                 // Draw a card
-                currentPlayer.drawCard(theDeck.getCompleteDeck());
+                currentPlayer.drawCard(theDeck);
                 break;
             } else if (playerInput.equalsIgnoreCase("P")) {
                 if (currentPlayer.getHand().getCards().isEmpty()) {
@@ -185,7 +185,7 @@ public class Game {
 
                         // Draw 4 cards for the next player
                         for (int j = 0; j < 4; j++) {
-                            nextPlayer.drawCard(theDeck.getCompleteDeck());
+                            nextPlayer.drawCard(theDeck);
                         }
                     }
                 }
@@ -302,7 +302,7 @@ public class Game {
                     int nextPlayerIndex = (currentTurn + 1) % playersInGame.size();
                     Player nextPlayer = playersInGame.get(nextPlayerIndex);
                     for (int i = 0; i < 2; i++){
-                        nextPlayer.drawCard(theDeck.getCompleteDeck());
+                        nextPlayer.drawCard(theDeck);
                     }
                     // Changing current color of cards being played based on user input
                     wildInput = new Scanner(System.in);
