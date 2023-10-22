@@ -8,13 +8,15 @@ public class Player {
     private int score;      // Player's score
     private boolean unoCalled;  // Indicates whether Uno has been called by the player
 
+    private String name;
     /**
      * Constructs a new player with an empty hand, a score of 0, and Uno not called.
      */
-    public Player() {
+    public Player(String name) {
         this.hand = new Hand(); // Initialize the player's hand
         this.score = 0;        // Initialize the player's score
         this.unoCalled = false; // Uno is initially not called
+        this.name = name;
     }
 
     /**
@@ -109,5 +111,9 @@ public class Player {
         if (hasWon) {
             score += 1; // Increase the score by 1 if the player has won.
         }
+    }
+
+    public String getName() {
+        return this.name;
     }
 }

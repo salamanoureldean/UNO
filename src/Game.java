@@ -1,22 +1,17 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Collections;
+
 public class Game {
-
-    /**
-     * Initializing variables in order to perform the play function
-     */
-
     private Deck theDeck;
     private ArrayList<Player> playersInGame;
-    private boolean gameOn = true; //Probably will end up deleting
     private boolean winner = false;
     private Scanner userInput;
-    private String userInputText;
     private Card currentCard;
     private int currentTurn = 0;
 
     public Game() {
+        theDeck = new Deck();
         mainMenu();
     }
 
@@ -32,17 +27,17 @@ public class Game {
                 "(H)elp\n");
         userInput = new Scanner(System.in);
         System.out.print("Please enter a command: ");
-        userInputText = userInput.nextLine();
-        if (userInputText.toUpperCase().equals("P")) {
+        String userInputText = userInput.nextLine();
+        if (userInputText.equalsIgnoreCase("P")) {
             playMenu();
-        } else if (userInputText.toUpperCase().equals("R")) {
+        } else if (userInputText.equalsIgnoreCase("R")) {
             rulesMenu();
-        } else if (userInputText.toUpperCase().equals("Q")) {
+        } else if (userInputText.equalsIgnoreCase("Q")) {
             quit();
-        } else if (userInputText.toUpperCase().equals("H") || userInputText.toUpperCase().equals("HELP")) {
+        } else if (userInputText.equalsIgnoreCase("H") || userInputText.equalsIgnoreCase("HELP")) {
             helpMenu();
         } else {
-            System.out.println("Thats not a valid option try again....");
+            System.out.println("That's not a valid option, please try again.");
             mainMenu();
         }
     }
@@ -54,41 +49,36 @@ public class Game {
                 "(3) Players\n" +
                 "(4) Players\n");
         userInput = new Scanner(System.in);
-        System.out.print("Enter the amount of players you want to play with: ");
+        System.out.print("Enter the number of players you want to play with: ");
         playerInput = userInput.nextLine();
-        if (playerInput.equals("2")) {
+        int playerCount;
+        try {
+            playerCount = Integer.parseInt(playerInput);
+        } catch (NumberFormatException e) {
+            playerCount = 0;
+        }
+
+        if (playerCount >= 2 && playerCount <= 4) {
             playersInGame = new ArrayList<Player>();
-            for (int j = 0; j < 2; j++) {
-                playersInGame.add(new Player());
-            }
-            gameStart();
-        } else if (playerInput.equals("3")) {
-            playersInGame = new ArrayList<Player>();
-            for (int j = 0; j < 3; j++) {
-                playersInGame.add(new Player());
-            }
-            gameStart();
-        } else if (playerInput.equals("4")) {
-            playersInGame = new ArrayList<Player>();
-            for (int j = 0; j < 4; j++) {
-                playersInGame.add(new Player());
+            for (int j = 0; j < playerCount; j++) {
+                String playerName = "Player " + (j + 1);
+                playersInGame.add(new Player(playerName));
             }
             gameStart();
         } else {
-            System.out.println("Not a valid option please try again");
+            System.out.println("Not a valid option, please try again");
             playMenu();
         }
     }
 
     public void rulesMenu() {
-        String back;
         System.out.println("Google the rules!\n" +
-                "Menu Options:" +
+                "Menu Options:\n" +
                 "(B)ack");
         userInput = new Scanner(System.in);
         System.out.print("Please enter a command: ");
-        back = userInput.nextLine();
-        if (back.toUpperCase().equals("B")) {
+        String back = userInput.nextLine();
+        if (back.equalsIgnoreCase("B")) {
             mainMenu();
         } else {
             System.out.println("Please try again...");
@@ -102,14 +92,13 @@ public class Game {
     }
 
     public void helpMenu() {
-        String back;
-        System.out.println("To navigate through the menus enter the letter in brackets for the selection,\n" +
-                "you'd like to make, here are your options:\n" +
+        System.out.println("To navigate through the menus, enter the letter in brackets for the selection,\n" +
+                "you'd like to make. Here are your options:\n" +
                 "(B)ack");
         userInput = new Scanner(System.in);
         System.out.print("Enter 'B' to go back: ");
-        back = userInput.nextLine();
-        if (back.toUpperCase().equals("B")) {
+        String back = userInput.nextLine();
+        if (back.equalsIgnoreCase("B")) {
             mainMenu();
         } else {
             System.out.println("Please try again");
@@ -117,152 +106,167 @@ public class Game {
         }
     }
 
-
-    public void playDisplay(int playerTurn){
-        System.out.printf("Currently Player %d playing:\n", playerTurn+1);
-        System.out.printf("Cards in hand: ");
+    public void playDisplay(int playerTurn) {
+        System.out.printf("Currently Player %d playing:\n", playerTurn + 1);
+        System.out.print("Cards in hand: ");
         playersInGame.get(playerTurn).viewHand();
     }
 
-    public void playPrompt(int index){
-        String input;
-        System.out.print("Options for actions: \n" +
-                "(P)lace\n" +
-                "(D)raw\n" +
-                "(Q)uit\n");
-        userInput = new Scanner(System.in);
-        System.out.print("Please input your option: ");
-        input = userInput.nextLine();
-        if(input.toUpperCase().equals("P")){
-            //Mahad finish this
-            System.out.println("Please select the card you want to place: ");
-            //place(null);
-        }
-        else if(input.toUpperCase().equals("D")){
-            playersInGame.get(index).drawCard();
-        }
-        else if(input.toUpperCase().equals("Q")){
-            quit();
-        }
-        else{
-            System.out.println("Not a valid input try again");
-            playPrompt(index);
-        }
-        //Add score here
+    public void playPrompt() {
+        Player currentPlayer = playersInGame.get(currentTurn);
 
+        System.out.println("Current Card is: " + currentCard.stringCard());
+        playDisplay(currentTurn);
+
+        // Prompt the player to choose an action
+        while (true) {
+            System.out.println();
+            System.out.println(currentPlayer.getName() + ", choose your action:");
+            System.out.println("  (D)raw a card");
+            System.out.println("  (P)lay a card");
+
+            String playerInput = userInput.nextLine();
+            if (playerInput.equalsIgnoreCase("D")) {
+                // Draw a card
+                currentPlayer.drawCard();
+                break;
+            } else if (playerInput.equalsIgnoreCase("P")) {
+                if (currentPlayer.getHand().getCards().isEmpty()) {
+                    System.out.println("Your hand is empty. You cannot play a card.");
+                } else {
+                    System.out.print("Enter the index of the card to play: ");
+                    int cardIndex;
+                    try {
+                        cardIndex = Integer.parseInt(userInput.nextLine());
+                        if (cardIndex >= 0 && cardIndex < currentPlayer.getHand().getCards().size()) {
+                            Card cardToPlay = currentPlayer.getHand().getCards().get(cardIndex);
+                            if (isPlayable(cardToPlay)) {
+                                theDeck.place(cardToPlay);
+                                currentPlayer.playCard(cardToPlay);
+                                currentCard = cardToPlay;
+                                break;
+                            } else {
+                                System.out.println("Invalid move. You cannot play this card.");
+                            }
+                        } else {
+                            System.out.println("Invalid card index. Please try again.");
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid input. Please enter a valid card index.");
+                    }
+                }
+            } else {
+                System.out.println("Invalid input. Please choose (D)raw or (P)lay.");
+            }
+        }
     }
+    public boolean winner() {
+        for (Player player : playersInGame) {
+            if (player.getHand().getCards().isEmpty()) {
+                System.out.println(player.getName() + " has won!");
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean isPlayable(Card card) {
+        if (currentCard == null) {
+            // If no card has been played yet, any card is playable.
+            return true;
+        }
 
-    //Do this Mahad
-    public boolean winner(){
-        return true;
+        if (currentCard.getColor() == card.getColor() || currentCard.getValue() == card.getValue()) {
+            return true;
+        } else if (card.getValue() == Card.Value.WILD || card.getValue() == Card.Value.WILD_DRAW_TWO) {
+            return true;
+        } else if (card.getValue() == Card.Value.SKIP || card.getValue() == Card.Value.REVERSE) {
+            return card.getColor() == currentCard.getColor();
+        }
+
+        return false;
     }
 
     public void gameStart() {
+        // Draw the first card to set the current card
+        currentCard = theDeck.draw();
 
-        while(winner){
-            //playDisplay
-            playDisplay(currentTurn);
-            //isZero
+        while (!winner) {
+            Player currentPlayer = playersInGame.get(currentTurn);
 
-            //Prompt what to play, Draw card or place (Allow player to choose)
-            playPrompt(currentTurn);
+            playPrompt();
 
-            //check if playable
+            // Rotating players
+            currentTurn = (currentTurn + 1) % playersInGame.size();
 
-
-            //cardFunction
-
-
-            //Rotating players
-            if (currentTurn + 1 > playersInGame.size()){
-                currentTurn = 0;
-            }
-            else{
-                currentTurn += 1;
-            }
-
-            //Is winner will be placed here
-
+            winner();
         }
 
-        if (currentTurn == 0){
-            currentTurn = playersInGame.size()-1;
-        }
-        else {
-            currentTurn -=1;
-        }
         int winnerScore = 0;
-        for (int i = 0; i < playersInGame.size(); i++){
+        for (int i = 0; i < playersInGame.size(); i++) {
             int sumOfPlayer = 0;
-            for (int j = 0; j < playersInGame.get(i).getHand().getCardNum(); j++ ){
-
-                int cardValue = playersInGame.get(i).getHand().getCards().get(j).getValue().ordinal();
-
-
-                if (cardValue>-1 && cardValue<10){
-                    sumOfPlayer+= playersInGame.get(i).getHand().getCards().get(j).getValue().ordinal();
-
-                }
-                else {
-                    switch (cardValue){
+            for (Card card : playersInGame.get(i).getHand().getCards()) {
+                int cardValue = card.getValue().ordinal();
+                if (cardValue >= 0 && cardValue < 10) {
+                    sumOfPlayer += cardValue;
+                } else {
+                    switch (cardValue) {
                         case 10:
-                            sumOfPlayer+= 20;
+                            sumOfPlayer += 20;
+                            break;
                         case 11:
-                            sumOfPlayer+=30;
+                            sumOfPlayer += 30;
+                            break;
                         case 12:
-                            sumOfPlayer+=40;
+                            sumOfPlayer += 40;
+                            break;
                         case 13:
-                            sumOfPlayer+=50;
-
+                            sumOfPlayer += 50;
+                            break;
                     }
                 }
             }
-
-
-        winnerScore += sumOfPlayer;
+            winnerScore += sumOfPlayer;
         }
         System.out.println("The Winner has a score of: " + winnerScore);
-
-
     }
 
     public void cardFunctionality(Card playedCard) {
-        Card.Value cardValue = playedCard.getValue();
-        //Card.Color cardColor = playedCard.getColor();
+            Card.Value cardValue = playedCard.getValue();
+            //Card.Color cardColor = playedCard.getColor();
 
-        switch (cardValue) {
+            switch (cardValue) {
 
-            case REVERSE:
-                Collections.reverse(playersInGame);
-                break;
-            case SKIP:
-                if (currentTurn + 1 > playersInGame.size()){
-                    currentTurn = 0;
-                }
-                else{
-                    currentTurn += 1;
-                }
-                break;
-            case WILD:
-                Scanner wildInput = new Scanner(System.in);
-                System.out.println("Choose a color: R, G, B, Y\n");
-                String newColor = wildInput.nextLine().toUpperCase();
+                case REVERSE:
+                    Collections.reverse(playersInGame);
+                    break;
+                case SKIP:
+                    if (currentTurn + 1 > playersInGame.size()){
+                        currentTurn = 0;
+                    }
+                    else{
+                        currentTurn += 1;
+                    }
+                    break;
+                case WILD:
+                    Scanner wildInput = new Scanner(System.in);
+                    System.out.println("Choose a color: R, G, B, Y\n");
+                    String newColor = wildInput.nextLine().toUpperCase();
 
-                // Changing current color based on user input
-                if (newColor.equals("R")) {
-                    currentCard.setColor(Card.Color.RED);
-                }
-                else if (newColor.equals("G")) {
-                    currentCard.setColor(Card.Color.GREEN);
-                }
-                else if (newColor.equals("B")) {
-                    currentCard.setColor(Card.Color.BLUE);
-                }
-                else if (newColor.equals("Y")) {
-                    currentCard.setColor(Card.Color.YELLOW);
-                }
-                break;
-            //case WILD_DRAW_TWO
+                    // Changing current color based on user input
+                    if (newColor.equals("R")) {
+                        currentCard.setColor(Card.Color.RED);
+                    }
+                    else if (newColor.equals("G")) {
+                        currentCard.setColor(Card.Color.GREEN);
+                    }
+                    else if (newColor.equals("B")) {
+                        currentCard.setColor(Card.Color.BLUE);
+                    }
+                    else if (newColor.equals("Y")) {
+                        currentCard.setColor(Card.Color.YELLOW);
+                    }
+                    break;
+                //case WILD_DRAW_TWO
+            }
         }
     }
-}
