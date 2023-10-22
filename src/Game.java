@@ -143,6 +143,9 @@ public class Game {
         playerTurn.viewHand();
     }
 
+    /**
+     * brings up a prompt for the user to perform an action and performs the function based on the response
+     */
     public void playPrompt() {
         Player currentPlayer = playersInGame.get(currentTurn);
 
@@ -204,9 +207,10 @@ public class Game {
         }
     }
 
-
-
-
+    /**
+     * Implements the function of calling uno against a player
+     * @param currentPlayer
+     */
     public void callUnoAgainst(Player currentPlayer) {
         System.out.print("Select a player to call Uno against (Enter player number): ");
         int playerNumber;
@@ -234,7 +238,9 @@ public class Game {
             System.out.println("Invalid input. Please enter a valid player number.");
         }
     }
-
+    /**
+     * checks for the winner
+     */
     public void winner() {
         for (Player player : playersInGame) {
             if (player.getHand().getCards().isEmpty()) {
@@ -243,6 +249,12 @@ public class Game {
             }
         }
     }
+
+    /**
+     * checks if the card to be placed is playable
+     * @param card you want to place
+     * @return true if playable false if not playable
+     */
     public boolean isPlayable(Card card) {
         if (currentCard == null) {
             // If no card has been played yet, any card is playable.
@@ -260,6 +272,9 @@ public class Game {
         return false;
     }
 
+    /**
+     * Manages all of the other functions and centralizes them to make the game work
+     */
     public void gameStart() {
         // Draw the first card to set the current card
         currentCard = theDeck.draw();
@@ -281,6 +296,10 @@ public class Game {
 
     }
 
+    /**
+     * Imeplements the special card functionalities such as REVERSE, WILD, SKIP
+     * @param playedCard the special card to be played
+     */
     public void cardFunctionality(Card playedCard) {
             Card.Value cardValue = playedCard.getValue();
             //Card.Color cardColor = playedCard.getColor();
@@ -354,7 +373,10 @@ public class Game {
             }
         }
 
-        public void winnerScore(){
+    /**
+     * Calculates and displays the winners score
+     */
+    public void winnerScore(){
             int winnerScore = 0;
             //Iterating through each player to calculate their hand's score
             for (int i = 0; i < playersInGame.size(); i++) {
