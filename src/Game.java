@@ -266,7 +266,14 @@ public class Game {
                         currentCard.setColor(Card.Color.YELLOW);
                     }
                     break;
-                //case WILD_DRAW_TWO
+                case WILD_DRAW_TWO:
+                    // Getting next player's index in order to make them draw two cards
+                    int nextPlayerIndex = (currentTurn + 1) % playersInGame.size();
+                    Player nextPlayer = playersInGame.get(nextPlayerIndex);
+                    for (int i = 0; i < 2; i++){
+                        nextPlayer.drawCard(theDeck.getCompleteDeck());
+                    }
+                    break;
             }
         }
     }
