@@ -6,7 +6,7 @@
  */
 
 import java.util.ArrayList;
-import java.util.Stack;
+
 public class Hand {
     private ArrayList<Card> cards;
     private int cardNum;
@@ -59,14 +59,6 @@ public class Hand {
         for(Card card : cards){
             System.out.print(card.stringCard() + ", ");
         }
-    }
-
-    /**
-     * getHand will return whatever is in the hand
-     * @return - the arraylist
-     */
-    public ArrayList<Card> getHand() {
-        return cards;
     }
 
     /**

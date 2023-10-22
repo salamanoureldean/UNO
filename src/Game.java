@@ -6,7 +6,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Collections;
-import java.util.Stack;
 
 public class Game {
     private Deck theDeck;
@@ -261,11 +260,11 @@ public class Game {
             return true;
         }
 
-        if (currentCard.getColor() == card.getColor() || currentCard.getValue() == card.getValue()) {
+        if (currentCard.getColor() == card.getColor() || currentCard.getVALUE() == card.getVALUE()) {
             return true;
-        } else if (card.getValue() == Card.Value.WILD || card.getValue() == Card.Value.WILD_DRAW_TWO) {
+        } else if (card.getVALUE() == Card.Value.WILD || card.getVALUE() == Card.Value.WILD_DRAW_TWO) {
             return true;
-        } else if (card.getValue() == Card.Value.SKIP || card.getValue() == Card.Value.REVERSE) {
+        } else if (card.getVALUE() == Card.Value.SKIP || card.getVALUE() == Card.Value.REVERSE) {
             return card.getColor() == currentCard.getColor();
         }
 
@@ -307,7 +306,7 @@ public class Game {
      * @param playedCard the special card to be played
      */
     public void cardFunctionality(Card playedCard) {
-            Card.Value cardValue = playedCard.getValue();
+            Card.Value cardValue = playedCard.getVALUE();
             //Card.Color cardColor = playedCard.getColor();
 
             switch (cardValue) {
@@ -390,7 +389,7 @@ public class Game {
 
                 //Iterating through each card in players (i) hand
                 for (Card card : playersInGame.get(i).getHand().getCards()) {
-                    int cardValue = card.getValue().ordinal();
+                    int cardValue = card.getVALUE().ordinal();
 
                     //Checking the value of each card (j)
                     if (cardValue >= 0 && cardValue < 10) {

@@ -26,21 +26,21 @@ public class CardTest {
     @Test
     public void test_defaultCardConstructor(){
         Card card = new Card(Card.Value.ZERO, Card.Color.BLUE);
-        assertEquals(Card.Value.ZERO, card.getValue());
+        assertEquals(Card.Value.ZERO, card.getVALUE());
         assertEquals(Card.Color.BLUE, card.getColor());
     }
 
     @Test
     public void test_wildCardCreation(){
         Card card = new Card(Card.Value.WILD, Card.Color.BLANK);
-        assertEquals(Card.Value.WILD, card.getValue());
+        assertEquals(Card.Value.WILD, card.getVALUE());
         assertEquals(Card.Color.BLANK, card.getColor());
     }
 
     @Test
     public void test_getValue(){
         Card card = new Card(Card.Value.ZERO, Card.Color.BLUE);
-        assertEquals(Card.Value.ZERO, card.getValue());
+        assertEquals(Card.Value.ZERO, card.getVALUE());
     }
 
     @Test

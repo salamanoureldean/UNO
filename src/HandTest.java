@@ -8,8 +8,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 
-import java.awt.*;
-import java.sql.Array;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -43,17 +41,17 @@ public class HandTest {
     public void test_DefaultConstructor(){
         deck = new Deck();
         hand = new Hand(deck);
-        assertEquals(hand.getHand().size(), 7);
-        assertNotEquals(hand.getHand().get(0), null);
+        assertEquals(hand.getCards().size(), 7);
+        assertNotEquals(hand.getCards().get(0), null);
     }
     @Test
     public void test_addCard(){
         deck = new Deck();
         hand = new Hand(deck);
         hand.addCard(deck);
-        assertEquals(hand.getHand().size(), 8);
+        assertEquals(hand.getCards().size(), 8);
         assertEquals(hand.getCardNum(), 8);
-        assertNotEquals(hand.getHand().get(7), null);
+        assertNotEquals(hand.getCards().get(7), null);
     }
     @Test
     public void test_getCards(){

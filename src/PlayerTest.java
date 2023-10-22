@@ -94,7 +94,7 @@ public class PlayerTest {
         Hand hand = player.getHand();
 
         // Obtain the first card in the set to play it
-        Card playedCard = hand.getHand().get(0);
+        Card playedCard = hand.getCards().get(0);
         player.playCard(playedCard);
 
         // Size of hand after card has been played
