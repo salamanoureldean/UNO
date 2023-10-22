@@ -266,9 +266,9 @@ public class Game {
             //Card.Color cardColor = playedCard.getColor();
 
             switch (cardValue) {
-
                 case REVERSE:
                     Collections.reverse(playersInGame);
+                    System.out.println("The play has been reversed!");
                     break;
                 case SKIP:
                     if (currentTurn + 1 > playersInGame.size()){
@@ -277,6 +277,7 @@ public class Game {
                     else{
                         currentTurn += 1;
                     }
+                    System.out.println("Player " + (currentTurn + 1) + "has been skipped!");
                     break;
                 case WILD:
                     Scanner wildInput = new Scanner(System.in);
@@ -286,15 +287,19 @@ public class Game {
                     // Changing current color based on user input
                     if (newColor.equals("R")) {
                         currentCard.setColor(Card.Color.RED);
+                        System.out.println("The color has been changed to red.");
                     }
                     else if (newColor.equals("G")) {
                         currentCard.setColor(Card.Color.GREEN);
+                        System.out.println("The color has been changed to green.");
                     }
                     else if (newColor.equals("B")) {
                         currentCard.setColor(Card.Color.BLUE);
+                        System.out.println("The color has been changed to blue.");
                     }
                     else if (newColor.equals("Y")) {
                         currentCard.setColor(Card.Color.YELLOW);
+                        System.out.println("The color has been changed to yellow.");
                     }
                     break;
                 case WILD_DRAW_TWO:
@@ -311,15 +316,19 @@ public class Game {
 
                     if (newColor.equals("R")) {
                         currentCard.setColor(Card.Color.RED);
+                        System.out.println("The color has been changed to red.");
                     }
                     else if (newColor.equals("G")) {
                         currentCard.setColor(Card.Color.GREEN);
+                        System.out.println("The color has been changed to green.");
                     }
                     else if (newColor.equals("B")) {
                         currentCard.setColor(Card.Color.BLUE);
+                        System.out.println("The color has been changed to blue.");
                     }
                     else if (newColor.equals("Y")) {
                         currentCard.setColor(Card.Color.YELLOW);
+                        System.out.println("The color has been changed to yellow.");
                     }
                     break;
             }
