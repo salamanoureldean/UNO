@@ -138,7 +138,7 @@ public class Game {
      * @param playerTurn - should be which player is playing
      */
     public void playDisplay(Player playerTurn) {
-        System.out.printf("Currently Player %d playing:\n", playerTurn.getName());
+        System.out.printf("Currently Player %s playing:\n", playerTurn.getName());
         System.out.print("Cards in hand: ");
         playerTurn.viewHand();
     }
