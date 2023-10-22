@@ -22,6 +22,16 @@ public class Player {
     }
 
     /**
+     * For testing, constructs a new player with one card in the hand, a score of 0, and Uno not called.
+     */
+    public Player(String test_name, Deck test_deck, int i){
+        this.hand = new Hand(test_deck, i); // Initialize the player's hand
+        this.score = 0;        // Initialize the player's score
+        this.unoCalled = false; // Uno is initially not called
+        this.name = name;
+    }
+
+    /**
      * Gets the player's current score.
      *
      * @return The player's score.

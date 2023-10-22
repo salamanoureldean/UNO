@@ -9,11 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CardTest {
     private static int counter;
-    /**
-     * Worker: Salama
-     * Task: getters, setters: Make sure it doesn't break
-     */
-
     @BeforeAll
     private static void setUp(){
         counter = 0;
