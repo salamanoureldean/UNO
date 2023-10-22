@@ -36,7 +36,7 @@ To run the Uno Card Game on your local machine, follow these steps:
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/your-username/uno-card-game.git
+   git clone https://github.com/salamanoureldean/UNO.git
    ```
 
 2. Compile the Java code:
