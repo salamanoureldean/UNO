@@ -62,7 +62,7 @@ public class Game {
             playersInGame = new ArrayList<Player>();
             for (int j = 0; j < playerCount; j++) {
                 String playerName = "Player " + (j + 1);
-                playersInGame.add(new Player(playerName));
+                playersInGame.add(new Player(playerName, theDeck.getCompleteDeck()));
             }
             gameStart();
         } else {
@@ -128,7 +128,7 @@ public class Game {
             String playerInput = userInput.nextLine();
             if (playerInput.equalsIgnoreCase("D")) {
                 // Draw a card
-                currentPlayer.drawCard();
+                currentPlayer.drawCard(theDeck.getCompleteDeck());
                 break;
             } else if (playerInput.equalsIgnoreCase("P")) {
                 if (currentPlayer.getHand().getCards().isEmpty()) {

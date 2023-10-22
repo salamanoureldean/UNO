@@ -1,16 +1,16 @@
 import java.util.ArrayList;
+import java.util.Stack;
 public class Hand {
-    int start = 7;
     private ArrayList<Card> cards;
     private int cardNum;
 
     /**
-     *Hand constructor, will randomly select 7 cards into the players hand
+     *Hand constructor, will randomly select 7 cards into the players hand from a shuffled deck
      */
-    public Hand(){
+    public Hand(Stack<Card> deck){
         cards = new ArrayList<Card>();
-        for(int i=0;i < start; i++){
-            cards.add(new Card());
+        for(int i=0;i < 7; i++){
+            cards.add(deck.pop());
             cardNum += 1;
         }
     }
@@ -18,8 +18,8 @@ public class Hand {
     /**
      * addCard method, adds a card
      */
-    public void addCard(){
-        cards.add(new Card());
+    public void addCard(Stack<Card> deck){
+        cards.add(deck.pop());
         cardNum +=1;
     }
 

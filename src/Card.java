@@ -15,18 +15,18 @@ public class Card {
         if(value != Value.WILD && value != Value.WILD_DRAW_TWO){
             this.color = Color.values()[random.nextInt(Color.values().length)];
         }
-
     }
-    public Card(Card.Value value, Card.Color color){
+    public Card(Value value, Color color) {
+
         this.value = value;
-        // If card is not a wildcard, give it a color.
-        if(value != Value.WILD && value != Value.WILD_DRAW_TWO){
+        // If the card is not a wildcard, give it a color.
+        if (value != Value.WILD && value != Value.WILD_DRAW_TWO) {
             this.color = color;
-        }
-        else{
+        } else {
             this.color = null;
         }
     }
+
 
     //Returns the randomized color of the card.
     public Color getColor(){
