@@ -18,6 +18,17 @@ public class Card {
 
     }
 
+    public Card(Card.Value value, Card.Color color){
+        this.value = value;
+        // If card is not a wildcard, give it a color.
+        if(value != Value.WILD && value != Value.WILD_DRAW_TWO){
+            this.color = color;
+        }
+        else{
+            this.color = null;
+        }
+    }
+
     //Returns the randomized color of the card.
     public Color getColor(){
         return color;

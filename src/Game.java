@@ -6,15 +6,18 @@ public class Game {
     /**
      * Initializing variables in order to perform the play function
      */
+
+    private Deck theDeck;
     private ArrayList<Player> playersInGame;
     private boolean gameOn = true; //Probably will end up deleting
-    private static boolean winner = false;
+    private boolean winner = false;
     private Scanner userInput;
     private String userInputText;
     private Card currentCard;
     private int currentTurn = 0;
 
     public Game() {
+        mainMenu();
     }
 
     public void play() {
@@ -145,6 +148,8 @@ public class Game {
             System.out.println("Not a valid input try again");
             playPrompt(index);
         }
+        //Add score here
+
     }
 
     //Do this Mahad
