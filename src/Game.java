@@ -292,8 +292,14 @@ public class Game {
         }
 
         winnerScore();
+        System.out.println("Thank you for playing UNO! (press 'q' to quit)");
 
-
+        // Prompt the user to enter 'q' to quit
+        userInput = new Scanner(System.in);
+        String quitInput = userInput.nextLine();
+        if (quitInput.equalsIgnoreCase("q")) {
+            quit();
+        }
     }
 
     /**
