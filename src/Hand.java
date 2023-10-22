@@ -1,6 +1,6 @@
 /**
  * @author: Abody Majeed 101227327
- * @editor: Salama
+ * @editor: Salama Noureldean 101154365
  * @date: 10/22/2023
  * @version: 1.00
  */
@@ -76,6 +76,11 @@ public class Hand {
     public int getCardNum() {
         return cardNum;
     }
+
+    /**
+     * returns the arraylist of cards
+     * @return an array of cards
+     */
     public ArrayList<Card> getCards(){return cards;}
 }
 

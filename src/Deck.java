@@ -1,6 +1,6 @@
 /**
- * @authors: Abody Majeed 101227327, Salama
- * @editors: Salama
+ * @authors: Abody Majeed 101227327
+ * @editors: Salama Noureldean 101154365
  * @date: 10/22/2023
  * @version: 1.00
  */

@@ -1,6 +1,5 @@
 /**
  * @Author: Abody Majeed 101227327
- *  Editors:
  * @Date: 10/22/2023
  * @Version: 1.00
  */

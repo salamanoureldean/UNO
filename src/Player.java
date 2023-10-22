@@ -1,6 +1,6 @@
 /**
- * @author: Mahad
- * @editors: Abody Majeed 101227327, Salama
+ * @author:  Mahad Mohamed Yonis 10122680, Pietro Adamvoski 101238885
+ * @editors: Abody Majeed 101227327, Salama Noureldean 101154365
  * @version 1.0
  * @date: 10/22/2023
  */
@@ -104,17 +104,6 @@ public class Player {
      */
     public void callUno() {
         unoCalled = true;
-    }
-
-    /**
-     * Updates the player's score based on whether they have won the round.
-     *
-     * @param hasWon True if the player has won the round; otherwise, false.
-     */
-    public void updateScore(boolean hasWon) {
-        if (hasWon) {
-            score += 1; // Increase the score by 1 if the player has won.
-        }
     }
 
     /**
