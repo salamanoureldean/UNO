@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Card {
     public enum Value{ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, REVERSE, SKIP, WILD, WILD_DRAW_TWO};
-    public enum Color{RED, GREEN, BLUE, YELLOW};
+    public enum Color{RED, GREEN, BLUE, YELLOW, BLANK};
 
     private final Value value;
     private Color color;
@@ -10,11 +10,7 @@ public class Card {
     public Card(Value value, Color color) {
 
         this.value = value;
-        // If the card is not a wildcard, give it a color.
-        if (value != Value.WILD && value != Value.WILD_DRAW_TWO) {
-            this.color = color;
-        } else {
-            this.color = null;
+        this.color = color;
         }
     }
 
