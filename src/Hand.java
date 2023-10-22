@@ -1,3 +1,10 @@
+/**
+ * @author: Abody Majeed 101227327
+ * @editor: Salama
+ * @date: 10/22/2023
+ * @version: 1.00
+ */
+
 import java.util.ArrayList;
 import java.util.Stack;
 public class Hand {

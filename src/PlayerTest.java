@@ -1,3 +1,8 @@
+/**
+ * @authors: Salama, Pietro
+ * @date: 10/22/2023
+ * @version: 1.00
+ */
 public class PlayerTest {
     /**
      * Worker: Mahad

@@ -1,6 +1,8 @@
 /**
- * Represents a player in the Uno card game.
+ * @author: Mahad
+ * @editors: Abody Majeed 101227327, Salama
  * @version 1.0
+ * @date: 10/22/2023
  */
 import java.util.ArrayList;
 import java.util.Stack;
@@ -115,6 +117,10 @@ public class Player {
         }
     }
 
+    /**
+     * Getter for the name
+     * @return players name
+     */
     public String getName() {
         return this.name;
     }
