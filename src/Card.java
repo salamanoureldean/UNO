@@ -17,7 +17,6 @@ public class Card {
         }
 
     }
-
     public Card(Card.Value value, Card.Color color){
         this.value = value;
         // If card is not a wildcard, give it a color.

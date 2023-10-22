@@ -162,6 +162,8 @@ public class Game {
         while(winner){
             //playDisplay
             playDisplay(currentTurn);
+            //isZero
+
             //Prompt what to play, Draw card or place (Allow player to choose)
             playPrompt(currentTurn);
 

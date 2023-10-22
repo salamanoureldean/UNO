@@ -107,4 +107,12 @@ public class Deck {
             deckZero(currentCard);
         }
     }
+
+    public Stack<Card> getCompleteDeck() {
+        return completeDeck;
+    }
+
+    public Stack<Card> getDiscardPile() {
+        return discardPile;
+    }
 }
