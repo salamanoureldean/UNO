@@ -192,14 +192,13 @@ public class Game {
             }
         }
     }
-    public boolean winner() {
+    public void winner() {
         for (Player player : playersInGame) {
             if (player.getHand().getCards().isEmpty()) {
                 System.out.println(player.getName() + " has won!");
-                return true;
+                winner = true;
             }
         }
-        return false;
     }
     public boolean isPlayable(Card card) {
         if (currentCard == null) {
