@@ -7,15 +7,6 @@ public class Card {
     private final Value value;
     private Color color;
 
-    //Constructs a random card from the initialized Value and Color enums.
-    public Card() {
-        Random random = new Random();
-        this.value = Value.values()[random.nextInt(Value.values().length)];
-        // If the card is not a wildcard, give it a color.
-        if(value != Value.WILD && value != Value.WILD_DRAW_TWO){
-            this.color = Color.values()[random.nextInt(Color.values().length)];
-        }
-    }
     public Card(Value value, Color color) {
 
         this.value = value;
