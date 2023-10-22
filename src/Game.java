@@ -63,7 +63,7 @@ public class Game {
             playersInGame = new ArrayList<Player>();
             for (int j = 0; j < playerCount; j++) {
                 String playerName = "Player " + (j + 1);
-                playersInGame.add(new Player(playerName, theDeck.getCompleteDeck()));
+                playersInGame.add(new Player(playerName, theDeck));
             }
             gameStart();
         } else {
@@ -130,7 +130,7 @@ public class Game {
             String playerInput = userInput.nextLine();
             if (playerInput.equalsIgnoreCase("D")) {
                 // Draw a card
-                currentPlayer.drawCard(theDeck.getCompleteDeck());
+                currentPlayer.drawCard(theDeck);
                 break;
             } else if (playerInput.equalsIgnoreCase("P")) {
                 if (currentPlayer.getHand().getCards().isEmpty()) {
@@ -154,6 +154,7 @@ public class Game {
                                 cardFunctionality(currentCard);
                                 theDeck.place(cardToPlay);
                                 currentPlayer.playCard(cardToPlay);
+                                currentCard = cardToPlay;
                                 break;
                             } else {
                                 System.out.println("Invalid move. You cannot play this card.");
@@ -192,7 +193,7 @@ public class Game {
 
                         // Draw 4 cards for the next player
                         for (int j = 0; j < 4; j++) {
-                            nextPlayer.drawCard(theDeck.getCompleteDeck());
+                            nextPlayer.drawCard(theDeck);
                         }
                     }
                 }
@@ -310,7 +311,7 @@ public class Game {
                     int nextPlayerIndex = (currentTurn + 1) % playersInGame.size();
                     Player nextPlayer = playersInGame.get(nextPlayerIndex);
                     for (int i = 0; i < 2; i++){
-                        nextPlayer.drawCard(theDeck.getCompleteDeck());
+                        nextPlayer.drawCard(theDeck);
                     }
                     // Changing current color of cards being played based on user input
                     wildInput = new Scanner(System.in);

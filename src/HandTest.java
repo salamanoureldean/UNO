@@ -1,6 +1,13 @@
+/**
+ * @Author: Abody Majeed 101227327
+ *  Editors:
+ * @Date: 10/22/2023
+ * @Version: 1.00
+ */
 import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 
 import java.awt.*;
 
@@ -10,10 +17,43 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class HandTest {
-    /**
-     * Worker: Abody
-     * Tasks: Validate card size, test addCard function, test getters
-     *
-     */
+
+    public static Deck deck;
+    public static Hand hand;
+    private static int count;
+
+    public HandTest(){}
+
+    @BeforeAll
+    private static void setUp(){
+        count = 0;
+    }
+
+    @AfterEach
+    public static void increment(){
+        count += 1;
+    }
+    @AfterAll
+    private static void testsDone(){
+        System.out.print("All deck tests are done");
+        System.out.printf("%d tests were ran\n", count);
+    }
+
+    @Test
+    public void test_DefaultConstructor(){
+        deck = new Deck();
+        hand = new Hand(deck);
+        assertEquals(hand.getHand().size(), 7);
+        assertNotEquals(hand.getHand().get(0), null);
+    }
+    @Test
+    public void test_addCard(){
+        deck = new Deck();
+        hand = new Hand(deck);
+        hand.addCard(deck);
+        assertEquals(hand.getHand().size(), 8);
+        assertEquals(hand.getCardNum(), 8);
+        assertNotEquals(hand.getHand().get(7), null);
+    }
 
 }
