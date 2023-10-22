@@ -14,6 +14,13 @@ public class Hand {
             cardNum += 1;
         }
     }
+    public Hand(Deck deck, int num){
+        cards = new ArrayList<Card>();
+        for(int i=0;i < num; i++){
+            cards.add(deck.draw());
+            cardNum += 1;
+        }
+    }
 
     /**
      * addCard method, adds a card

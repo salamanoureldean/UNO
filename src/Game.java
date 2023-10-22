@@ -130,6 +130,7 @@ public class Game {
             String playerInput = userInput.nextLine();
             if (playerInput.equalsIgnoreCase("D")) {
                 // Draw a card
+                theDeck.isZero(currentCard);
                 currentPlayer.drawCard(theDeck);
                 break;
             } else if (playerInput.equalsIgnoreCase("P")) {
@@ -154,7 +155,6 @@ public class Game {
                                 cardFunctionality(currentCard);
                                 theDeck.place(cardToPlay);
                                 currentPlayer.playCard(cardToPlay);
-                                currentCard = cardToPlay;
                                 break;
                             } else {
                                 System.out.println("Invalid move. You cannot play this card.");

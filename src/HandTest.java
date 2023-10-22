@@ -10,6 +10,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 
 import java.awt.*;
+import java.sql.Array;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -55,5 +57,10 @@ public class HandTest {
         assertEquals(hand.getCardNum(), 8);
         assertNotEquals(hand.getHand().get(7), null);
     }
-
+    @Test
+    public void test_getCards(){
+        deck = new Deck();
+        hand = new Hand(deck);
+        assertTrue(hand.getCards() instanceof ArrayList<Card>, String.valueOf(true));
+    }
 }
