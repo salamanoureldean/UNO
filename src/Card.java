@@ -17,8 +17,6 @@ public class Card {
         this.color = color;
     }
 
-
-
     //Returns the randomized color of the card.
     public Color getColor(){
         return color;

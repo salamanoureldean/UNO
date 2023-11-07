@@ -65,11 +65,13 @@ public class Gui implements ActionListener{
         // Create a panel to display current player's hand using buttons
         handPanel = new JPanel(new GridLayout(1, 0));
         cardHand = new ArrayList<>();
+        Controller controller = new Controller(model) ;
+
         // Add JButtons representing the player's hand
         for (int i = 0; i < 7; i++) {
             JButton cardButton = new JButton("Card" + i);
             cardHand.add(cardButton);
-            cardButton.addActionListener(this);
+            cardButton.addActionListener(controller);
             handPanel.add(cardHand.get(i));
         }
         // Create a JScrollPane and add handPanel to it
