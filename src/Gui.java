@@ -20,8 +20,11 @@ public class Gui implements ActionListener{
     private JLabel statusLabel;
     private JPanel bottomPanel;
     private ArrayList<JButton> cardHand;
+    Game model;
 
     public Gui() {
+        model = new  Game();
+        //model.addUnoView(this);
         frame1 = new JFrame();
         Object[] possibilities = {2, 3, 4};
         numberOfPlayers = (Integer) JOptionPane.showInputDialog(frame1,
@@ -65,7 +68,7 @@ public class Gui implements ActionListener{
         // Create a panel to display current player's hand using buttons
         handPanel = new JPanel(new GridLayout(1, 0));
         cardHand = new ArrayList<>();
-        Controller controller = new Controller(model) ;
+        Controller controller = new Controller(model);
 
         // Add JButtons representing the player's hand
         for (int i = 0; i < 7; i++) {
