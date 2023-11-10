@@ -4,12 +4,15 @@
  * @date: 10/22/2023
  * @version: 1.00
  */
+import javax.swing.SwingUtilities;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        Game game1 = new Game();
-        game1.play();
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                MainMenuGUI mainMenu = new MainMenuGUI();
+                mainMenu.setVisible(true);
+            }
+        });
     }
 }

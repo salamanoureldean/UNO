@@ -30,7 +30,7 @@ public class Player {
         this.hand = new Hand(test_deck, i); // Initialize the player's hand
         this.score = 0;        // Initialize the player's score
         this.unoCalled = false; // Uno is initially not called
-        this.name = name;
+        this.name = test_name;
     }
 
     /**
@@ -122,5 +122,12 @@ public class Player {
      */
     public String getName() {
         return this.name;
+    }
+
+    public Card getLastCard() {
+        if (getHand().getCardNum() > 0) {
+            return hand.getCards().get(hand.getCards().size() - 1);
+        }
+        return null;
     }
 }
