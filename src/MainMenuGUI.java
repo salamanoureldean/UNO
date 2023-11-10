@@ -15,7 +15,7 @@ public class MainMenuGUI extends JFrame {
         // Create main menu panel with layout
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBackground(new Color(121, 121, 234)); // Custom background color
+        panel.setBackground(new Color(121, 121, 234));
         panel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
         getContentPane().add(panel);
 
@@ -40,7 +40,7 @@ public class MainMenuGUI extends JFrame {
     private void styleButton(JButton button) {
         button.setFont(new Font("Times New Roman", Font.BOLD, 20));
         button.setForeground(Color.WHITE);
-        button.setBackground(new Color(0, 15, 204)); // Custom button color
+        button.setBackground(new Color(0, 15, 204));
         button.setFocusPainted(false);
         button.setBorderPainted(false);
         button.setOpaque(true);
