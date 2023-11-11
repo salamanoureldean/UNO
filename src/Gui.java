@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Gui implements ActionListener{
+public class Gui{
     private static JFrame frame1;
     private JFrame gameFrame;
     private int numberOfPlayers;
