@@ -4,6 +4,10 @@ import java.awt.event.ActionListener;
 public class Controller implements ActionListener{
     Game game = new Game();
 
+    public Controller(Game game){
+        this.game = game;
+    }
+
     public void actionPerformed(ActionEvent e){
 
     }
