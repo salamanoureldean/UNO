@@ -69,6 +69,7 @@ public class Game {
         return false;
     }
 
+
     // Check if a player has won
     public void checkWinner() {
         for (Player player : playersInGame) {
@@ -226,7 +227,7 @@ public class Game {
     }
 
     // Get the current player
-    private Player getCurrentPlayer() {
+    public Player getCurrentPlayer() {
         return playersInGame.get(currentTurn);
     }
 
