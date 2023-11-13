@@ -129,7 +129,7 @@ public class Gui {
             cardButton.setText(randomCard.stringCard());
 
             // Set the icon of the button to the corresponding PNG file
-            String filePath = "C:\\Users\\salam\\OneDrive\\Pictures\\PNGs\\small\\" + getFileNameForCard(randomCard) + ".png";
+            String filePath = "C:\\Users\\Mahad\\OneDrive\\Documents\\PNGs\\PNGs\\small\\" + getFileNameForCard(randomCard) + ".png";
             ImageIcon icon = new ImageIcon(filePath);
             cardButton.setIcon(icon);
         }
@@ -171,6 +171,9 @@ public class Gui {
         return drawCardButton;
     }
 
+    public int getNumberOfPlayers(){
+        return numberOfPlayers;
+    }
     public static void main(String[] args) {
         Gui GUI = new Gui();
     }

@@ -23,6 +23,14 @@ public class Game {
 
     // Main game flow
     public void gameStart() {
+        int numberOfPlayers = gui.getNumberOfPlayers();
+
+        // Initialize players
+        for (int i = 0; i < numberOfPlayers; i++) {
+            String playerName = "Player " + (i + 1);
+            playersInGame.add(new Player(playerName, theDeck));
+        }
+
         currentCard = theDeck.draw();
         cardFunctionality(currentCard);
 
