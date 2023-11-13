@@ -17,7 +17,7 @@ public class Gui {
     private JLabel cardLabel;
     private JLabel statusLabel;
     private JPanel bottomPanel;
-    public ArrayList<JButton> cardHand;
+    ArrayList<JButton> cardHand;
     private ArrayList<Card> playerCards;
     private Game model;
 
@@ -27,6 +27,18 @@ public class Gui {
 
     public Gui() {
         model = new Game();
+
+        frame1 = new JFrame();
+        Object[] possibilities = {2, 3, 4};
+        numberOfPlayers = (Integer) JOptionPane.showInputDialog(frame1,
+                "Choose the number of players:",
+                "Number of players selection",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                possibilities,
+                2);
+        frame1.setVisible(false);
+
         gameFrame = new JFrame();
         gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         gameFrame.setResizable(true);
@@ -103,21 +115,6 @@ public class Gui {
         update();
 
         gameFrame.setVisible(true);
-    }
-
-    private void chooseNumberOfPlayers() {
-        frame1 = new JFrame();
-        Object[] possibilities = {2, 3, 4};
-        numberOfPlayers = (Integer) JOptionPane.showInputDialog(frame1,
-                "Choose the number of players:",
-                "Number of players selection",
-                JOptionPane.PLAIN_MESSAGE,
-                null,
-                possibilities,
-                2);
-
-        frame1.setVisible(false);
-        numberOfPlayersChosen = true; // Update the flag after choosing the number of players;
     }
 
     public void update() {
