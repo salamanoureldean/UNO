@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 public class Controller implements ActionListener{
     Game game = new Game();
 
-    Gui gui = new Gui();
+    Gui gui;
 
     public Controller(Game game){
         this.game = game;
