@@ -56,7 +56,7 @@ public class Game {
     }
 
     // Play a card
-    public boolean playCard(Card cardToPlay) {
+    public boolean removeCardFromHand(Card cardToPlay) {
         Player currentPlayer = getCurrentPlayer();
 
         if (cardToPlay != null && isPlayable(cardToPlay)) {

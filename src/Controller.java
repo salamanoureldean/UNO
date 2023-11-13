@@ -5,24 +5,38 @@ import java.awt.event.ActionListener;
 public class Controller implements ActionListener{
     Game game = new Game();
 
-    Gui gui = new Gui();
+    Gui gui;
 
     public Controller(Game game){
         this.game = game;
     }
 
     public void actionPerformed(ActionEvent e){
-        Player currPlayer;
-        if(e.getSource() == gui.drawCardButton){
+        if(e.getSource() == gui.getDrawCardButton()){
             game.addCardToHand();
-            for (JButton b: gui.cardHand){
+            gui.cardToHand();
+            for (JButton b: gui.getCardHand()){
                 b.setEnabled(false);
             }
-            gui.drawCardButton.setEnabled(false);
-            gui.nextPlayerButton.setEnabled(true);
+            gui.getDrawCardButton().setEnabled(false);
+            gui.getNextPlayerButton().setEnabled(true);
 
-        } else if (e.getSource() == gui.nextPlayerButton) {
 
+            game.getCurrentPlayer().getHand().getCards();
+
+        } else if (e.getSource() == gui.getNextPlayerButton()) {
+            game.nextPlayer();
+            gui.getDrawCardButton().setEnabled(true);
+            for (JButton b: gui.getCardHand()){
+                b.setEnabled(true);
+            }
+            gui.getNextPlayerButton().setEnabled(false);
+        } else{
+            for(JButton button: gui.getCardHand()){
+                if(e.getSource() == button){
+                    game.cardFunctionality(); //////FIX THIS
+                }
+            }
         }
     }
 }

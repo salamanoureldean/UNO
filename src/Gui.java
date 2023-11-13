@@ -17,13 +17,13 @@ public class Gui {
     private JLabel cardLabel;
     private JLabel statusLabel;
     private JPanel bottomPanel;
-    ArrayList<JButton> cardHand;
+    private ArrayList<JButton> cardHand;
     private ArrayList<Card> playerCards;
     private Game model;
 
     // Buttons and components that can implement an action
-    public JButton nextPlayerButton;
-    public JButton drawCardButton;
+    private JButton nextPlayerButton;
+    private JButton drawCardButton;
 
     public Gui() {
         model = new Game();
@@ -84,6 +84,7 @@ public class Gui {
         JPanel leftPanel = new JPanel();
         leftPanel.add(nextPlayerButton, BorderLayout.SOUTH);
         bottomPanel.add(leftPanel, BorderLayout.WEST);
+        nextPlayerButton.setEnabled(false);
 
         // Create a panel to display current player's hand using buttons
         handPanel = new JPanel(new GridLayout(1, 0));
@@ -142,10 +143,32 @@ public class Gui {
         return new Card(randomValue, randomColor);
     }
 
+    public void cardToHand(){
+
+        //Salama do this
+        JButton tempButton = new JButton();
+    }
+
     private String getFileNameForCard(Card card) {
         // Logic to map card color and value to a corresponding PNG file name
         // This can be customized based on your actual file naming convention
         return card.getColor().toString().toLowerCase() + "_" + card.getVALUE().toString().toLowerCase();
+    }
+
+    public JButton getNextPlayerButton() {
+        return nextPlayerButton;
+    }
+
+    public ArrayList<Card> getPlayerCards() {
+        return playerCards;
+    }
+
+    public ArrayList<JButton> getCardHand() {
+        return cardHand;
+    }
+
+    public JButton getDrawCardButton() {
+        return drawCardButton;
     }
 
     public static void main(String[] args) {
