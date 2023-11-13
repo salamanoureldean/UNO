@@ -23,6 +23,8 @@ public class Gui {
     private JPanel bottomPanel;
     private ArrayList<JButton> cardHand;
     private ArrayList<Card> playerCards;
+    private JButton drawCardButton;
+    private  JButton nextPlayerButton;
     Game model;
 
     public Gui() {
@@ -65,8 +67,9 @@ public class Gui {
         bottomPanel = new JPanel(new BorderLayout());
 
         // Add a button to advance to the next player
-        JButton nextPlayerButton = new JButton("Next Player");
+        nextPlayerButton = new JButton("Next Player");
         bottomPanel.add(nextPlayerButton, BorderLayout.WEST);
+        nextPlayerButton.setEnabled(false);
 
         /*
         // Create a panel to display current player's hand using buttons
@@ -107,7 +110,7 @@ public class Gui {
 
         // Add a button to draw a card
         drawPanel = new JPanel();
-        JButton drawCardButton = new JButton("Draw Card");
+        drawCardButton = new JButton("Draw Card");
         drawPanel.add(drawCardButton);
         bottomPanel.add(drawPanel, BorderLayout.EAST);
 
@@ -170,6 +173,21 @@ public class Gui {
         return card.getColor().toString().toLowerCase() + "_" + card.getVALUE().toString().toLowerCase();
     }
 
+    public JButton getDrawCardButton() {
+        return drawCardButton;
+    }
+
+    public JButton getNextPlayerButton() {
+        return nextPlayerButton;
+    }
+
+    public ArrayList<Card> getPlayerCards() {
+        return playerCards;
+    }
+
+    public ArrayList<JButton> getCardHand() {
+        return cardHand;
+    }
     /*public void update() {
 
 

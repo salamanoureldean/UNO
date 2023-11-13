@@ -40,7 +40,7 @@ public class Game {
     }
 
     // Draw a card
-    public boolean drawCard() {
+    public boolean addCardToHand() {
         Player currentPlayer = getCurrentPlayer();
         theDeck.isZero(currentCard);
         currentPlayer.drawCard(theDeck);
