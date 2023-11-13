@@ -20,7 +20,6 @@ public class Gui {
     public ArrayList<JButton> cardHand;
     private ArrayList<Card> playerCards;
     private Game model;
-    private boolean numberOfPlayersChosen; // Flag to check if the number of players has been chosen
 
     // Buttons and components that can implement an action
     public JButton nextPlayerButton;
@@ -28,12 +27,6 @@ public class Gui {
 
     public Gui() {
         model = new Game();
-        numberOfPlayersChosen = false; // Initialize the flag
-
-        if (!numberOfPlayersChosen) {
-            chooseNumberOfPlayers(); // Display the JOptionPane only if the number of players has not been chosen
-        }
-
         gameFrame = new JFrame();
         gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         gameFrame.setResizable(true);
