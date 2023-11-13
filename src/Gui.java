@@ -1,20 +1,16 @@
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Color;
-
 
 public class Gui {
     private static JFrame frame1;
     private JFrame gameFrame;
     private int numberOfPlayers;
     private JPanel topCardPanel;
-    private JPanel statusPanel;
     private JPanel handPanel;
     private JPanel drawPanel;
     private JLabel turnLabel;
@@ -23,38 +19,50 @@ public class Gui {
     private JPanel bottomPanel;
     private ArrayList<JButton> cardHand;
     private ArrayList<Card> playerCards;
+    private Game model;
+    private boolean numberOfPlayersChosen; // Flag to check if the number of players has been chosen
+
+    // Buttons and components that can implement an action
+    private JButton nextPlayerButton;
     private JButton drawCardButton;
-    private  JButton nextPlayerButton;
-    Game model;
 
     public Gui() {
         model = new Game();
-        //model.addUnoView(this);
-        frame1 = new JFrame();
-        Object[] possibilities = {2, 3, 4};
-        numberOfPlayers = (Integer) JOptionPane.showInputDialog(frame1,
-                "Choose the number of players:",
-                "Number of players selection",
-                JOptionPane.PLAIN_MESSAGE,
-                null,
-                possibilities,
-                2);
+        numberOfPlayersChosen = false; // Initialize the flag
 
-        frame1.setVisible(false);
+        if (!numberOfPlayersChosen) {
+            chooseNumberOfPlayers(); // Display the JOptionPane only if the number of players has not been chosen
+        }
 
         gameFrame = new JFrame();
         gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         gameFrame.setResizable(true);
         gameFrame.setLayout(new BorderLayout());
 
-        // Create the player's turn label at the top left
+        // Create a panel to display label of player's turn label at the top left
+        JPanel topPanel = new JPanel(new BorderLayout());
         turnLabel = new JLabel("Player _______");
-        gameFrame.add(turnLabel, BorderLayout.NORTH);
+        topPanel.add(turnLabel, BorderLayout.WEST);
+        JSeparator separator = new JSeparator(SwingConstants.HORIZONTAL);
+        topPanel.add(separator, BorderLayout.SOUTH);
+        gameFrame.add(topPanel, BorderLayout.NORTH);
 
         // Create a panel to display the current card
         topCardPanel = new JPanel(new BorderLayout());
         cardLabel = new JLabel(new ImageIcon("unocard.png"));
         topCardPanel.add(cardLabel, BorderLayout.CENTER);
+
+        // Create a panel to display status
+        JPanel statusPanel = new JPanel(new BorderLayout());
+        statusLabel = new JLabel("Status:");
+        statusPanel.add(statusLabel, BorderLayout.NORTH);
+
+        // Add a JTextArea for displaying status
+        JTextArea statusTextArea = new JTextArea(10, 10);  // Rows, Columns
+        statusTextArea.setEditable(false);  // Make it read-only
+        statusPanel.add(new JScrollPane(statusTextArea), BorderLayout.EAST);
+        topCardPanel.add(statusPanel, BorderLayout.WEST);
+
         gameFrame.add(topCardPanel, BorderLayout.CENTER);
 
         // Create a panel to display status
@@ -68,30 +76,16 @@ public class Gui {
 
         // Add a button to advance to the next player
         nextPlayerButton = new JButton("Next Player");
-        bottomPanel.add(nextPlayerButton, BorderLayout.WEST);
-        nextPlayerButton.setEnabled(false);
-
-        /*
-        // Create a panel to display current player's hand using buttons
-        handPanel = new JPanel(new GridLayout(1, 0));
-        cardHand = new ArrayList<>();
-        Controller controller = new Controller(model);
-
-        playerCards = new ArrayList<>();
-        // Add JButtons representing the player's hand
-        for (int i = 0; i < 7; i++) {
-            JButton cardButton = new JButton("Card" + i);
-            cardHand.add(cardButton);
-            cardButton.addActionListener(controller);
-            handPanel.add(cardHand.get(i));
-        }*/
+        JPanel leftPanel = new JPanel();
+        leftPanel.add(nextPlayerButton, BorderLayout.SOUTH);
+        bottomPanel.add(leftPanel, BorderLayout.WEST);
 
         // Create a panel to display current player's hand using buttons
         handPanel = new JPanel(new GridLayout(1, 0));
         cardHand = new ArrayList<>();
         Controller controller = new Controller(model);
 
-        // Arraylist of type Card
+        // ArrayList of type Card
         playerCards = new ArrayList<>();
         // Add JButtons representing the player's hand
         for (int i = 0; i < 7; i++) {
@@ -101,12 +95,10 @@ public class Gui {
             handPanel.add(cardHand.get(i));
         }
 
-
         // Create a JScrollPane and add handPanel to it
         JScrollPane handScrollPane = new JScrollPane(handPanel);
         handScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         bottomPanel.add(handScrollPane, BorderLayout.CENTER);
-
 
         // Add a button to draw a card
         drawPanel = new JPanel();
@@ -118,6 +110,21 @@ public class Gui {
         update();
 
         gameFrame.setVisible(true);
+    }
+
+    private void chooseNumberOfPlayers() {
+        frame1 = new JFrame();
+        Object[] possibilities = {2, 3, 4};
+        numberOfPlayers = (Integer) JOptionPane.showInputDialog(frame1,
+                "Choose the number of players:",
+                "Number of players selection",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                possibilities,
+                2);
+
+        frame1.setVisible(false);
+        numberOfPlayersChosen = true; // Update the flag after choosing the number of players;
     }
 
     public void update() {
@@ -134,28 +141,6 @@ public class Gui {
             String filePath = "C:\\Users\\salam\\OneDrive\\Pictures\\PNGs\\small\\" + getFileNameForCard(randomCard) + ".png";
             ImageIcon icon = new ImageIcon(filePath);
             cardButton.setIcon(icon);
-
-            /*//Set the background color based on the card color
-            switch (randomCard.getColor()) {
-                case RED:
-                    cardButton.setBackground(Color.RED);
-                    break;
-                case GREEN:
-                    cardButton.setBackground(Color.GREEN);
-                    break;
-                case BLUE:
-                    cardButton.setBackground(Color.BLUE);
-                    break;
-                case YELLOW:
-                    cardButton.setBackground(Color.YELLOW);
-                    break;
-                // Handle other colors as needed
-                default:
-                    cardButton.setBackground(Color.WHITE); // Set a default color
-                    break;
-            }
-
-             */
         }
     }
 
@@ -173,38 +158,7 @@ public class Gui {
         return card.getColor().toString().toLowerCase() + "_" + card.getVALUE().toString().toLowerCase();
     }
 
-    public JButton getDrawCardButton() {
-        return drawCardButton;
-    }
-
-    public JButton getNextPlayerButton() {
-        return nextPlayerButton;
-    }
-
-    public ArrayList<Card> getPlayerCards() {
-        return playerCards;
-    }
-
-    public ArrayList<JButton> getCardHand() {
-        return cardHand;
-    }
-    /*public void update() {
-
-
-        //Set the text on the buttons with the current cards
-        ArrayList<Card> playerHand = model.getCurrentPlayer().getHand().getCards();
-        for (int i = 0; i < Math.min(playerHand.size(), cardHand.size()); i++) {
-            JButton cardButton = cardHand.get(i);
-            Card card = playerHand.get(i);
-
-            //value and color information
-            String buttonText = card.getVALUE() + " " + card.getColor();
-            cardButton.setText(buttonText);
-        }
-    }*/
-
     public static void main(String[] args) {
-        Gui GUI = new Gui();
-        GUI.update();
+        //Gui GUI = new Gui();
     }
 }
