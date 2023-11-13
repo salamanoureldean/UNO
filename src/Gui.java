@@ -17,14 +17,14 @@ public class Gui {
     private JLabel cardLabel;
     private JLabel statusLabel;
     private JPanel bottomPanel;
-    private ArrayList<JButton> cardHand;
+    public ArrayList<JButton> cardHand;
     private ArrayList<Card> playerCards;
     private Game model;
     private boolean numberOfPlayersChosen; // Flag to check if the number of players has been chosen
 
     // Buttons and components that can implement an action
-    private JButton nextPlayerButton;
-    private JButton drawCardButton;
+    public JButton nextPlayerButton;
+    public JButton drawCardButton;
 
     public Gui() {
         model = new Game();
@@ -159,6 +159,6 @@ public class Gui {
     }
 
     public static void main(String[] args) {
-        //Gui GUI = new Gui();
+        Gui GUI = new Gui();
     }
 }

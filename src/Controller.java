@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 public class Controller implements ActionListener{
     Game game = new Game();
 
-    Gui gui;
+    Gui gui = new Gui();
 
     public Controller(Game game){
         this.game = game;
@@ -13,15 +13,15 @@ public class Controller implements ActionListener{
 
     public void actionPerformed(ActionEvent e){
         Player currPlayer;
-        if(e.getSource() == gui.getDrawCardButton()){
+        if(e.getSource() == gui.drawCardButton){
             game.addCardToHand();
-            for (JButton b: gui.getCardHand()){
+            for (JButton b: gui.cardHand){
                 b.setEnabled(false);
             }
-            gui.getDrawCardButton().setEnabled(false);
-            gui.getNextPlayerButton().setEnabled(true);
+            gui.drawCardButton.setEnabled(false);
+            gui.nextPlayerButton.setEnabled(true);
 
-        } else if (e.getSource() == gui.getNextPlayerButton()) {
+        } else if (e.getSource() == gui.nextPlayerButton) {
 
         }
     }
