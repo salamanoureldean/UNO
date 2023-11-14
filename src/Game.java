@@ -9,6 +9,7 @@ import java.util.Collections;
 
 public class Game {
     private Deck theDeck;
+    private Gui gui;
     private ArrayList<Player> playersInGame;
     private boolean winner = false;
     private Card currentCard;
@@ -32,6 +33,8 @@ public class Game {
 
         currentCard = theDeck.draw();
         cardFunctionality(currentCard);
+
+        gui = new Gui();
 
         while (!winner) {
             Player currentPlayer = getCurrentPlayer();
