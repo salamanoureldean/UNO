@@ -35,8 +35,9 @@ public class Controller implements ActionListener {
         gui.getDrawCardButton().setEnabled(true);
     }
     private void handleCardAction(ActionEvent e) {
+
         Card selectedCard = findSelectedCard(e);
-        if (selectedCard != null) {
+        if (selectedCard != null && selectedCard!=game.getCurrentCard()) {
             processCardPlacement(selectedCard);
 
         }

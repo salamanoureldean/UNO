@@ -206,10 +206,11 @@ public class Gui {
     public void updateCurrentCard(Card card){
         topCardPanel.removeAll();
         topCardPanel.add(card.getCardButton());
-        card.getCardButton().setEnabled(false);
+
         card.getCardButton().setVisible(true);
         topCardPanel.revalidate();
         topCardPanel.repaint();
+
     }
 
     public void addLatestCardToHandDisplay() {
