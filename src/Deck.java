@@ -83,7 +83,7 @@ public class Deck {
         initialize(4, Card.Color.BLANK, Card.Value.WILD);
 
         //Wild Draw 2s
-        initialize(4, Card.Color.BLANK, Card.Value.WILD_DRAW_TWO);
+        initialize(4, Card.Color.BLANK, Card.Value.WILDDRAWTWO);
 
         shuffle(completeDeck);
     }

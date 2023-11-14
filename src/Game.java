@@ -89,7 +89,7 @@ public class Game {
 
         if (currentCard.getColor() == card.getColor() || currentCard.getVALUE() == card.getVALUE()) {
             return true;
-        } else if (card.getVALUE() == Card.Value.WILD || card.getVALUE() == Card.Value.WILD_DRAW_TWO) {
+        } else if (card.getVALUE() == Card.Value.WILD || card.getVALUE() == Card.Value.WILDDRAWTWO) {
             return true;
         } else if (card.getVALUE() == Card.Value.SKIP || card.getVALUE() == Card.Value.REVERSE) {
             return card.getColor() == currentCard.getColor();
@@ -155,7 +155,7 @@ public class Game {
                     System.out.println("The color has been changed to yellow.");
                 }
                 break;
-            case WILD_DRAW_TWO:
+            case WILDDRAWTWO:
                 // Getting next player's index in order to make them draw two cards
                 int nextPlayerIndex = (currentTurn + 1) % playersInGame.size();
                 Player nextPlayer = playersInGame.get(nextPlayerIndex);
