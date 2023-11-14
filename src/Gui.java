@@ -44,9 +44,14 @@ public class Gui {
         gameFrame.setResizable(true);
         gameFrame.setLayout(new BorderLayout());
 
+        for (int i = 0; i < numberOfPlayers; i++) {
+            String playerName = JOptionPane.showInputDialog(frame1, "Enter the name of Player " + (i + 1) + ":");
+            model.getPlayersInGame().add(new Player(playerName, model.getTheDeck()));
+        }
+
         // Create a panel to display label of player's turn label at the top left
         JPanel topPanel = new JPanel(new BorderLayout());
-        turnLabel = new JLabel("Player " + (model.getCurrentTurn()+1));
+        turnLabel = new JLabel("Player " + (model.getPlayersInGame().get(0).getName()));
         topPanel.add(turnLabel, BorderLayout.WEST);
         JSeparator separator = new JSeparator(SwingConstants.HORIZONTAL);
         topPanel.add(separator, BorderLayout.SOUTH);
