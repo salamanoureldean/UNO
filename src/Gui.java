@@ -206,6 +206,10 @@ public class Gui {
         return statusTextArea;
     }
 
+    public Game getModel() {
+        return model;
+    }
+
     public static void main(String[] args) {
         //Gui GUI = new Gui();
     }
