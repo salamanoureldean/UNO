@@ -5,6 +5,7 @@ import javax.swing.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collections;
 
 public class Gui {
     private static JFrame frame1;
@@ -14,7 +15,6 @@ public class Gui {
     private JPanel handPanel;
     private JPanel drawPanel;
     private JLabel turnLabel;
-    private JLabel cardLabel;
     private JLabel statusLabel;
     private JPanel bottomPanel;
     private ArrayList<JButton> cardHand;
@@ -123,6 +123,9 @@ public class Gui {
         for (Card card: currentPlayer.getHand().getCards()){
             handPanel.add(card.getCardButton());
         }
+        model.getCurrentCard().getCardButton().setVisible(true);
+        setHandVisible(model.getCurrentPlayer());
+
 
         /*
         // Add JButtons representing the player's hand
@@ -159,14 +162,22 @@ public class Gui {
 
     public void cardToHand(){
 
-        //Salama do this
-        JButton tempButton = new JButton();
     }
 
-    public void placeCard(Card card){
-        topCardPanel.remove(cardLabel);
-        topCardPanel.add(card.getCardButton());
-        handPanel.remove(card.getCardButton());
+    public boolean placeCard(Card cardToPlay, int i){
+        if(model.removeCardFromHand(model.getCurrentPlayer().getHand().getCards().get(i)) == true) {
+            topCardPanel.remove(model.getCurrentCard().getCardButton());
+            topCardPanel.add(cardToPlay.getCardButton(), BorderLayout.CENTER);
+            handPanel.remove(cardToPlay.getCardButton());
+
+
+            return true;
+        }
+        return false;
+    }
+
+    public JFrame getGameFrame() {
+        return gameFrame;
     }
 
     public JButton getNextPlayerButton() {
@@ -216,18 +227,16 @@ public class Gui {
     // Enable and set the cards in the hand as visible
     public void setHandVisible(Player player) {
         for (Card card : player.getHand().getCards()) {
-            JButton cardButton = card.getCardButton();
-            cardButton.setVisible(true);
-            cardButton.setEnabled(true);
+            card.getCardButton().setVisible(true);
+            card.getCardButton().setEnabled(true);
         }
     }
 
     // Disable and set the cards in the hand as invisible
     public void setHandInvisible(Player player){
         for (Card card : player.getHand().getCards()) {
-            JButton cardButton = card.getCardButton();
-            cardButton.setVisible(false);
-            cardButton.setEnabled(false);
+            card.getCardButton().setVisible(false);
+            card.getCardButton().setEnabled(false);
         }
     }
 }

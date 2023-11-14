@@ -53,7 +53,7 @@ public class Game {
     }
 
     // Play a card
-    public void removeCardFromHand(Card cardToPlay) {
+    public boolean removeCardFromHand(Card cardToPlay) {
         Player currentPlayer = getCurrentPlayer();
 
         if (cardToPlay != null && isPlayable(cardToPlay)) {
@@ -61,7 +61,9 @@ public class Game {
             cardFunctionality(currentCard);
             theDeck.place(cardToPlay);
             currentPlayer.playCard(cardToPlay);
+            return true;
         }
+        return false;
     }
 
 
@@ -82,11 +84,6 @@ public class Game {
      * @return true if playable false if not playable
      */
     public boolean isPlayable(Card card) {
-        if (currentCard == null) {
-            // If no card has been played yet, any card is playable.
-            return true;
-        }
-
         if (currentCard.getColor() == card.getColor() || currentCard.getVALUE() == card.getVALUE()) {
             return true;
         } else if (card.getVALUE() == Card.Value.WILD || card.getVALUE() == Card.Value.WILDDRAWTWO) {
