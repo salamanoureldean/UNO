@@ -1,28 +1,32 @@
+import javax.swing.*;
+
 /**
  * @author: Salama Noureldean 101154365
  * @editor: Pietro Adamvoski 101238885
  * @date: 10/22/2023
  * @version: 1.00
  */
-
 public class Card {
-     enum Value{ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, REVERSE, SKIP, WILD, WILD_DRAW_TWO};
+    enum Value{ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, REVERSE, SKIP, WILD, WILD_DRAW_TWO};
     public enum Color{RED, GREEN, BLUE, YELLOW, BLANK};
 
     private final Value VALUE;
     private Color color;
+    private JButton cardButton;
 
     public Card(Value value, Color color) {
+        newCardButton();
+        //cardButton.setVisible(false);
         this.VALUE = value;
         this.color = color;
     }
 
-    //Returns the randomized color of the card.
+    //Returns the color of the card.
     public Color getColor(){
         return color;
     }
 
-    //Returns the randomized value of the card.
+    //Returns the value of the card.
     public Value getVALUE(){
         return VALUE;
     }
@@ -30,6 +34,10 @@ public class Card {
     //Sets color variable
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public void newCardButton(){
+        this.cardButton = new JButton();
     }
 
     //Returns a string representation of the card. Returns value and color if the value of the card is not a wildcard.
@@ -41,5 +49,9 @@ public class Card {
         else{
             return "A " + color + " " + VALUE;
         }
+    }
+
+    public JButton getCardButton() {
+        return cardButton;
     }
 }

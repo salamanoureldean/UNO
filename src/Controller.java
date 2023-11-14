@@ -32,15 +32,12 @@ public class Controller implements ActionListener{
             }
             gui.getNextPlayerButton().setEnabled(false);
         }
-
-
-
-        else{
+        /**else{
             for(JButton button: gui.getCardHand()){
                 if(e.getSource() == button){
-                    game.cardFunctionality(game.getCurrentCard()); //////FIX THIS
+                    game.cardFunctionality(); //////FIX THIS
                 }
             }
-        }
+        } */
     }
 }

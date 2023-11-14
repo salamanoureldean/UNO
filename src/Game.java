@@ -260,4 +260,5 @@ public class Game {
     public Card getCurrentCard() {
         return currentCard;
     }
+
 }

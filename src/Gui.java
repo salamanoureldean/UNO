@@ -102,6 +102,28 @@ public class Gui {
 
         // ArrayList of type Card
         playerCards = new ArrayList<>();
+
+        // Set the image of the card based on a player's hands
+        for(int j =0; j < model.getPlayersInGame().size(); j++) {
+            for (int i = 0; i < model.getPlayersInGame().get(j).getHand().getCards().size(); i++) {
+                Card tempCard = model.getPlayersInGame().get(j).getHand().getCards().get(i);
+                System.out.println("Player i");
+
+                // Set the icon of the button to the corresponding PNG file
+                String filePath = "C:\\Users\\Salam\\OneDrive\\Documents\\PNGs\\PNGs\\small\\" + getFileNameForCard(tempCard) + ".png";
+                ImageIcon icon = new ImageIcon(filePath);
+                tempCard.getCardButton().setIcon(icon);
+                //cardHand.add(temp.getCardButton());
+                //handPanel.add(tempCard.getCardButton());
+            }
+        }
+
+        Player currentPlayer = model.getCurrentPlayer();
+        for (Card card: currentPlayer.getHand().getCards()){
+            handPanel.add(card.getCardButton());
+        }
+
+        /*
         // Add JButtons representing the player's hand
         for (int i = 0; i < 7; i++) {
             JButton cardButton = new JButton();
@@ -109,6 +131,7 @@ public class Gui {
             cardButton.addActionListener(controller);
             handPanel.add(cardHand.get(i));
         }
+        */
 
         // Create a JScrollPane and add handPanel to it
         JScrollPane handScrollPane = new JScrollPane(handPanel);
@@ -120,28 +143,10 @@ public class Gui {
         drawCardButton = new JButton("Draw Card");
         drawPanel.add(drawCardButton);
         bottomPanel.add(drawPanel, BorderLayout.EAST);
-
         gameFrame.add(bottomPanel, BorderLayout.SOUTH);
-        update();
+        //update();
 
         gameFrame.setVisible(true);
-    }
-
-    public void update() {
-        // Set the text and background color on the buttons with random card values and colors
-        for (int i = 0; i < cardHand.size(); i++) {
-            JButton cardButton = cardHand.get(i);
-            Card randomCard = getRandomCard(); // Get a random card
-            playerCards.add(randomCard);
-
-            // Set the card text on the button
-            cardButton.setText(randomCard.stringCard());
-
-            // Set the icon of the button to the corresponding PNG file
-            String filePath = "C:\\Users\\Mahad\\OneDrive\\Documents\\PNGs\\PNGs\\small\\" + getFileNameForCard(randomCard) + ".png";
-            ImageIcon icon = new ImageIcon(filePath);
-            cardButton.setIcon(icon);
-        }
     }
 
     private Card getRandomCard() {
