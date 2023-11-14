@@ -203,6 +203,10 @@ public class Gui {
         }
     }
 
+    public void updateStatusDraw(Player player){
+        statusTextArea.setText("Drew: " + player.getLastCard().stringCard());
+    }
+
     public void updateCurrentCard(Card card){
         topCardPanel.removeAll();
         topCardPanel.add(card.getCardButton());

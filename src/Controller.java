@@ -26,6 +26,8 @@ public class Controller implements ActionListener {
         }
         gui.getDrawCardButton().setEnabled(false);
         gui.getNextPlayerButton().setEnabled(true);
+        gui.updateStatusDraw(game.getCurrentPlayer());
+        gui.disableHand();
     }
 
     private void handleNextPlayerAction() {
@@ -42,6 +44,7 @@ public class Controller implements ActionListener {
 
         }
         checkForGameWinner();
+
     }
 
     private Card findSelectedCard(ActionEvent e) {
