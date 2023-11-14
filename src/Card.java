@@ -23,6 +23,8 @@ public class Card {
         String filePath = "C:\\Users\\pietr\\OneDrive\\Pictures\\PNGs\\small\\" + getFileNameForCard(value, color) + ".png";
         ImageIcon icon = new ImageIcon(filePath);
         this.cardButton.setIcon(icon);
+        this.cardButton.setEnabled(false);
+        this.cardButton.setVisible(false);
     }
 
     //Returns the color of the card.
