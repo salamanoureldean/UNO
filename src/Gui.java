@@ -102,38 +102,10 @@ public class Gui {
         // ArrayList of type Card
         playerCards = new ArrayList<>();
 
-        // Set the image of the card in each players' hands
-        /*
-        for(int j =0; j < model.getPlayersInGame().size(); j++) {
-
-            for (int i = 0; i < model.getPlayersInGame().get(j).getHand().getCards().size(); i++) {
-                Card tempCard = model.getPlayersInGame().get(j).getHand().getCards().get(i);
-                System.out.println("Player i");
-
-                // Set the icon of the button to the corresponding PNG file
-                String filePath = "C:\\Users\\Salam\\OneDrive\\Documents\\PNGs\\PNGs\\small\\" + getFileNameForCard(tempCard) + ".png";
-                ImageIcon icon = new ImageIcon(filePath);
-                tempCard.getCardButton().setIcon(icon);
-                cardHand.add(tempCard.getCardButton());
-                //handPanel.add(tempCard.getCardButton());
-            }
-        }
-         */
-
         Player currentPlayer = model.getCurrentPlayer();
         for (Card card: currentPlayer.getHand().getCards()){
             handPanel.add(card.getCardButton());
         }
-
-        /*
-        // Add JButtons representing the player's hand
-        for (int i = 0; i < 7; i++) {
-            JButton cardButton = new JButton();
-            cardHand.add(cardButton);
-            cardButton.addActionListener(controller);
-            handPanel.add(cardHand.get(i));
-        }
-        */
 
         // Create a JScrollPane and add handPanel to it
         JScrollPane handScrollPane = new JScrollPane(handPanel);
@@ -169,6 +141,7 @@ public class Gui {
         topCardPanel.remove(cardLabel);
         topCardPanel.add(card.getCardButton());
         handPanel.remove(card.getCardButton());
+        cardHand.remove(card.getCardButton());
     }
 
     public JButton getNextPlayerButton() {
