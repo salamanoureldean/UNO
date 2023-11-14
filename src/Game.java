@@ -44,12 +44,7 @@ public class Game {
 
         Card lastDrawnCard = currentPlayer.getLastCard();
 
-        if (lastDrawnCard != null && isPlayable(lastDrawnCard)) {
-            return true;
-        } else {
-            nextPlayer();
-            return false;
-        }
+        return true;
     }
 
     // Play a card

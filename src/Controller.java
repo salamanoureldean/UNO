@@ -15,19 +15,11 @@ public class Controller implements ActionListener{
 
 
     public void actionPerformed(ActionEvent e){
-        JFrame frame = new JFrame();
-        frame.setVisible(false);
         if(e.getSource() == gui.getDrawCardButton()){
-            //THIS IS DRAW
             game.addCardToHand();
-            //gui.cardToHand();
-            gui.drawTheCard(game.getCurrentPlayer().getLastCard());
-            gui.setHandInvisible(game.getCurrentPlayer());
+            gui.addLatestCardToHandDisplay();
             gui.getDrawCardButton().setEnabled(false);
             gui.getNextPlayerButton().setEnabled(true);
-
-
-            game.getCurrentPlayer().getHand().getCards();
 
         } else if (e.getSource() == gui.getNextPlayerButton()) {
             //THIS THE NEXT PLAYER
@@ -65,7 +57,7 @@ public class Controller implements ActionListener{
             }
             System.out.println("BYEEEEEEEEEEEEE");
             if(game.checkWinner() == true){
-                JOptionPane.showMessageDialog(frame,"You Won!");
+                JOptionPane.showMessageDialog(gui.getGameFrame(),"You Won!");
                 System.exit(0);
             }
         }
