@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 public class Controller implements ActionListener{
     private Game game;
 
-    private int index = 0;
+    private int indexPlayer = 0;
 
     private Gui gui;
 
@@ -19,13 +19,11 @@ public class Controller implements ActionListener{
     public void actionPerformed(ActionEvent e){
         JFrame frame = new JFrame();
         frame.setVisible(false);
-        Card tempCard = game.getCurrentPlayer().getHand().getCards().get(index);
         if(e.getSource() == gui.getDrawCardButton()){
             game.addCardToHand();
             gui.cardToHand();
-            for (JButton b: gui.getCardHand()){
-                b.setEnabled(false);
-            }
+           //Useless code to be changed
+            gui.setHandInvisible(game.getCurrentPlayer());
             gui.getDrawCardButton().setEnabled(false);
             gui.getNextPlayerButton().setEnabled(true);
 
@@ -33,26 +31,30 @@ public class Controller implements ActionListener{
             game.getCurrentPlayer().getHand().getCards();
 
         } else if (e.getSource() == gui.getNextPlayerButton()) {
-            index = (index + 1) % 4;
+            indexPlayer += 1;
+            indexPlayer = indexPlayer % gui.getNumberOfPlayers();
             game.nextPlayer();
             gui.getDrawCardButton().setEnabled(true);
-            for (JButton b: gui.getCardHand()){
-                b.setEnabled(true);
-            }
+            gui.setHandVisible(game.getCurrentPlayer());
             gui.getNextPlayerButton().setEnabled(false);
-            gui.getTurnLabel().setText(game.getPlayersInGame().get(index).getName());
+            gui.getTurnLabel().setText(game.getPlayersInGame().get(indexPlayer).getName());
         }
         else{
+            System.out.println("HIIIIIIIIIIIII");
             for(int i=0; i < game.getCurrentPlayer().getHand().getCards().size(); i++){
-                if(e.getSource() == tempCard.getCardButton()){
-                    if(game.isPlayable(tempCard) == true) {
-                        game.removeCardFromHand(tempCard);
-                        gui.placeCard(tempCard);
+                if(e.getSource() == game.getCurrentPlayer().getHand().getCards().get(i).getCardButton()){
+                    System.out.println("Hiiiiiiiiiiii");
+                    if(game.isPlayable(game.getCurrentPlayer().getHand().getCards().get(i)) == true) {
+                        game.removeCardFromHand(game.getCurrentPlayer().getHand().getCards().get(i));
+                        gui.placeCard(game.getCurrentPlayer().getHand().getCards().get(i));
                         gui.setHandInvisible(game.getCurrentPlayer());
+                        gui.getDrawCardButton().setEnabled(false);
+                        gui.getNextPlayerButton().setEnabled(true);
                     }else{
                         gui.getStatusTextArea().setText("Invalid Move!");
                     }
                 }
+            System.out.println("BYEEEEEEEEEEEEE");
             if(game.checkWinner() == true){
                     JOptionPane.showMessageDialog(frame,"You Won!");
                     System.exit(0);

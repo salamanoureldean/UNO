@@ -149,7 +149,6 @@ public class Gui {
 
         gameFrame.setVisible(true);
     }
-
     private Card getRandomCard() {
         // Generate a random card with a random color and value
         Card.Color randomColor = Card.Color.values()[(int) (Math.random() * Card.Color.values().length)];
@@ -184,6 +183,10 @@ public class Gui {
 
     public JButton getDrawCardButton() {
         return drawCardButton;
+    }
+
+    public void drawTheCard(Card card){
+        handPanel.add(card.getCardButton());
     }
 
     public int getNumberOfPlayers(){

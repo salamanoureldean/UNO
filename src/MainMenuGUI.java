@@ -64,8 +64,10 @@ public class MainMenuGUI extends JFrame {
     private void initialize(){
         gui = new Gui();
         controller = new Controller(gui.getModel(),gui);
-        for(JButton button: gui.getCardHand()){
-            button.addActionListener(controller);
+        for(int i=0; i < gui.getModel().getPlayersInGame().size(); i++){
+            for(int j = 0; j< gui.getModel().getPlayersInGame().get(i).getHand().getCards().size(); j++) {
+                gui.getModel().getPlayersInGame().get(i).getHand().getCards().get(j).getCardButton().addActionListener(controller);
+            }
         }
         gui.getDrawCardButton().addActionListener(controller);
         gui.getNextPlayerButton().addActionListener(controller);
