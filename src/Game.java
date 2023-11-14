@@ -16,13 +16,10 @@ public class Game {
     private int currentTurn = 0;
 
     // Game constructor
-    public Game() {
+    public Game(int numPlayers) {
         playersInGame = new ArrayList<>();
         theDeck = new Deck();
-    }
 
-    // Main game flow
-    public void gameStart(int numPlayers) {
         int numberOfPlayers = numPlayers;
 
         // Initialize players
@@ -34,20 +31,8 @@ public class Game {
         currentCard = theDeck.draw();
         cardFunctionality(currentCard);
 
-        gui = new Gui();
-
-        while (!winner) {
-            Player currentPlayer = getCurrentPlayer();
-            // Controller will decide whether to call drawCard() or playCard()
-
-            checkWinner();
-
-            if (!winner) {
-                nextPlayer();
-            }
-        }
-        winnerScore();
     }
+
 
     // Draw a card
     public boolean addCardToHand() {

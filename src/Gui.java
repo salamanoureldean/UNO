@@ -26,8 +26,6 @@ public class Gui {
     private JButton drawCardButton;
 
     public Gui() {
-        model = new Game();
-
         frame1 = new JFrame();
         Object[] possibilities = {2, 3, 4};
         numberOfPlayers = (Integer) JOptionPane.showInputDialog(frame1,
@@ -39,7 +37,8 @@ public class Gui {
                 2);
         frame1.setVisible(false);
 
-        model.gameStart(numberOfPlayers);
+        model = new Game(numberOfPlayers);
+
 
         gameFrame = new JFrame();
         gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -98,7 +97,6 @@ public class Gui {
         // Create a panel to display current player's hand using buttons
         handPanel = new JPanel(new GridLayout(1, 0));
         cardHand = new ArrayList<>();
-        Controller controller = new Controller(model);
 
         // ArrayList of type Card
         playerCards = new ArrayList<>();
@@ -188,6 +186,11 @@ public class Gui {
     public int getNumberOfPlayers(){
         return numberOfPlayers;
     }
+
+    public JLabel getTurnLabel() {
+        return turnLabel;
+    }
+
     public static void main(String[] args) {
         Gui GUI = new Gui();
     }

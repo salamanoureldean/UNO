@@ -3,12 +3,15 @@ import java.awt.event.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 public class Controller implements ActionListener{
-    Game game = new Game();
+    private Game game;
 
-    Gui gui;
+    private int index = 0;
 
-    public Controller(Game game){
+    private Gui gui;
+
+    public Controller(Game game, Gui gui){
         this.game = game;
+        this.gui = gui;
     }
 
     public void actionPerformed(ActionEvent e){
@@ -25,12 +28,14 @@ public class Controller implements ActionListener{
             game.getCurrentPlayer().getHand().getCards();
 
         } else if (e.getSource() == gui.getNextPlayerButton()) {
+            index = (index + 1) % 4;
             game.nextPlayer();
             gui.getDrawCardButton().setEnabled(true);
             for (JButton b: gui.getCardHand()){
                 b.setEnabled(true);
             }
             gui.getNextPlayerButton().setEnabled(false);
+            gui.getTurnLabel().setText(game.getPlayersInGame().get(index).getName());
         }
         /**else{
             for(JButton button: gui.getCardHand()){
