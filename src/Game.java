@@ -257,4 +257,8 @@ public class Game {
     public int getCurrentTurn() {
         return currentTurn;
     }
+
+    public Card getCurrentCard() {
+        return currentCard;
+    }
 }
