@@ -240,6 +240,7 @@ public class Gui {
     public boolean removeCardFromHand(Card cardToPlay){
         if(model.removeCardFromHand(cardToPlay)) {
             cardToPlay.getCardButton().setVisible(false);
+            updateCurrentCard(cardToPlay);
             handPanel.remove(cardToPlay.getCardButton());
             handPanel.revalidate();
             handPanel.repaint();
