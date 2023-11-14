@@ -160,8 +160,8 @@ public class Gui {
         return new Card(randomValue, randomColor);
     }
 
-    public void cardToHand(){
-
+    public void cardToHand(Card cardToDraw){
+        handPanel.add(cardToDraw.getCardButton());
     }
 
     public boolean placeCard(Card cardToPlay, int i){
