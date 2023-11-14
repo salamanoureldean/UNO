@@ -245,4 +245,16 @@ public class Game {
             playersInGame.add(player);
         }
     }
+
+    public ArrayList<Player> getPlayersInGame() {
+        return playersInGame;
+    }
+
+    public Deck getTheDeck() {
+        return theDeck;
+    }
+
+    public int getCurrentTurn() {
+        return currentTurn;
+    }
 }

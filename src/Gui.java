@@ -46,7 +46,7 @@ public class Gui {
 
         // Create a panel to display label of player's turn label at the top left
         JPanel topPanel = new JPanel(new BorderLayout());
-        turnLabel = new JLabel("Player _______");
+        turnLabel = new JLabel("Player " + (model.getCurrentTurn()+1));
         topPanel.add(turnLabel, BorderLayout.WEST);
         JSeparator separator = new JSeparator(SwingConstants.HORIZONTAL);
         topPanel.add(separator, BorderLayout.SOUTH);
