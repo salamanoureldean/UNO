@@ -40,7 +40,6 @@ public class Controller implements ActionListener {
             processCardPlacement(selectedCard);
 
         }
-        gui.disableHand();
         checkForGameWinner();
     }
 
@@ -56,6 +55,7 @@ public class Controller implements ActionListener {
     private void processCardPlacement(Card card) {
         if (gui.removeCardFromHand(card)) {
             handleSuccessfulCardPlacement();
+            gui.disableHand();
         } else {
             //SHOW INVALID MOVE IN STATUS
             gui.getStatusTextArea().setText("Invalid Move!");
