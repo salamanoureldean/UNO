@@ -101,8 +101,10 @@ public class Gui {
         // ArrayList of type Card
         playerCards = new ArrayList<>();
 
-        // Set the image of the card based on a player's hands
+        // Set the image of the card in each players' hands
+        /*
         for(int j =0; j < model.getPlayersInGame().size(); j++) {
+
             for (int i = 0; i < model.getPlayersInGame().get(j).getHand().getCards().size(); i++) {
                 Card tempCard = model.getPlayersInGame().get(j).getHand().getCards().get(i);
                 System.out.println("Player i");
@@ -115,6 +117,7 @@ public class Gui {
                 //handPanel.add(tempCard.getCardButton());
             }
         }
+         */
 
         Player currentPlayer = model.getCurrentPlayer();
         for (Card card: currentPlayer.getHand().getCards()){
@@ -161,11 +164,14 @@ public class Gui {
         JButton tempButton = new JButton();
     }
 
+    /*
     private String getFileNameForCard(Card card) {
         // Logic to map card color and value to a corresponding PNG file name
         // This can be customized based on your actual file naming convention
         return card.getColor().toString().toLowerCase() + "_" + card.getVALUE().toString().toLowerCase();
     }
+
+    */
 
     public JButton getNextPlayerButton() {
         return nextPlayerButton;
@@ -196,6 +202,24 @@ public class Gui {
     }
 
     public static void main(String[] args) {
-        Gui GUI = new Gui();
+        //Gui GUI = new Gui();
+    }
+
+    // Enable and set the cards in the hand as visible
+    public void setHandVisible(Player player) {
+        for (Card card : player.getHand().getCards()) {
+            JButton cardButton = card.getCardButton();
+            cardButton.setVisible(true);
+            cardButton.setEnabled(true);
+        }
+    }
+
+    // Disable and set the cards in the hand as invisible
+    public void setHandInvisible(Player player){
+        for (Card card : player.getHand().getCards()) {
+            JButton cardButton = card.getCardButton();
+            cardButton.setVisible(false);
+            cardButton.setEnabled(false);
+        }
     }
 }

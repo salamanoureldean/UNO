@@ -15,10 +15,13 @@ public class Card {
     private JButton cardButton;
 
     public Card(Value value, Color color) {
-        newCardButton();
-        //cardButton.setVisible(false);
         this.VALUE = value;
         this.color = color;
+
+        this.cardButton = new JButton();
+        String filePath = "C:\\Users\\salam\\OneDrive\\Pictures\\PNGs\\small\\" + getFileNameForCard(value, color) + ".png";
+        ImageIcon icon = new ImageIcon(filePath);
+        this.cardButton.setIcon(icon);
     }
 
     //Returns the color of the card.
@@ -36,8 +39,10 @@ public class Card {
         this.color = color;
     }
 
-    public void newCardButton(){
-        this.cardButton = new JButton();
+    private String getFileNameForCard(Value value, Color color) {
+        // Logic to map card color and value to a corresponding PNG file name
+        // This can be customized based on your actual file naming convention
+        return color.toString().toLowerCase() + "_" + value.toString().toLowerCase();
     }
 
     //Returns a string representation of the card. Returns value and color if the value of the card is not a wildcard.
