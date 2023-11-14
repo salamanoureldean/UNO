@@ -32,12 +32,15 @@ public class Controller implements ActionListener {
         game.nextPlayer();
         gui.updatePlayerTurnLabel(game.getCurrentTurn());
         gui.updatePlayerHand(game.getCurrentPlayer());
+        gui.getDrawCardButton().setEnabled(true);
     }
     private void handleCardAction(ActionEvent e) {
         Card selectedCard = findSelectedCard(e);
         if (selectedCard != null) {
             processCardPlacement(selectedCard);
+
         }
+        gui.disableHand();
         checkForGameWinner();
     }
 

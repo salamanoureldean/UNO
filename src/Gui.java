@@ -106,7 +106,7 @@ public class Gui {
             handPanel.add(card.getCardButton());
         }
         model.getCurrentCard().getCardButton().setVisible(true);
-
+        updatePlayerHand(model.getCurrentPlayer());
 
 
         // Create a JScrollPane and add handPanel to it
@@ -195,7 +195,12 @@ public class Gui {
     }
 
     public void disableHand(){
-        handPanel.setEnabled(false);
+        for(Component component: handPanel.getComponents()){
+            if(component instanceof JButton){
+                JButton button = (JButton) component;
+                button.setEnabled(true);
+            }
+        }
     }
 
     public void updateCurrentCard(Card card){
