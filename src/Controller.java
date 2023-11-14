@@ -22,6 +22,7 @@ public class Controller implements ActionListener{
         if(e.getSource() == gui.getDrawCardButton()){
             game.addCardToHand();
             gui.cardToHand();
+            gui.drawTheCard(game.getCurrentPlayer().getLastCard());
            //Useless code to be changed
             gui.setHandInvisible(game.getCurrentPlayer());
             gui.getDrawCardButton().setEnabled(false);
