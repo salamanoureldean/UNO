@@ -208,7 +208,7 @@ public class Gui {
     }
 
     public static void main(String[] args) {
-        //Gui GUI = new Gui();
+        Gui GUI = new Gui();
     }
 
     // Enable and set the cards in the hand as visible
