@@ -105,7 +105,9 @@ public class Game {
     public void cardFunctionality(Card playedCard) {
         Card.Value cardValue = playedCard.getVALUE();
         //Card.Color cardColor = playedCard.getColor();
+        String newColor;
         JFrame frame = new JFrame();
+        String[] choose = {"Red","Green","Blue","Yellow"};
 
         switch (cardValue) {
             case REVERSE:
@@ -123,27 +125,32 @@ public class Game {
                     currentTurn += 1;
                 }
                 JOptionPane.showMessageDialog(frame, "Player was skipped");
+                frame.setVisible(false);
                 break;
             case WILD:
-                Scanner wildInput = new Scanner(System.in);
-                //JOPTIONPANE
-                System.out.println("Choose a color: R, G, B, Y\n");
-                String newColor = wildInput.nextLine().toUpperCase();
-
+                frame.setVisible(true);
+                        newColor = (String) JOptionPane.showInputDialog(frame,
+                        "Choose the color",
+                        "Color selection",
+                        JOptionPane.PLAIN_MESSAGE,
+                        null,
+                        choose,
+                        0);
+                frame.setVisible(false);
                 // Changing current color based on user input
-                if (newColor.equals("R")) {
+                if (newColor.equals("Red")) {
                     currentCard.setColor(Card.Color.RED);
                     System.out.println("The color has been changed to red.");
                 }
-                else if (newColor.equals("G")) {
+                else if (newColor.equals("Green")) {
                     currentCard.setColor(Card.Color.GREEN);
                     System.out.println("The color has been changed to green.");
                 }
-                else if (newColor.equals("B")) {
+                else if (newColor.equals("Blue")) {
                     currentCard.setColor(Card.Color.BLUE);
                     System.out.println("The color has been changed to blue.");
                 }
-                else if (newColor.equals("Y")) {
+                else if (newColor.equals("Yellow")) {
                     currentCard.setColor(Card.Color.YELLOW);
                     System.out.println("The color has been changed to yellow.");
                 }
@@ -156,23 +163,28 @@ public class Game {
                     nextPlayer.drawCard(theDeck);
                 }
                 // Changing current color of cards being played based on user input
-                wildInput = new Scanner(System.in);
-                System.out.println("Choose a color: R, G, B, Y\n");
-                newColor = wildInput.nextLine().toUpperCase();
+                frame.setVisible(true);
+                newColor = (String) JOptionPane.showInputDialog(frame,
+                        "Choose the color",
+                        "Color selection",
+                        JOptionPane.PLAIN_MESSAGE,
+                        null,
+                        choose,
+                        0);
 
-                if (newColor.equals("R")) {
+                if (newColor.equals("Red")) {
                     currentCard.setColor(Card.Color.RED);
                     System.out.println("The color has been changed to red.");
                 }
-                else if (newColor.equals("G")) {
+                else if (newColor.equals("Green")) {
                     currentCard.setColor(Card.Color.GREEN);
                     System.out.println("The color has been changed to green.");
                 }
-                else if (newColor.equals("B")) {
+                else if (newColor.equals("Blue")) {
                     currentCard.setColor(Card.Color.BLUE);
                     System.out.println("The color has been changed to blue.");
                 }
-                else if (newColor.equals("Y")) {
+                else if (newColor.equals("Yellow")) {
                     currentCard.setColor(Card.Color.YELLOW);
                     System.out.println("The color has been changed to yellow.");
                 }
