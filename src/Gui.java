@@ -198,7 +198,7 @@ public class Gui {
         for(Component component: handPanel.getComponents()){
             if(component instanceof JButton){
                 JButton button = (JButton) component;
-                button.setEnabled(true);
+                button.setEnabled(false);
             }
         }
     }
