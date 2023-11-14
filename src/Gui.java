@@ -171,6 +171,10 @@ public class Gui {
         handPanel.remove(card.getCardButton());
     }
 
+    public void drawCard(Card card){
+        handPanel.add(card.getCardButton());
+    }
+
     public JButton getNextPlayerButton() {
         return nextPlayerButton;
     }
