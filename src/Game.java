@@ -230,7 +230,9 @@ public class Game {
 
     // Move to the next player
     public int nextPlayer() {
-        currentTurn = currentTurn % playersInGame.size();
+        if(currentTurn == 1){
+            currentTurn = 0;
+        }
         currentTurn +=  1;
         return currentTurn;
     }
