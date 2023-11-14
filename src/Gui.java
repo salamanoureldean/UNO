@@ -24,6 +24,7 @@ public class Gui {
     // Buttons and components that can implement an action
     private JButton nextPlayerButton;
     private JButton drawCardButton;
+    private JTextArea statusTextArea;
 
     public Gui() {
         frame1 = new JFrame();
@@ -71,7 +72,7 @@ public class Gui {
         statusPanel.add(statusLabel, BorderLayout.NORTH);
 
         // Add a JTextArea for displaying status
-        JTextArea statusTextArea = new JTextArea(10, 10);  // Rows, Columns
+        statusTextArea = new JTextArea(10, 10);  // Rows, Columns
         statusTextArea.setEditable(false);  // Make it read-only
         statusPanel.add(new JScrollPane(statusTextArea), BorderLayout.EAST);
         topCardPanel.add(statusPanel, BorderLayout.WEST);
@@ -193,6 +194,10 @@ public class Gui {
 
     public void setNumberOfPlayers(int numberOfPlayers) {
         this.numberOfPlayers = numberOfPlayers;
+    }
+
+    public JTextArea getStatusTextArea() {
+        return statusTextArea;
     }
 
     public static void main(String[] args) {

@@ -15,7 +15,7 @@ public class Controller implements ActionListener{
     }
 
     public void actionPerformed(ActionEvent e){
-        System.out.println("HIIIIIIIIIII");
+        Card tempCard = game.getCurrentPlayer().getHand().getCards().get(index);
         if(e.getSource() == gui.getDrawCardButton()){
             game.addCardToHand();
             gui.cardToHand();
@@ -38,12 +38,20 @@ public class Controller implements ActionListener{
             gui.getNextPlayerButton().setEnabled(false);
             gui.getTurnLabel().setText(game.getPlayersInGame().get(index).getName());
         }
-        /**else{
-            for(JButton button: gui.getCardHand()){
-                if(e.getSource() == button){
-                    game.cardFunctionality(); //////FIX THIS
+        else{
+            if(game.checkWinner() == true){
+                //Make a gameover in the gui
+                System.exit(0);
+            }
+            for(int i=0; i < game.getCurrentPlayer().getHand().getCards().size(); i++){
+                if(e.getSource() == tempCard.getCardButton()){
+                    if(game.isPlayable(tempCard) == true) {
+                        game.removeCardFromHand(tempCard);
+                    }else{
+                        gui.getStatusTextArea().setText("Invalid Move!");
+                    }
                 }
             }
-        } */
+        }
     }
 }
