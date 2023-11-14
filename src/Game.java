@@ -41,7 +41,6 @@ public class Game {
         Player currentPlayer = getCurrentPlayer();
         theDeck.isZero(currentCard);
         currentPlayer.drawCard(theDeck);
-
         return true;
     }
 
@@ -223,10 +222,7 @@ public class Game {
 
     // Move to the next player
     public int nextPlayer() {
-        if(currentTurn > 2){
-            currentTurn = 1;
-        }
-        currentTurn +=  1;
+       currentTurn = (currentTurn+1) % playersInGame.size();
         return currentTurn;
     }
 

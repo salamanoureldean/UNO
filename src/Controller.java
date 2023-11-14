@@ -29,9 +29,9 @@ public class Controller implements ActionListener {
     }
 
     private void handleNextPlayerAction() {
-        int currentPlayerIndex = game.nextPlayer();
-        gui.updatePlayerTurnLabel(currentPlayerIndex);
-        gui.setHandVisible(game.getCurrentPlayer());
+        game.nextPlayer();
+        gui.updatePlayerTurnLabel(game.getCurrentTurn());
+        gui.updatePlayerHand(game.getCurrentPlayer());
     }
     private void handleCardAction(ActionEvent e) {
         Card selectedCard = findSelectedCard(e);
@@ -55,6 +55,7 @@ public class Controller implements ActionListener {
             handleSuccessfulCardPlacement();
         } else {
             //SHOW INVALID MOVE IN STATUS
+            gui.getStatusTextArea().setText("Invalid Move!");
         }
     }
     private void handleSuccessfulCardPlacement() {

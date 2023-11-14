@@ -106,7 +106,7 @@ public class Gui {
             handPanel.add(card.getCardButton());
         }
         model.getCurrentCard().getCardButton().setVisible(true);
-        setHandVisible(model.getCurrentPlayer());
+
 
 
         // Create a JScrollPane and add handPanel to it
@@ -182,21 +182,29 @@ public class Gui {
     }
 
     // Enable and set the cards in the hand as visible
-    public void setHandVisible(Player player) {
+    public void updatePlayerHand(Player player) {
+        handPanel.removeAll();
         for (Card card : player.getHand().getCards()) {
             card.getCardButton().setVisible(true);
             card.getCardButton().setEnabled(true);
             handPanel.add(card.getCardButton());
         }
+        handPanel.revalidate();
+        handPanel.repaint();
+
     }
 
-    // Disable and set the cards in the hand as invisible
-    public void setHandInvisible(Player player){
-        for (Card card : player.getHand().getCards()) {
-            card.getCardButton().setVisible(false);
-            card.getCardButton().setEnabled(false);
-            handPanel.remove(card.getCardButton());
-        }
+    public void disableHand(){
+        handPanel.setEnabled(false);
+    }
+
+    public void updateCurrentCard(Card card){
+        topCardPanel.removeAll();
+        topCardPanel.add(card.getCardButton());
+        card.getCardButton().setEnabled(false);
+        card.getCardButton().setVisible(true);
+        topCardPanel.revalidate();
+        topCardPanel.repaint();
     }
 
     public void addLatestCardToHandDisplay() {
