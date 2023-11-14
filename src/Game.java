@@ -8,7 +8,6 @@ import java.util.Scanner;
 import java.util.Collections;
 
 public class Game {
-    private Gui gui;
     private Deck theDeck;
     private ArrayList<Player> playersInGame;
     private boolean winner = false;
@@ -22,8 +21,8 @@ public class Game {
     }
 
     // Main game flow
-    public void gameStart() {
-        int numberOfPlayers = gui.getNumberOfPlayers();
+    public void gameStart(int numPlayers) {
+        int numberOfPlayers = numPlayers;
 
         // Initialize players
         for (int i = 0; i < numberOfPlayers; i++) {
