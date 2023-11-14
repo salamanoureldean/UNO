@@ -20,7 +20,7 @@ public class Card {
         this.color = color;
 
         this.cardButton = new JButton(getFileNameForCard(value, color));
-        String filePath = "C:\\Users\\salam\\OneDrive\\Pictures\\PNGs\\small\\" + getFileNameForCard(value, color) + ".png";
+        String filePath = "C:\\Users\\pietr\\OneDrive\\Pictures\\PNGs\\small\\" + getFileNameForCard(value, color) + ".png";
         ImageIcon icon = new ImageIcon(filePath);
         this.cardButton.setIcon(icon);
     }

@@ -63,8 +63,7 @@ public class Gui {
 
         // Create a panel to display the current card
         topCardPanel = new JPanel(new BorderLayout());
-        cardLabel = new JLabel(new ImageIcon("unocard.png"));
-        topCardPanel.add(cardLabel, BorderLayout.CENTER);
+        topCardPanel.add(model.getCurrentCard().getCardButton(), BorderLayout.CENTER);
 
         // Create a panel to display status
         JPanel statusPanel = new JPanel(new BorderLayout());
