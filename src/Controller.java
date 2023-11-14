@@ -14,6 +14,8 @@ public class Controller implements ActionListener{
         this.gui = gui;
     }
 
+
+
     public void actionPerformed(ActionEvent e){
         Card tempCard = game.getCurrentPlayer().getHand().getCards().get(index);
         if(e.getSource() == gui.getDrawCardButton()){
@@ -29,6 +31,10 @@ public class Controller implements ActionListener{
             game.getCurrentPlayer().getHand().getCards();
 
         } else if (e.getSource() == gui.getNextPlayerButton()) {
+            if(game.checkWinner() == true){
+                //Make a gameover in the gui
+                System.exit(0);
+            }
             index = (index + 1) % 4;
             game.nextPlayer();
             gui.getDrawCardButton().setEnabled(true);
@@ -39,10 +45,6 @@ public class Controller implements ActionListener{
             gui.getTurnLabel().setText(game.getPlayersInGame().get(index).getName());
         }
         else{
-            if(game.checkWinner() == true){
-                //Make a gameover in the gui
-                System.exit(0);
-            }
             for(int i=0; i < game.getCurrentPlayer().getHand().getCards().size(); i++){
                 if(e.getSource() == tempCard.getCardButton()){
                     if(game.isPlayable(tempCard) == true) {
@@ -50,6 +52,10 @@ public class Controller implements ActionListener{
                     }else{
                         gui.getStatusTextArea().setText("Invalid Move!");
                     }
+                }
+            if(game.checkWinner() == true){
+                    //Make a gameover in the gui
+                    System.exit(0);
                 }
             }
         }

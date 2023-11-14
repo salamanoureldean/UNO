@@ -165,14 +165,11 @@ public class Gui {
         JButton tempButton = new JButton();
     }
 
-    /*
-    private String getFileNameForCard(Card card) {
-        // Logic to map card color and value to a corresponding PNG file name
-        // This can be customized based on your actual file naming convention
-        return card.getColor().toString().toLowerCase() + "_" + card.getVALUE().toString().toLowerCase();
+    public void placeCard(Card card){
+        topCardPanel.remove(cardLabel);
+        topCardPanel.add(card.getCardButton());
+        handPanel.remove(card.getCardButton());
     }
-
-    */
 
     public JButton getNextPlayerButton() {
         return nextPlayerButton;
