@@ -166,11 +166,9 @@ public class Gui {
 
     public boolean placeCard(Card cardToPlay, int i){
         if(model.removeCardFromHand(model.getCurrentPlayer().getHand().getCards().get(i)) == true) {
-            topCardPanel.remove(model.getCurrentCard().getCardButton());
-            topCardPanel.add(cardToPlay.getCardButton(), BorderLayout.CENTER);
+            model.setCurrentCard(cardToPlay);
             handPanel.remove(cardToPlay.getCardButton());
-
-
+            cardToPlay.getCardButton().setVisible(false);
             return true;
         }
         return false;
@@ -198,6 +196,8 @@ public class Gui {
 
     public void drawTheCard(Card card){
         handPanel.add(card.getCardButton());
+        card.getCardButton().setEnabled(true);
+        card.getCardButton().setVisible(true);
     }
 
     public int getNumberOfPlayers(){

@@ -4,9 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 public class Controller implements ActionListener{
     private Game game;
-
-    private int indexPlayer = 0;
-
+    private int indexPlayer;
     private Gui gui;
 
     public Controller(Game game, Gui gui){
@@ -33,14 +31,13 @@ public class Controller implements ActionListener{
 
         } else if (e.getSource() == gui.getNextPlayerButton()) {
             //THIS THE NEXT PLAYER
-            indexPlayer += 1;
-            indexPlayer = indexPlayer % gui.getNumberOfPlayers();
-            game.nextPlayer();
+            indexPlayer = game.nextPlayer();
             gui.getDrawCardButton().setEnabled(true);
             gui.setHandVisible(game.getCurrentPlayer());
+            System.out.printf("Player %d\n", indexPlayer);
             gui.getNextPlayerButton().setEnabled(false);
-            gui.getTurnLabel().setText(game.getPlayersInGame().get(indexPlayer).getName());
-            gui.setHandVisible(game.getPlayersInGame().get(indexPlayer));
+            gui.getTurnLabel().setText(game.getPlayersInGame().get(indexPlayer-1).getName());
+            gui.setHandVisible(game.getPlayersInGame().get(indexPlayer-1));
         }
         else{
             System.out.println("HIIIIIIIIIIIII");
@@ -51,9 +48,9 @@ public class Controller implements ActionListener{
                     //IF IT'S RIGHT
                     if (gui.placeCard(game.getCurrentPlayer().getHand().getCards().get(i), i) == true) {
                         System.out.println("Card is playable");
-                        gui.setHandInvisible(game.getCurrentPlayer());
-                        gui.getDrawCardButton().setEnabled(false);
-                        gui.getNextPlayerButton().setEnabled(true);
+                        gui.setHandInvisible(game.getCurrentPlayer()); //setsHandInvisible
+                        gui.getDrawCardButton().setEnabled(false); //Disables DrawCardButton
+                        gui.getNextPlayerButton().setEnabled(true); //Enables NextPlayer Button
                         break;
                         //IF IT'S WRONG
                     } else if(gui.placeCard(game.getCurrentPlayer().getHand().getCards().get(i), i) == false) {

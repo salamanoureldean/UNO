@@ -229,8 +229,10 @@ public class Game {
 
 
     // Move to the next player
-    public void nextPlayer() {
-        currentTurn = (currentTurn + 1) % playersInGame.size();
+    public int nextPlayer() {
+        currentTurn = currentTurn % playersInGame.size();
+        currentTurn +=  1;
+        return currentTurn;
     }
 
     // Get the current player
@@ -261,4 +263,7 @@ public class Game {
         return currentCard;
     }
 
+    public void setCurrentCard(Card currentCard) {
+        this.currentCard = currentCard;
+    }
 }
