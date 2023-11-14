@@ -229,6 +229,7 @@ public class Gui {
         for (Card card : player.getHand().getCards()) {
             card.getCardButton().setVisible(true);
             card.getCardButton().setEnabled(true);
+            handPanel.add(card.getCardButton());
         }
     }
 
@@ -237,6 +238,7 @@ public class Gui {
         for (Card card : player.getHand().getCards()) {
             card.getCardButton().setVisible(false);
             card.getCardButton().setEnabled(false);
+            handPanel.remove(card.getCardButton());
         }
     }
 }
