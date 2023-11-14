@@ -6,6 +6,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Collections;
+import javax.swing.JOptionPane;
+import javax.swing.JFrame;
 
 public class Game {
     private Deck theDeck;
@@ -51,7 +53,7 @@ public class Game {
     }
 
     // Play a card
-    public boolean removeCardFromHand(Card cardToPlay) {
+    public void removeCardFromHand(Card cardToPlay) {
         Player currentPlayer = getCurrentPlayer();
 
         if (cardToPlay != null && isPlayable(cardToPlay)) {
@@ -59,20 +61,19 @@ public class Game {
             cardFunctionality(currentCard);
             theDeck.place(cardToPlay);
             currentPlayer.playCard(cardToPlay);
-            return true;
         }
-        return false;
     }
 
 
     // Check if a player has won
-    public void checkWinner() {
+    public boolean checkWinner() {
         for (Player player : playersInGame) {
             if (player.getHand().getCards().isEmpty()) {
                 winner = true;
-                break;
+                return true;
             }
         }
+        return false;
     }
 
     /**
@@ -104,22 +105,24 @@ public class Game {
     public void cardFunctionality(Card playedCard) {
         Card.Value cardValue = playedCard.getVALUE();
         //Card.Color cardColor = playedCard.getColor();
+        JFrame frame = new JFrame();
 
         switch (cardValue) {
             case REVERSE:
                 Collections.reverse(playersInGame);
-                //TURN THE PRINT INTO A JOPTIONPANE
-                System.out.println("The play has been reversed!");
+                frame.setVisible(true);
+                JOptionPane.showMessageDialog(frame,"Cards have been reversed!");
+                frame.setVisible(false);
                 break;
             case SKIP:
+                frame.setVisible(true);
                 if (currentTurn + 1 > playersInGame.size()){
                     currentTurn = 0;
                 }
                 else{
                     currentTurn += 1;
                 }
-                //TURN INTO JOPTIONPANE
-                System.out.println("Player " + (currentTurn + 1) + "has been skipped!");
+                JOptionPane.showMessageDialog(frame, "Player was skipped");
                 break;
             case WILD:
                 Scanner wildInput = new Scanner(System.in);
