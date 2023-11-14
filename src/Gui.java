@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 public class Gui {
     private static JFrame frame1;
     private JFrame gameFrame;
-    private int numberOfPlayers;
+    private int numberOfPlayers = 2;
     private JPanel topCardPanel;
     private JPanel handPanel;
     private JPanel drawPanel;
@@ -111,7 +111,7 @@ public class Gui {
                 String filePath = "C:\\Users\\Salam\\OneDrive\\Documents\\PNGs\\PNGs\\small\\" + getFileNameForCard(tempCard) + ".png";
                 ImageIcon icon = new ImageIcon(filePath);
                 tempCard.getCardButton().setIcon(icon);
-                //cardHand.add(temp.getCardButton());
+                cardHand.add(tempCard.getCardButton());
                 //handPanel.add(tempCard.getCardButton());
             }
         }
@@ -189,6 +189,10 @@ public class Gui {
 
     public JLabel getTurnLabel() {
         return turnLabel;
+    }
+
+    public void setNumberOfPlayers(int numberOfPlayers) {
+        this.numberOfPlayers = numberOfPlayers;
     }
 
     public static void main(String[] args) {

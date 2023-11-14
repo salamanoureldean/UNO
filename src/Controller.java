@@ -15,6 +15,7 @@ public class Controller implements ActionListener{
     }
 
     public void actionPerformed(ActionEvent e){
+        System.out.println("HIIIIIIIIIII");
         if(e.getSource() == gui.getDrawCardButton()){
             game.addCardToHand();
             gui.cardToHand();

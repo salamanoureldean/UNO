@@ -4,6 +4,8 @@ import java.awt.event.ActionListener;
 
 public class MainMenuGUI extends JFrame {
     private Gui gui;
+    private Game game;
+    private Controller controller;
 
     public MainMenuGUI() {
         // Initialize the frame
@@ -20,7 +22,7 @@ public class MainMenuGUI extends JFrame {
         getContentPane().add(panel);
 
         // Add buttons for menu options
-        addButton(panel, "Play", e -> gui = new Gui());
+        addButton(panel, "Play", e -> initialize());
         addButton(panel, "Rules", e -> rulesMenu());
         addButton(panel, "Quit", e -> quit());
         addButton(panel, "Help", e -> helpMenu());
@@ -57,6 +59,18 @@ public class MainMenuGUI extends JFrame {
 
     private void helpMenu() {
         JOptionPane.showMessageDialog(this, "To navigate through the menus, select the button for the action you want to perform.", "Help", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void initialize(){
+        gui = new Gui();
+        game = new Game(gui.getNumberOfPlayers());
+        controller = new Controller(game,gui);
+        for(JButton button: gui.getCardHand()){
+            button.addActionListener(controller);
+        }
+        gui.getDrawCardButton().addActionListener(controller);
+        gui.getNextPlayerButton().addActionListener(controller);
+
     }
 
     public static void main(String[] args) {
