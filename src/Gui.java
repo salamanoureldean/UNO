@@ -136,15 +136,6 @@ public class Gui {
         handPanel.add(cardToDraw.getCardButton());
     }
 
-    public boolean placeCard(Card cardToPlay, int i){
-        if(model.removeCardFromHand(model.getCurrentPlayer().getHand().getCards().get(i)) == true) {
-            model.setCurrentCard(cardToPlay);
-            handPanel.remove(cardToPlay.getCardButton());
-            cardToPlay.getCardButton().setVisible(false);
-            return true;
-        }
-        return false;
-    }
 
     public JFrame getGameFrame() {
         return gameFrame;
@@ -164,12 +155,6 @@ public class Gui {
 
     public JButton getDrawCardButton() {
         return drawCardButton;
-    }
-
-    public void drawTheCard(Card card){
-        handPanel.add(card.getCardButton());
-        card.getCardButton().setEnabled(true);
-        card.getCardButton().setVisible(true);
     }
 
     public int getNumberOfPlayers(){
@@ -229,6 +214,25 @@ public class Gui {
             handPanel.revalidate();
             handPanel.repaint();
         }
+    }
+    public void updatePlayerTurnLabel(int currentPlayerIndex){
+        String currentPlayerName = model.getPlayersInGame().get(currentPlayerIndex).getName();
+        turnLabel.setText("Current Player: " + currentPlayerName);
+
+        // Refresh the GUI components to reflect these changes
+        turnLabel.revalidate();
+        turnLabel.repaint();
+    }
+
+    public boolean removeCardFromHand(Card cardToPlay){
+        if(model.removeCardFromHand(cardToPlay)) {
+            cardToPlay.getCardButton().setVisible(false);
+            handPanel.remove(cardToPlay.getCardButton());
+            handPanel.revalidate();
+            handPanel.repaint();
+            return  true;
+        }
+        return false;
     }
 
 }

@@ -42,8 +42,6 @@ public class Game {
         theDeck.isZero(currentCard);
         currentPlayer.drawCard(theDeck);
 
-        Card lastDrawnCard = currentPlayer.getLastCard();
-
         return true;
     }
 
