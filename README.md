@@ -77,5 +77,4 @@ If a player plays a wild draw two, the next player can challenge it. If the next
 - Mahad Mohamed Yonis
 
 ## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is intended strictly for educational and non-commercial purposes.
