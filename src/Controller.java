@@ -63,7 +63,7 @@ public class Controller implements ActionListener {
 
         if (card.isWildDrawTwo()) {
 
-            handleWildDrawTwoChallenge(card);
+            handleWildDrawTwoChallenge(game.getCurrentCard());
         }
         if (gui.removeCardFromHand(card)) {
             cardFunctionality(card);
