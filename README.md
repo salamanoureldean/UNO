@@ -1,24 +1,23 @@
 # Uno Card Game
 
-Uno Card Game is a Java text-based implementation of the classic Uno card game. This README provides an overview of the game, its features, and instructions on how to use it.
+Uno Card Game is a Java GUI-based implementation of the classic Uno card game. This updated README provides an overview of the game's GUI version, its features, instructions on how to play, and the technicalities involved in the GUI and game logic.
 
 ## Table of Contents
 - [Features](#features)
 - [Game Rules](#game-rules)
 - [Getting Started](#getting-started)
 - [How to Play](#how-to-play)
-- [Calling Uno](#calling-uno)
-- [Challenging Uno Calls](#challenging-uno-calls)
+- [Challenging Wild Draw Twos](#challenging-uno-calls)
 - [Contributing](#contributing)
 - [License](#license)
 
 ## Features
 
-- Supports 2 to 4 players.
-- Implements standard Uno rules and gameplay.
-- Players can call "Uno" when they have one card left.
-- Players can challenge Uno calls.
-- Console-based user interface.
+- Supports 2 to 4 players with an interactive graphical user interface.
+- Implements standard Uno rules with additional GUI-based functionalities.
+- Enhanced gameplay experience through mouse interactions in a JFrame environment.
+- Includes a "Next Player" button to facilitate controlled game progression.
+- User-friendly and visually appealing design for an immersive playing experience.
 
 ## Game Rules
 
@@ -26,8 +25,7 @@ Uno is a card game where the objective is to be the first player to get rid of a
 
 - Players take turns playing a card that matches the color or value of the top card on the discard pile.
 - Special cards (e.g., Skip, Reverse, Wild) have unique effects.
-- When a player has one card left, they must call "Uno."
-- Players can challenge Uno calls.
+- Players can challenge Wild Draw Twos.
 
 ## Getting Started
 
@@ -42,47 +40,30 @@ To run the Uno Card Game on your local machine, follow these steps:
 2. Compile the Java code:
 
    ```bash
-   javac Game.java
+   javac MainMenuGUI.java
    ```
 
 3. Run the game:
 
    ```bash
-   java Game
+   java MainMenuGUI
    ```
 
-The game will start, and you can follow the on-screen instructions to play.
+The GUI will open, and you can start playing by following the on-screen instructions.
 
 ## How to Play
 
 Uno Card Game can be played by 2 to 4 players. Here's how to play:
+1. Launch the game following the "Getting Started" instructions.
+2. Select the number of players from the main menu.
+3. The game begins with the GUI showing each player's hand and the current card in play.
+4. Players use the mouse to interact with the game, choosing to draw or play cards.
+5. Use the "Next Player" button to proceed to the next player's turn.
+6. The game continues until a player has no cards left.
 
-1. Start the game as per the "Getting Started" instructions.
+## Challenging
 
-2. Follow the on-screen menu to select the number of players.
-
-3. The game will start, and players will take turns.
-
-4. On your turn, you can either:
-   - (D)raw a card.
-   - (P)lay a card.
-   - (C)all Uno Against Other Player.
-
-5. If you choose to draw a card, you will draw a card from the deck.
-
-6. If you choose to play a card, follow the on-screen prompts to select the card to play.
-
-7. When you have one card left, you should call "Uno."
-
-8. The game continues until one player plays their last card.
-
-## Calling Uno
-
-When you have one card left, you will get prompted to call uno automatically. This will notify the other players that you have one card left.
-
-## Challenging Uno Calls
-
-If a player fails to call Uno when they should have, you can challenge them. To challenge, say "Call Uno" before the challenged player plays their card.
+If a player plays a wild draw two, the next player can challenge it. If the next player wins, the person who initially played the wild draw two picks up 2 cards. If the current player wins, or the next player denies the challenge, the next player picks up 2 cards.
 
 ## Contributing
 
