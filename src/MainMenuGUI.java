@@ -7,6 +7,11 @@ public class MainMenuGUI extends JFrame {
     private Game game;
     private Controller controller;
 
+    /**
+     * Initializes the main menu graphical user interface for the UNO game.
+     * It creates a JFrame with buttons for play, rules, quit, and help menu options.
+     * The buttons are arranged vertically in a JPanel with a specified layout and styling.
+     */
     public MainMenuGUI() {
         // Initialize the frame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -30,6 +35,14 @@ public class MainMenuGUI extends JFrame {
         panel.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
 
+    /**
+     * Adds a button to the specified JPanel with the given text and ActionListener.
+     * The button is styled, and rigid space is added after the button for spacing.
+     *
+     * @param panel           The JPanel to which the button will be added.
+     * @param text            The text to be displayed on the button.
+     * @param actionListener  The ActionListener to handle button click events.
+     */
     private void addButton(JPanel panel, String text, ActionListener actionListener) {
         JButton button = new JButton(text);
         button.setMaximumSize(new Dimension(300, 60));
@@ -39,6 +52,12 @@ public class MainMenuGUI extends JFrame {
         panel.add(Box.createRigidArea(new Dimension(0, 15)));
     }
 
+    /**
+     * Styles the specified JButton by setting its font, text color, background color,
+     * removing focus and border painting, making it opaque, and aligning it to the center.
+     *
+     * @param button The JButton to be styled.
+     */
     private void styleButton(JButton button) {
         button.setFont(new Font("Times New Roman", Font.BOLD, 20));
         button.setForeground(Color.WHITE);
@@ -49,18 +68,36 @@ public class MainMenuGUI extends JFrame {
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
 
+    /**
+     * Displays a simple dialog providing information to encourage the user to search for
+     * the rules of the game on the internet. The dialog informs the user to "Google the rules!"
+     * and is categorized as an INFORMATION_MESSAGE.
+     */
     private void rulesMenu() {
         JOptionPane.showMessageDialog(this, "Google the rules!", "Rules", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    /**
+     * Exits the application by invoking the System.exit() method with a status code of 0.
+     */
     private void quit() {
         System.exit(0);
     }
 
+    /**
+     * Displays a simple dialog providing information about how to navigate through the menus.
+     * The dialog advises the user to select the button for the desired action. It is categorized
+     * as an INFORMATION_MESSAGE.
+     */
     private void helpMenu() {
         JOptionPane.showMessageDialog(this, "To navigate through the menus, select the button for the action you want to perform.", "Help", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    /**
+     * Initializes the game by creating a new GUI and controller, associating action listeners
+     * with each card button, draw card button, and next player button. It also invokes the
+     * card functionality for the current card in the game.
+     */
     private void initialize(){
         gui = new Gui();
         controller = new Controller(gui.getModel(),gui);
@@ -75,6 +112,12 @@ public class MainMenuGUI extends JFrame {
 
     }
 
+    /**
+     * The main entry point of the UNO game application. Invokes the creation and display
+     * of the main menu GUI using SwingUtilities.invokeLater to ensure proper thread handling.
+     *
+     * @param args The command-line arguments (not used in this application).
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new MainMenuGUI().setVisible(true));
     }

@@ -7,11 +7,26 @@ public class Controller implements ActionListener {
     private Gui gui;
     private boolean tf;
 
+    /**
+     * Constructs a new Controller object that manages the interaction between the
+     * game logic (represented by the Game class) and the graphical user interface
+     * (represented by the Gui class).
+     *
+     * @param game The Game object representing the core logic of the card game.
+     * @param gui The Gui object representing the graphical user interface of the game.
+     */
     public Controller(Game game, Gui gui) {
         this.game = game;
         this.gui = gui;
     }
 
+    /**
+     * Handles ActionEvents triggered by various GUI components. Depending on the source
+     * of the event, it delegates the handling to specific methods such as drawing a card,
+     * advancing to the next player's turn, or processing a card action.
+     *
+     * @param e The ActionEvent triggered by a GUI component.
+     */
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == gui.getDrawCardButton()) {
             handleDrawCardAction();
@@ -22,6 +37,11 @@ public class Controller implements ActionListener {
         }
     }
 
+    /**
+     * Handles the action of a player drawing a card. It adds a card to the current player's hand,
+     * updates the GUI to display the latest card in the player's hand, disables the draw card button,
+     * enables the next player button, updates the status display, and disables the player's hand.
+     */
     private void handleDrawCardAction() {
         if (game.addCardToHand()) {
             gui.addLatestCardToHandDisplay();
@@ -32,6 +52,11 @@ public class Controller implements ActionListener {
         gui.disableHand();
     }
 
+    /**
+     * Handles the action to advance the game to the next player's turn. It updates the
+     * game state and GUI to reflect the change, enabling the draw card button, disabling
+     * the next player button, and updating the player's turn label and current card display.
+     */
     private void handleNextPlayerAction() {
         game.nextPlayer();
         gui.updatePlayerTurnLabel(game.getCurrentTurn());
@@ -40,6 +65,14 @@ public class Controller implements ActionListener {
         gui.getNextPlayerButton().setEnabled(false);
         gui.getStatusTextArea().setText("Current Card: " + game.getCurrentCard().stringCard());
     }
+
+    /**
+     * Handles the action triggered by selecting a card button. It identifies the
+     * selected card from the ActionEvent, processes its placement if it is a valid move,
+     * and checks for a game winner after the card is played.
+     *
+     * @param e The ActionEvent triggered by selecting a card button.
+     */
     private void handleCardAction(ActionEvent e) {
 
         Card selectedCard = findSelectedCard(e);
@@ -51,6 +84,14 @@ public class Controller implements ActionListener {
 
     }
 
+    /**
+     * Finds the selected card associated with the ActionEvent in the current player's hand.
+     * It iterates through the cards in the player's hand and checks if the source of the
+     * ActionEvent matches the button associated with each card.
+     *
+     * @param e The ActionEvent triggered by selecting a card button.
+     * @return The selected card if found, or null if no matching card is found.
+     */
     private Card findSelectedCard(ActionEvent e) {
         for (Card card : game.getCurrentPlayer().getHand().getCards()) {
             if (e.getSource() == card.getCardButton()) {
@@ -60,6 +101,13 @@ public class Controller implements ActionListener {
         return null;
     }
 
+    /**
+     * Processes the placement of a card in the game. Depending on the card type,
+     * it may trigger specific actions such as handling Wild Draw Two challenges,
+     * executing the functionality of the card, and updating the game state and GUI.
+     *
+     * @param card The card to be placed in the game.
+     */
     private void processCardPlacement(Card card) {
         if (card.isWildDrawTwo()) {
 
@@ -75,6 +123,13 @@ public class Controller implements ActionListener {
         }
     }
 
+    /**
+     * Handles the challenge for a Wild Draw Two card played in the game.
+     * This method prompts the next player for a challenge, checks the challenge result,
+     * and updates the game state and GUI accordingly.
+     *
+     * @param card The Wild Draw Two card played.
+     */
     private void handleWildDrawTwoChallenge(Card card) {
         Player currentPlayer = game.getCurrentPlayer();
         Player nextPlayer = game.getNextPlayer();
@@ -100,6 +155,14 @@ public class Controller implements ActionListener {
         }
     }
 
+    /**
+     * Prompts the specified player with a confirmation dialog to determine if they
+     * want to challenge the playing of a Wild Draw Two card. Returns true if the player
+     * chooses to challenge, and false otherwise.
+     *
+     * @param player The player to prompt for the challenge.
+     * @return true if the player chooses to challenge, false otherwise.
+     */
     private boolean promptForChallenge(Player player) {
         return JOptionPane.showConfirmDialog(gui.getGameFrame(),
                 player.getName() + ", do you want to challenge the Wild Draw Two?",
@@ -107,18 +170,38 @@ public class Controller implements ActionListener {
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
     }
 
+    /**
+     * Handles the actions to be performed after a successful card placement, such as
+     * disabling the draw card button, enabling the next player button, and disabling
+     * the player's hand in the GUI.
+     */
     private void handleSuccessfulCardPlacement() {
         gui.getDrawCardButton().setEnabled(false);
         gui.getNextPlayerButton().setEnabled(true);
         gui.disableHand();
     }
 
+    /**
+     * Checks if there is a game winner by invoking the `checkWinner` method of the
+     * associated Game object. If a winner is found, displays a congratulatory message
+     * through a JOptionPane and exits the program.
+     */
     private void checkForGameWinner() {
         if (game.checkWinner()) {
             JOptionPane.showMessageDialog(gui.getGameFrame(), "You Won!");
             System.exit(0);
         }
     }
+
+    /**
+     * Executes the functionality associated with a played card. This method handles
+     * various card types such as REVERSE, SKIP, WILD, and WILDDRAWTWO. It interacts
+     * with the game state and GUI to perform actions like reversing the order of players,
+     * skipping a player's turn, allowing color selection for Wild cards, and making the
+     * next player draw two cards for Wild Draw Two cards.
+     *
+     * @param playedCard The card that has been played and whose functionality is to be executed.
+     */
     public void cardFunctionality(Card playedCard) {
         Card.Value cardValue = playedCard.getVALUE();
         //Card.Color cardColor = playedCard.getColor();
