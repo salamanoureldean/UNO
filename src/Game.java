@@ -11,7 +11,6 @@ import javax.swing.JFrame;
 
 public class Game {
     private Deck theDeck;
-    private Gui gui;
     private ArrayList<Player> playersInGame;
     private boolean winner = false;
     private Card currentCard;
@@ -31,7 +30,6 @@ public class Game {
         }
 
         currentCard = theDeck.draw();
-        cardFunctionality(currentCard);
 
     }
 
@@ -50,7 +48,6 @@ public class Game {
 
         if (cardToPlay != null && isPlayable(cardToPlay)) {
             currentCard = cardToPlay;
-            cardFunctionality(currentCard);
             theDeck.place(cardToPlay);
             currentPlayer.playCard(cardToPlay);
             return true;
@@ -85,100 +82,6 @@ public class Game {
         }
 
         return false;
-    }
-
-    /**
-     * Imeplements the special card functionalities such as REVERSE, WILD, SKIP
-     * @param playedCard the special card to be played
-     */
-    public void cardFunctionality(Card playedCard) {
-        Card.Value cardValue = playedCard.getVALUE();
-        //Card.Color cardColor = playedCard.getColor();
-        String newColor;
-        JFrame frame = new JFrame();
-        String[] choose = {"Red","Green","Blue","Yellow"};
-
-        switch (cardValue) {
-            case REVERSE:
-                Collections.reverse(playersInGame);
-                frame.setVisible(true);
-                JOptionPane.showMessageDialog(frame,"Cards have been reversed!");
-                frame.setVisible(false);
-                break;
-            case SKIP:
-                frame.setVisible(true);
-                if (currentTurn + 1 > playersInGame.size()){
-                    currentTurn = 0;
-                }
-                else{
-                    currentTurn += 1;
-                }
-                JOptionPane.showMessageDialog(frame, "Player was skipped");
-                frame.setVisible(false);
-                break;
-            case WILD:
-                frame.setVisible(true);
-                        newColor = (String) JOptionPane.showInputDialog(frame,
-                        "Choose the color",
-                        "Color selection",
-                        JOptionPane.PLAIN_MESSAGE,
-                        null,
-                        choose,
-                        0);
-                frame.setVisible(false);
-                // Changing current color based on user input
-                if (newColor.equals("Red")) {
-                    currentCard.setColor(Card.Color.RED);
-                    System.out.println("The color has been changed to red.");
-                }
-                else if (newColor.equals("Green")) {
-                    currentCard.setColor(Card.Color.GREEN);
-                    System.out.println("The color has been changed to green.");
-                }
-                else if (newColor.equals("Blue")) {
-                    currentCard.setColor(Card.Color.BLUE);
-                    System.out.println("The color has been changed to blue.");
-                }
-                else if (newColor.equals("Yellow")) {
-                    currentCard.setColor(Card.Color.YELLOW);
-                    System.out.println("The color has been changed to yellow.");
-                }
-                break;
-            case WILDDRAWTWO:
-                // Getting next player's index in order to make them draw two cards
-                int nextPlayerIndex = (currentTurn + 1) % playersInGame.size();
-                Player nextPlayer = playersInGame.get(nextPlayerIndex);
-                for (int i = 0; i < 2; i++){
-                    nextPlayer.drawCard(theDeck);
-                }
-                // Changing current color of cards being played based on user input
-                frame.setVisible(true);
-                newColor = (String) JOptionPane.showInputDialog(frame,
-                        "Choose the color",
-                        "Color selection",
-                        JOptionPane.PLAIN_MESSAGE,
-                        null,
-                        choose,
-                        0);
-
-                if (newColor.equals("Red")) {
-                    currentCard.setColor(Card.Color.RED);
-                    System.out.println("The color has been changed to red.");
-                }
-                else if (newColor.equals("Green")) {
-                    currentCard.setColor(Card.Color.GREEN);
-                    System.out.println("The color has been changed to green.");
-                }
-                else if (newColor.equals("Blue")) {
-                    currentCard.setColor(Card.Color.BLUE);
-                    System.out.println("The color has been changed to blue.");
-                }
-                else if (newColor.equals("Yellow")) {
-                    currentCard.setColor(Card.Color.YELLOW);
-                    System.out.println("The color has been changed to yellow.");
-                }
-                break;
-        }
     }
 
     /**
@@ -256,5 +159,9 @@ public class Game {
 
     public void setCurrentCard(Card currentCard) {
         this.currentCard = currentCard;
+    }
+
+    public void setCurrentTurn(int currentTurn) {
+        this.currentTurn = currentTurn;
     }
 }

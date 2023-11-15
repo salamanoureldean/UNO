@@ -71,6 +71,7 @@ public class MainMenuGUI extends JFrame {
         }
         gui.getDrawCardButton().addActionListener(controller);
         gui.getNextPlayerButton().addActionListener(controller);
+        controller.cardFunctionality(game.getCurrentCard());
 
     }
 
