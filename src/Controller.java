@@ -5,6 +5,7 @@ import java.util.Collections;
 public class Controller implements ActionListener {
     private Game game;
     private Gui gui;
+    private boolean tf;
 
     public Controller(Game game, Gui gui) {
         this.game = game;
@@ -60,7 +61,6 @@ public class Controller implements ActionListener {
     }
 
     private void processCardPlacement(Card card) {
-
         if (card.isWildDrawTwo()) {
 
             handleWildDrawTwoChallenge(game.getCurrentCard());
@@ -82,6 +82,7 @@ public class Controller implements ActionListener {
         boolean challengeAccepted = promptForChallenge(nextPlayer);
 
         if (challengeAccepted) {
+            tf = true;
             boolean challengeResult = game.challengeWildDrawTwo(nextPlayer, currentPlayer, card.getColor());
 
             if (challengeResult) {
@@ -94,7 +95,8 @@ public class Controller implements ActionListener {
             gui.updatePlayerHand(currentPlayer);
             gui.updatePlayerHand(nextPlayer);
         } else {
-            //Case where challenge isnt accepted
+            tf = false;
+
         }
     }
 
@@ -181,11 +183,6 @@ public class Controller implements ActionListener {
                 // Getting next player's index in order to make them draw two cards
                 int nextPlayerIndex = (game.getCurrentTurn() + 1) % game.getPlayersInGame().size();
                 Player nextPlayer = game.getPlayersInGame().get(nextPlayerIndex);
-                for (int i = 0; i < 2; i++){
-                    nextPlayer.drawCard(game.getTheDeck());
-                }
-
-
 
                 // Changing current color of cards being played based on user input
                 frame.setVisible(true);
@@ -196,6 +193,12 @@ public class Controller implements ActionListener {
                         null,
                         choose,
                         0);
+
+                if(tf == false){
+                    for (int i = 0; i < 2; i++){
+                        nextPlayer.drawCard(game.getTheDeck());
+                    }
+                }
 
                 if (newColor != null && newColor.equals("Red")) {
                     game.getCurrentCard().setColor(Card.Color.RED);
