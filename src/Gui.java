@@ -20,6 +20,9 @@ public class Gui {
     private JButton drawCardButton;
     private JTextArea statusTextArea;
 
+    /**
+     * Constructor for the GUI class which sets up the frame.
+     */
     public Gui() {
         frame1 = new JFrame();
         Object[] possibilities = {2, 3, 4};
