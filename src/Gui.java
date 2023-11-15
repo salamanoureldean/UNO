@@ -47,11 +47,11 @@ public class Gui {
         gameFrame.setLayout(new BorderLayout());
 
         /**
-        for (int i = 0; i < numberOfPlayers; i++) {
-            String playerName = JOptionPane.showInputDialog(frame1, "Enter the name of Player " + (i + 1) + ":");
-            model.getPlayersInGame().add(new Player(playerName, model.getTheDeck()));
-        }
-        */
+         for (int i = 0; i < numberOfPlayers; i++) {
+         String playerName = JOptionPane.showInputDialog(frame1, "Enter the name of Player " + (i + 1) + ":");
+         model.getPlayersInGame().add(new Player(playerName, model.getTheDeck()));
+         }
+         */
 
         // Create a panel to display label of player's turn label at the top left
         JPanel topPanel = new JPanel(new BorderLayout());
@@ -61,10 +61,15 @@ public class Gui {
         topPanel.add(separator, BorderLayout.SOUTH);
         gameFrame.add(topPanel, BorderLayout.NORTH);
 
+        // Create a panel to contain the status panel and the topCardPanel
+        JPanel panelHolder = new JPanel(new BorderLayout());
+
         // Create a panel to display the current card
         topCardPanel = new JPanel(new BorderLayout());
         topCardPanel.add(model.getCurrentCard().getCardButton(), BorderLayout.CENTER);
         model.getCurrentCard().getCardButton().setEnabled(true);
+        panelHolder.add(topCardPanel, BorderLayout.CENTER);
+
 
         // Create a panel to display status
         JPanel statusPanel = new JPanel(new BorderLayout());
@@ -75,15 +80,17 @@ public class Gui {
         statusTextArea = new JTextArea(10, 10);  // Rows, Columns
         statusTextArea.setEditable(false);  // Make it read-only
         statusPanel.add(new JScrollPane(statusTextArea), BorderLayout.EAST);
-        topCardPanel.add(statusPanel, BorderLayout.WEST);
+        panelHolder.add(statusPanel, BorderLayout.WEST);
 
-        gameFrame.add(topCardPanel, BorderLayout.CENTER);
+        gameFrame.add(panelHolder, BorderLayout.CENTER);
 
+	/*
         // Create a panel to display status
         statusPanel = new JPanel();
         statusLabel = new JLabel("Status");
         statusPanel.add(statusLabel);
         gameFrame.add(statusPanel, BorderLayout.SOUTH);
+	*/
 
         // Create a panel to contain buttons
         bottomPanel = new JPanel(new BorderLayout());
