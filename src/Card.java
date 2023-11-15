@@ -14,6 +14,12 @@ public class Card {
     private JButton cardButton;
 
 
+    /**
+     * Constructs a new Card with the specified value and color.
+     *
+     * @param value The value of the card.
+     * @param color The color of the card.
+     */
     public Card(Value value, Color color) {
         this.VALUE = value;
         this.color = color;
@@ -26,33 +32,62 @@ public class Card {
         this.cardButton.setVisible(false);
     }
 
-    //Returns the color of the card.
+    /**
+     * Returns the color of the card.
+     *
+     * @return The color of the card.
+     */
     public Color getColor(){
         return color;
     }
 
-    //Returns the value of the card.
+    /**
+     * Returns the value of the card.
+     *
+     * @return The value of the card.
+     */
     public Value getVALUE(){
         return VALUE;
     }
 
+    /**
+     * Checks if the card is a Wild Draw Two card.
+     *
+     * @return True if the card is a Wild Draw Two card, false otherwise.
+     */
     public boolean isWildDrawTwo() {
         return this.VALUE == Value.WILDDRAWTWO;
     }
 
-    //Sets color variable
+    /**
+     * Sets the color of the card.
+     *
+     * @param color The color to set.
+     */
     public void setColor(Color color) {
         this.color = color;
     }
 
+    /**
+     * Generates the file name for the card's image based on its value and color.
+     * The file name is constructed by concatenating the lowercase string representation
+     * of the color, an underscore '_', and the lowercase string representation of the value.
+     *
+     * @param value The value of the card.
+     * @param color The color of the card.
+     * @return The file name for the card's image.
+     */
     private String getFileNameForCard(Value value, Color color) {
-        // Logic to map card color and value to a corresponding PNG file name
-        // This can be customized based on your actual file naming convention
         return color.toString().toLowerCase() + "_" + value.toString().toLowerCase();
     }
 
-    //Returns a string representation of the card. Returns value and color if the value of the card is not a wildcard.
-    //if value of the card is a wildcard then it returns only the value of the card since color is irrelevant.
+    /**
+     * Returns a string representation of the card.
+     * If the card's value is a wildcard (WILD or WILDDRAWTWO), it returns only the value.
+     * If the card's value is not a wildcard, it returns a string containing the card's color and value.
+     *
+     * @return The string representation of the card.
+     */
     public String stringCard(){
         if(VALUE == Value.WILD || VALUE == Value.WILDDRAWTWO){
             return "A " + VALUE;
@@ -62,6 +97,11 @@ public class Card {
         }
     }
 
+    /**
+     * Returns the JButton associated with the card.
+     *
+     * @return The JButton associated with the card.
+     */
     public JButton getCardButton() {
         return cardButton;
     }
