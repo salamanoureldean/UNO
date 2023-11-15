@@ -36,6 +36,7 @@ public class Controller implements ActionListener {
         gui.updatePlayerTurnLabel(game.getCurrentTurn());
         gui.updatePlayerHand(game.getCurrentPlayer());
         gui.getDrawCardButton().setEnabled(true);
+        gui.getNextPlayerButton().setEnabled(false);
         gui.getStatusTextArea().setText("Current Card: " + game.getCurrentCard().stringCard());
     }
     private void handleCardAction(ActionEvent e) {
@@ -59,11 +60,17 @@ public class Controller implements ActionListener {
     }
 
     private void processCardPlacement(Card card) {
+
         if (card.isWildDrawTwo()) {
+            card
             handleWildDrawTwoChallenge(card);
-        } else if (gui.removeCardFromHand(card)) {
+        }
+        if (gui.removeCardFromHand(card)) {
+            cardFunctionality(card);
             handleSuccessfulCardPlacement();
+            gui.disableHand();
         } else {
+            //SHOW INVALID MOVE IN STATUS
             gui.getStatusTextArea().setText("Invalid Move!");
         }
     }
@@ -101,6 +108,7 @@ public class Controller implements ActionListener {
     private void handleSuccessfulCardPlacement() {
         gui.getDrawCardButton().setEnabled(false);
         gui.getNextPlayerButton().setEnabled(true);
+        gui.disableHand();
     }
 
     private void checkForGameWinner() {
@@ -176,6 +184,9 @@ public class Controller implements ActionListener {
                 for (int i = 0; i < 2; i++){
                     nextPlayer.drawCard(game.getTheDeck());
                 }
+
+
+
                 // Changing current color of cards being played based on user input
                 frame.setVisible(true);
                 newColor = (String) JOptionPane.showInputDialog(frame,
