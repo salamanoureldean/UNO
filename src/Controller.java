@@ -60,6 +60,11 @@ public class Controller implements ActionListener {
     }
 
     private void processCardPlacement(Card card) {
+
+        if (card.isWildDrawTwo()) {
+
+            handleWildDrawTwoChallenge(card);
+        }
         if (gui.removeCardFromHand(card)) {
             cardFunctionality(card);
             handleSuccessfulCardPlacement();
@@ -80,9 +85,9 @@ public class Controller implements ActionListener {
             boolean challengeResult = game.challengeWildDrawTwo(nextPlayer, currentPlayer, card.getColor());
 
             if (challengeResult) {
-                gui.getStatusTextArea().setText(currentPlayer.getName() + " played Wild Draw Two illegally. "+ currentPlayer.getName() +  " draw 2 cards.");
+                gui.getStatusTextArea().setText(currentPlayer.getName() + " played Wild Draw Two illegally. They draw 2 cards.");
             } else {
-                gui.getStatusTextArea().setText(nextPlayer.getName() + " challenged incorrectly. "+ nextPlayer.getName() +" draw 4 cards.");
+                gui.getStatusTextArea().setText(nextPlayer.getName() + " challenged incorrectly. They draw 4 cards.");
             }
 
 
@@ -94,22 +99,10 @@ public class Controller implements ActionListener {
     }
 
     private boolean promptForChallenge(Player player) {
-        int var =  JOptionPane.showConfirmDialog(gui.getGameFrame(),
+        return JOptionPane.showConfirmDialog(gui.getGameFrame(),
                 player.getName() + ", do you want to challenge the Wild Draw Two?",
                 "Challenge",
-                JOptionPane.YES_NO_OPTION);
-
-        boolean result;
-
-        if(JOptionPane.YES_NO_OPTION == JOptionPane.YES_OPTION){
-            result = true;
-        }
-        if(var == JOptionPane.NO_OPTION){
-            game.addCardToHand();
-            game.addCardToHand();
-            result = false;
-        }
-        return result;
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
     }
 
     private void handleSuccessfulCardPlacement() {
@@ -120,7 +113,7 @@ public class Controller implements ActionListener {
 
     private void checkForGameWinner() {
         if (game.checkWinner()) {
-            JOptionPane.showMessageDialog(gui.getGameFrame(), game.getCurrentPlayer().getName() +" Won With a score of: " +  game.winnerScore());
+            JOptionPane.showMessageDialog(gui.getGameFrame(), "You Won!");
             System.exit(0);
         }
     }
@@ -185,6 +178,15 @@ public class Controller implements ActionListener {
                 }
                 break;
             case WILDDRAWTWO:
+                // Getting next player's index in order to make them draw two cards
+                int nextPlayerIndex = (game.getCurrentTurn() + 1) % game.getPlayersInGame().size();
+                Player nextPlayer = game.getPlayersInGame().get(nextPlayerIndex);
+                for (int i = 0; i < 2; i++){
+                    nextPlayer.drawCard(game.getTheDeck());
+                }
+
+
+
                 // Changing current color of cards being played based on user input
                 frame.setVisible(true);
                 newColor = (String) JOptionPane.showInputDialog(frame,
@@ -218,7 +220,6 @@ public class Controller implements ActionListener {
                     cardFunctionality(playedCard);
                     gui.getStatusTextArea().setText("Please select the wild card again");
                 }
-                handleWildDrawTwoChallenge(playedCard);
                 break;
         }
     }

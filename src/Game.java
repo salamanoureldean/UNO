@@ -58,10 +58,10 @@ public class Game {
         if (challengedPlayer.hasMatchingColorCards(currentColor)) {
                 challengedPlayer.drawCard(theDeck);
                 challengedPlayer.drawCard(theDeck);
-                challengedPlayer.drawCard(theDeck);
-                challengedPlayer.drawCard(theDeck);
             return true;
         } else {
+            challengingPlayer.drawCard(theDeck);
+            challengingPlayer.drawCard(theDeck);
             challengingPlayer.drawCard(theDeck);
             challengingPlayer.drawCard(theDeck);
             return false;
