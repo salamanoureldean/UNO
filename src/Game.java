@@ -16,7 +16,11 @@ public class Game {
     private Card currentCard;
     private int currentTurn = 0;
 
-    // Game constructor
+    /**
+     * Constructs a new Game instance with a specified number of players.
+     *
+     * @param numPlayers The number of players in the game.
+     */
     public Game(int numPlayers) {
         playersInGame = new ArrayList<>();
         theDeck = new Deck();
@@ -34,7 +38,11 @@ public class Game {
     }
 
 
-    // Draw a card
+    /**
+     * Adds a card to the current player's hand.
+     *
+     * @return true always, indicating a card has been added.
+     */
     public boolean addCardToHand() {
         Player currentPlayer = getCurrentPlayer();
         theDeck.isZero(currentCard);
@@ -42,7 +50,12 @@ public class Game {
         return true;
     }
 
-    // Play a card
+    /**
+     * Attempts to play a card from the current player's hand.
+     *
+     * @param cardToPlay The card the player wishes to play.
+     * @return true if the card is successfully played; false otherwise.
+     */
     public boolean removeCardFromHand(Card cardToPlay) {
         Player currentPlayer = getCurrentPlayer();
         if (cardToPlay != null && isPlayable(cardToPlay)) {
@@ -54,10 +67,18 @@ public class Game {
         return false;
     }
 
+    /**
+     * Challenges a player when a Wild Draw Two card is played.
+     *
+     * @param challengingPlayer The player initiating the challenge.
+     * @param challengedPlayer The player being challenged.
+     * @param currentColor The current color in play.
+     * @return true if the challenged player has matching color cards; false otherwise.
+     */
     public boolean challengeWildDrawTwo(Player challengingPlayer, Player challengedPlayer, Card.Color currentColor) {
         if (challengedPlayer.hasMatchingColorCards(currentColor)) {
-                challengedPlayer.drawCard(theDeck);
-                challengedPlayer.drawCard(theDeck);
+            challengedPlayer.drawCard(theDeck);
+            challengedPlayer.drawCard(theDeck);
             return true;
         } else {
             challengingPlayer.drawCard(theDeck);
@@ -68,7 +89,11 @@ public class Game {
         }
     }
 
-    // Check if a player has won
+    /**
+     * Checks if any player has won the game.
+     *
+     * @return true if a player has won; false otherwise.
+     */
     public boolean checkWinner() {
         for (Player player : playersInGame) {
             if (player.getHand().getCards().isEmpty()) {
@@ -97,7 +122,9 @@ public class Game {
     }
 
     /**
-     * Calculates and displays the winners score
+     * Calculates and returns the winner's score.
+     *
+     * @return The calculated score of the winner.
      */
     public int winnerScore(){
         int winnerScore = 0;
@@ -136,44 +163,86 @@ public class Game {
     }
 
 
-    // Move to the next player
+    /**
+     * Moves the turn to the next player in the game.
+     *
+     * @return The index of the next player.
+     */
     public int nextPlayer() {
        currentTurn = (currentTurn+1) % playersInGame.size();
         return currentTurn;
     }
 
-    // Get the current player
+    /**
+     * Retrieves the current player in the game.
+     *
+     * @return The current player.
+     */
     public Player getCurrentPlayer() {
         return playersInGame.get(currentTurn);
     }
 
-    // Add a new player
+    /**
+     * Adds a new player to the game.
+     *
+     * @param player The new player to be added.
+     */
     public void addPlayer(Player player) {
         if (player != null) {
             playersInGame.add(player);
         }
     }
 
+    /**
+     * Gets the list of players currently in the game.
+     *
+     * @return An ArrayList of players in the game.
+     */
     public ArrayList<Player> getPlayersInGame() {
         return playersInGame;
     }
 
+    /**
+     * Retrieves the deck used in the game.
+     *
+     * @return The game's deck.
+     */
     public Deck getTheDeck() {
         return theDeck;
     }
 
+    /**
+     * Gets the index of the current turn.
+     *
+     * @return The current turn index.
+     */
     public int getCurrentTurn() {
         return currentTurn;
     }
 
+    /**
+     * Retrieves the current card in play.
+     *
+     * @return The current card.
+     */
     public Card getCurrentCard() {
         return currentCard;
     }
 
+    /**
+     * Sets the current card in play.
+     *
+     * @param currentCard The new current card.
+     */
     public void setCurrentCard(Card currentCard) {
         this.currentCard = currentCard;
     }
 
+    /**
+     * Sets the index of the current turn.
+     *
+     * @param currentTurn The new current turn index.
+     */
     public void setCurrentTurn(int currentTurn) {
         this.currentTurn = currentTurn;
     }
