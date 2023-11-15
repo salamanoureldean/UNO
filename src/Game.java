@@ -56,12 +56,12 @@ public class Game {
 
     public boolean challengeWildDrawTwo(Player challengingPlayer, Player challengedPlayer, Card.Color currentColor) {
         if (challengedPlayer.hasMatchingColorCards(currentColor)) {
-            challengedPlayer.drawCard(theDeck);
-            challengedPlayer.drawCard(theDeck);
+                challengedPlayer.drawCard(theDeck);
+                challengedPlayer.drawCard(theDeck);
+                challengedPlayer.drawCard(theDeck);
+                challengedPlayer.drawCard(theDeck);
             return true;
         } else {
-            challengingPlayer.drawCard(theDeck);
-            challengingPlayer.drawCard(theDeck);
             challengingPlayer.drawCard(theDeck);
             challengingPlayer.drawCard(theDeck);
             return false;
@@ -99,7 +99,7 @@ public class Game {
     /**
      * Calculates and displays the winners score
      */
-    public void winnerScore(){
+    public int winnerScore(){
         int winnerScore = 0;
         //Iterating through each player to calculate their hand's score
         for (int i = 0; i < playersInGame.size(); i++) {
@@ -132,6 +132,7 @@ public class Game {
             //Adding total value of player(i) score into the winner's score
             winnerScore += sumOfPlayer;
         }
+        return winnerScore;
     }
 
 
