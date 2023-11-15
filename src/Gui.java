@@ -1,11 +1,7 @@
 import java.awt.*;
-import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Collections;
+
 
 public class Gui {
     private static JFrame frame1;
@@ -20,8 +16,6 @@ public class Gui {
     private ArrayList<JButton> cardHand;
     private ArrayList<Card> playerCards;
     private Game model;
-
-    // Buttons and components that can implement an action
     private JButton nextPlayerButton;
     private JButton drawCardButton;
     private JTextArea statusTextArea;
@@ -39,19 +33,10 @@ public class Gui {
         frame1.setVisible(false);
 
         model = new Game(numberOfPlayers);
-
-
         gameFrame = new JFrame();
         gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         gameFrame.setResizable(true);
         gameFrame.setLayout(new BorderLayout());
-
-        /**
-         for (int i = 0; i < numberOfPlayers; i++) {
-         String playerName = JOptionPane.showInputDialog(frame1, "Enter the name of Player " + (i + 1) + ":");
-         model.getPlayersInGame().add(new Player(playerName, model.getTheDeck()));
-         }
-         */
 
         // Create a panel to display label of player's turn label at the top left
         JPanel topPanel = new JPanel(new BorderLayout());
@@ -83,14 +68,6 @@ public class Gui {
         panelHolder.add(statusPanel, BorderLayout.WEST);
 
         gameFrame.add(panelHolder, BorderLayout.CENTER);
-
-	/*
-        // Create a panel to display status
-        statusPanel = new JPanel();
-        statusLabel = new JLabel("Status");
-        statusPanel.add(statusLabel);
-        gameFrame.add(statusPanel, BorderLayout.SOUTH);
-	*/
 
         // Create a panel to contain buttons
         bottomPanel = new JPanel(new BorderLayout());
@@ -128,68 +105,92 @@ public class Gui {
         drawPanel.add(drawCardButton);
         bottomPanel.add(drawPanel, BorderLayout.EAST);
         gameFrame.add(bottomPanel, BorderLayout.SOUTH);
-        //update();
 
         gameFrame.setVisible(true);
     }
-    private Card getRandomCard() {
-        // Generate a random card with a random color and value
-        Card.Color randomColor = Card.Color.values()[(int) (Math.random() * Card.Color.values().length)];
-        Card.Value randomValue = Card.Value.values()[(int) (Math.random() * Card.Value.values().length)];
 
-        return new Card(randomValue, randomColor);
-    }
-
-    public void cardToHand(Card cardToDraw){
-        handPanel.add(cardToDraw.getCardButton());
-    }
-
-
+    /**
+     * Retrieves the game frame.
+     *
+     * @return The game frame.
+     */
     public JFrame getGameFrame() {
         return gameFrame;
     }
 
+    /**
+     * Retrieves the "Next Player" button.
+     *
+     * @return The "Next Player" button.
+     */
     public JButton getNextPlayerButton() {
         return nextPlayerButton;
     }
 
-    public ArrayList<Card> getPlayerCards() {
-        return playerCards;
-    }
-
-    public ArrayList<JButton> getCardHand() {
-        return cardHand;
-    }
-
+    /**
+     * Retrieves the "Draw Card" button.
+     *
+     * @return The "Draw Card" button.
+     */
     public JButton getDrawCardButton() {
         return drawCardButton;
     }
 
+    /**
+     * Retrieves the number of players.
+     *
+     * @return The number of players in the game.
+     */
     public int getNumberOfPlayers(){
         return numberOfPlayers;
     }
 
+    /**
+     * Retrieves the turn label.
+     *
+     * @return The turn label.
+     */
     public JLabel getTurnLabel() {
         return turnLabel;
     }
 
+    /**
+     * Sets the number of players.
+     *
+     * @param numberOfPlayers The number of players to set.
+     */
     public void setNumberOfPlayers(int numberOfPlayers) {
         this.numberOfPlayers = numberOfPlayers;
     }
 
+    /**
+     * Retrieves the status text area.
+     *
+     * @return The status text area.
+     */
     public JTextArea getStatusTextArea() {
         return statusTextArea;
     }
+
 
     public Game getModel() {
         return model;
     }
 
+    /**
+     * Retrieves the game model.
+     *
+     * @return The game model.
+     */
     public static void main(String[] args) {
         Gui GUI = new Gui();
     }
 
-    // Enable and set the cards in the hand as visible
+    /**
+     * Updates the visibility and status of the player's hand.
+     *
+     * @param player The player whose hand is updated.
+     */
     public void updatePlayerHand(Player player) {
         handPanel.removeAll();
         for (Card card : player.getHand().getCards()) {
@@ -202,6 +203,9 @@ public class Gui {
 
     }
 
+    /**
+     * Disables the buttons in the player's hand.
+     */
     public void disableHand(){
         for(Component component: handPanel.getComponents()){
             if(component instanceof JButton){
@@ -211,10 +215,20 @@ public class Gui {
         }
     }
 
+    /**
+     * Updates the status text area with the information about the drawn card.
+     *
+     * @param player The player who drew the card.
+     */
     public void updateStatusDraw(Player player){
         statusTextArea.setText("Drew: " + player.getLastCard().stringCard());
     }
 
+    /**
+     * Updates the display of the current card.
+     *
+     * @param card The card to be displayed.
+     */
     public void updateCurrentCard(Card card){
         topCardPanel.removeAll();
         topCardPanel.add(card.getCardButton());
@@ -225,6 +239,9 @@ public class Gui {
 
     }
 
+    /**
+     * Adds the latest card to the player's hand display.
+     */
     public void addLatestCardToHandDisplay() {
         Player currentPlayer = model.getCurrentPlayer();
         ArrayList<Card> cards = currentPlayer.getHand().getCards();
@@ -241,6 +258,12 @@ public class Gui {
             handPanel.repaint();
         }
     }
+
+    /**
+     * Updates the turn label with the information about the current player's turn.
+     *
+     * @param currentPlayerIndex The index of the current player.
+     */
     public void updatePlayerTurnLabel(int currentPlayerIndex){
         String currentPlayerName = model.getPlayersInGame().get(currentPlayerIndex).getName();
         turnLabel.setText("Current Player: " + currentPlayerName);
@@ -250,6 +273,12 @@ public class Gui {
         turnLabel.repaint();
     }
 
+    /**
+     * Removes a card from the player's hand and updates the display.
+     *
+     * @param cardToPlay The card to be removed.
+     * @return True if the card was successfully removed, false otherwise.
+     */
     public boolean removeCardFromHand(Card cardToPlay){
         if(model.removeCardFromHand(cardToPlay)) {
             cardToPlay.getCardButton().setVisible(false);
