@@ -45,7 +45,6 @@ public class Game {
     // Play a card
     public boolean removeCardFromHand(Card cardToPlay) {
         Player currentPlayer = getCurrentPlayer();
-
         if (cardToPlay != null && isPlayable(cardToPlay)) {
             currentCard = cardToPlay;
             theDeck.place(cardToPlay);
@@ -55,6 +54,19 @@ public class Game {
         return false;
     }
 
+    public boolean challengeWildDrawTwo(Player challengingPlayer, Player challengedPlayer, Card.Color currentColor) {
+        if (challengedPlayer.hasMatchingColorCards(currentColor)) {
+            challengedPlayer.drawCard(theDeck);
+            challengedPlayer.drawCard(theDeck);
+            return true;
+        } else {
+            challengingPlayer.drawCard(theDeck);
+            challengingPlayer.drawCard(theDeck);
+            challengingPlayer.drawCard(theDeck);
+            challengingPlayer.drawCard(theDeck);
+            return false;
+        }
+    }
 
     // Check if a player has won
     public boolean checkWinner() {
@@ -163,5 +175,16 @@ public class Game {
 
     public void setCurrentTurn(int currentTurn) {
         this.currentTurn = currentTurn;
+    }
+
+    /**
+     * Gets the next player in the game.
+     *
+     * @return The next player.
+     */
+    public Player getNextPlayer() {
+        int nextPlayerIndex = (currentTurn + 1) % playersInGame.size();
+
+        return playersInGame.get(nextPlayerIndex);
     }
 }

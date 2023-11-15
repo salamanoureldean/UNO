@@ -130,4 +130,19 @@ public class Player {
         }
         return null;
     }
+
+    /**
+     * Checks if the player's hand contains any cards that match the given color.
+     *
+     * @param color The color to check for in the hand.
+     * @return True if there is at least one card of the matching color; otherwise, false.
+     */
+    public boolean hasMatchingColorCards(Card.Color color) {
+        for (Card card : hand.getCards()) {
+            if (card.getColor() == color) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

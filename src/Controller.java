@@ -59,15 +59,45 @@ public class Controller implements ActionListener {
     }
 
     private void processCardPlacement(Card card) {
-        if (gui.removeCardFromHand(card)) {
-            cardFunctionality(card);
+        if (card.isWildDrawTwo()) {
+            handleWildDrawTwoChallenge(card);
+        } else if (gui.removeCardFromHand(card)) {
             handleSuccessfulCardPlacement();
-            gui.disableHand();
         } else {
-            //SHOW INVALID MOVE IN STATUS
             gui.getStatusTextArea().setText("Invalid Move!");
         }
     }
+
+    private void handleWildDrawTwoChallenge(Card card) {
+        Player currentPlayer = game.getCurrentPlayer();
+        Player nextPlayer = game.getNextPlayer();
+
+        boolean challengeAccepted = promptForChallenge(nextPlayer);
+
+        if (challengeAccepted) {
+            boolean challengeResult = game.challengeWildDrawTwo(nextPlayer, currentPlayer, card.getColor());
+
+            if (challengeResult) {
+                gui.getStatusTextArea().setText(currentPlayer.getName() + " played Wild Draw Two illegally. They draw 2 cards.");
+            } else {
+                gui.getStatusTextArea().setText(nextPlayer.getName() + " challenged incorrectly. They draw 4 cards.");
+            }
+
+
+            gui.updatePlayerHand(currentPlayer);
+            gui.updatePlayerHand(nextPlayer);
+        } else {
+            //Case where challenge isnt accepted
+        }
+    }
+
+    private boolean promptForChallenge(Player player) {
+        return JOptionPane.showConfirmDialog(gui.getGameFrame(),
+                player.getName() + ", do you want to challenge the Wild Draw Two?",
+                "Challenge",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+    }
+
     private void handleSuccessfulCardPlacement() {
         gui.getDrawCardButton().setEnabled(false);
         gui.getNextPlayerButton().setEnabled(true);

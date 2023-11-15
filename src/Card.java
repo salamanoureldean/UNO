@@ -37,6 +37,10 @@ public class Card {
         return VALUE;
     }
 
+    public boolean isWildDrawTwo() {
+        return this.VALUE == Value.WILDDRAWTWO;
+    }
+
     //Sets color variable
     public void setColor(Color color) {
         this.color = color;
