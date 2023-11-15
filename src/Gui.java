@@ -77,7 +77,7 @@ public class Gui {
         statusPanel.add(statusLabel, BorderLayout.NORTH);
 
         // Add a JTextArea for displaying status
-        statusTextArea = new JTextArea(10, 10);  // Rows, Columns
+        statusTextArea = new JTextArea(10, 20);  // Rows, Columns
         statusTextArea.setEditable(false);  // Make it read-only
         statusPanel.add(new JScrollPane(statusTextArea), BorderLayout.EAST);
         panelHolder.add(statusPanel, BorderLayout.WEST);
