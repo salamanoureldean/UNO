@@ -6,7 +6,8 @@ import javax.swing.*;
 public class Gui {
     private static JFrame frame1;
     private JFrame gameFrame;
-    private int numberOfPlayers = 2;
+    private int numberOfPlayers;
+    int numberOfAIPlayers;
     private JPanel topCardPanel;
     private JPanel handPanel;
     private JPanel drawPanel;
@@ -25,17 +26,48 @@ public class Gui {
      */
     public Gui() {
         frame1 = new JFrame();
-        Object[] possibilities = {2, 3, 4};
-        numberOfPlayers = (Integer) JOptionPane.showInputDialog(frame1,
-                "Choose the number of players:",
-                "Number of players selection",
-                JOptionPane.PLAIN_MESSAGE,
-                null,
-                possibilities,
-                2);
+        boolean validSelection = false;
+
+        while (!validSelection) {
+            Object[] possibilities = {0, 1, 2, 3, 4, 5, 6};
+            numberOfPlayers = (Integer) JOptionPane.showInputDialog(
+                    frame1,
+                    "Choose the number of players:",
+                    "Number of players selection",
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    possibilities,
+                    0);
+
+            // Prompt for number of AI players
+            Integer[] aiOptions = {0, 1, 2, 3, 4, 5, 6}; // Adjust the range as needed
+            numberOfAIPlayers = (Integer) JOptionPane.showInputDialog(
+                    frame1,
+                    "Select the number of AI players:",
+                    "AI Players",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    aiOptions,
+                    0);
+
+            // Check for minimum player requirements
+            if (numberOfPlayers != 0 &&
+                    numberOfPlayers + numberOfAIPlayers >= 2 && numberOfPlayers > 0) {
+                validSelection = true;
+                model = new Game(numberOfPlayers, numberOfAIPlayers);
+            } else {
+                JOptionPane.showMessageDialog(
+                        frame1,
+                        "There must be at least one human player and a total of at least two players.",
+                        "Player Requirement Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
+        }
+
         frame1.setVisible(false);
 
-        model = new Game(numberOfPlayers);
+        model = new Game(numberOfPlayers, numberOfAIPlayers);
         gameFrame = new JFrame();
         gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         gameFrame.setResizable(true);
@@ -90,7 +122,7 @@ public class Gui {
         playerCards = new ArrayList<>();
 
         Player currentPlayer = model.getCurrentPlayer();
-        for (Card card: currentPlayer.getHand().getCards()){
+        for (Card card : currentPlayer.getHand().getCards()) {
             handPanel.add(card.getCardButton());
         }
         model.getCurrentCard().getCardButton().setVisible(true);

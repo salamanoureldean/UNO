@@ -17,17 +17,24 @@ public class Game {
      *
      * @param numPlayers The number of players in the game.
      */
-    public Game(int numPlayers) {
+    public Game(int numPlayers, int numAIPlayers) {
         playersInGame = new ArrayList<>();
         theDeck = new Deck();
 
         int numberOfPlayers = numPlayers;
 
-        // Initialize players
-        for (int i = 0; i < numberOfPlayers; i++) {
+        // Initialize human players
+        for (int i = 0; i < numPlayers; i++) {
             String playerName = "Player " + (i + 1);
             playersInGame.add(new Player(playerName, theDeck));
         }
+
+        // Initialize AI players
+        for (int i = 0; i < numAIPlayers; i++) {
+            String aiName = "AI " + (i + 1);
+            playersInGame.add(new AIPlayer(aiName, theDeck)); // Assuming AIPlayer extends Player
+        }
+
 
         currentCard = theDeck.draw();
 
