@@ -39,8 +39,7 @@ public class Gui {
                     possibilities,
                     0);
 
-            // Prompt for number of AI players
-            Integer[] aiOptions = {0, 1, 2, 3, 4, 5, 6}; // Adjust the range as needed
+            Integer[] aiOptions = {0, 1, 2, 3, 4, 5, 6};
             numberOfAIPlayers = (Integer) JOptionPane.showInputDialog(
                     frame1,
                     "Select the number of AI players:",
@@ -50,7 +49,6 @@ public class Gui {
                     aiOptions,
                     0);
 
-            // Check for minimum player requirements
             if (numberOfPlayers != 0 &&
                     numberOfPlayers + numberOfAIPlayers >= 2 && numberOfPlayers > 0) {
                 validSelection = true;
