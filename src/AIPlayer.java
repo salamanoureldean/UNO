@@ -15,19 +15,24 @@ public class AIPlayer extends Player {
 
         //Check if AIPlayer has one card left, if so c
         if (this.getHand().getCards().size() == 1 && this.getHand().getCards().get(0).getColor() == currentCard.getColor() && this.getHand().getCards().get(0).getVALUE() == currentCard.getVALUE()) {
-            playCard(this.getHand().getCards().get(0), game);
+            aiHasOneCardLeft(currentCard, game);
         }
 
-        if (game.getNextPlayer().getHand().getCards().size()<=2){
+        else if (game.getNextPlayer().getHand().getCards().size()<=2){
             nextPlayerHasTwoOrLessCards(currentCard, game);
         }
 
 
-        else {
+         else if (game.getNextPlayer().getHand().getCards().size()>2){
             playFirstPlayableCard(currentCard, game);
         }
 
-                }
+         else {
+                drawCard(game.getTheDeck());
+            }
+        }
+
+
 
 
 
@@ -43,6 +48,10 @@ public class AIPlayer extends Player {
         this.getHand().removeCard(card);
         game.setCurrentCard(card);
 
+    }
+
+    private void aiHasOneCardLeft(Card card, Game game){
+        playCard(this.getHand().getCards().get(0), game);
     }
 
     private void nextPlayerHasTwoOrLessCards(Card currentCard, Game game){
