@@ -6,8 +6,8 @@ import javax.swing.*;
  * @version: 1.00
  */
 public class Card {
-    enum Value{ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, REVERSE, SKIP, WILD, WILDDRAWTWO};
-    public enum Color{RED, GREEN, BLUE, YELLOW, BLANK};
+    enum Value{ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, REVERSE, SKIP, WILD, WILDDRAWTWO, FLIP};
+    public enum Color{RED, GREEN, BLUE, YELLOW, BLANK, PINK, PURPLE, TEAL, ORANGE};
 
     private final Value VALUE;
     private Color color;
