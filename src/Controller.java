@@ -313,6 +313,135 @@ public class Controller implements ActionListener {
                     gui.getStatusTextArea().setText("Please select the wild card again");
                 }
                 break;
+
+            case FLIP:
+                if(game.isPlayable(playedCard)){
+                    game.flipGameState();
+
+                    //flip order cards in pile
+                    Collections.reverse(game.getTheDeck().getDiscardPile());
+
+                    boolean currentGameState = game.getGameState();
+
+                    //flip each player's hand
+                    for(Player player : game.getPlayersInGame()) {
+                        for (Card cards : player.getHand().getCards()) {
+                            playedCard.flipCard(currentGameState);
+                        }
+                    }
+                    //update gui later
+                }
+                break;
+
+            case DRAWFIVE:
+
+                nextPlayerIndex = (game.getCurrentTurn() + 1) % game.getPlayersInGame().size();
+                nextPlayer = game.getPlayersInGame().get(nextPlayerIndex);
+
+                for (int i = 0; i < 5; i++){
+                    nextPlayer.drawCard(game.getTheDeck());
+                }
+                gui.updatePlayerHand(nextPlayer);
+
+                break;
+
+            case SKIPALL:
+                if (game.isPlayable(playedCard)){
+                    int currentPlayerIndex = game.getCurrentTurn();
+                    game.setCurrentTurn(currentPlayerIndex);
+                }
+                break;
+
+            case WILDDRAWCOLOR:
+                newColor = (String) JOptionPane.showInputDialog(frame,
+                        "Choose the color",
+                        "Color selection",
+                        JOptionPane.PLAIN_MESSAGE,
+                        null,
+                        choose,
+                        0);
+
+                if (newColor != null && newColor.equals("Red")) {
+                    game.getCurrentCard().setColor(Card.Color.RED);
+                    gui.getStatusTextArea().setText("The color has been changed to red");
+                }
+                else if (newColor != null && newColor.equals("Green")) {
+                    game.getCurrentCard().setColor(Card.Color.GREEN);
+                    gui.getStatusTextArea().setText("The color has changed to green");
+                }
+                else if (newColor != null && newColor.equals("Blue")) {
+                    game.getCurrentCard().setColor(Card.Color.BLUE);
+                    gui.getStatusTextArea().setText("The color has changed to blue");
+                }
+                else if (newColor != null && newColor.equals("Yellow")) {
+                    game.getCurrentCard().setColor(Card.Color.YELLOW);
+                    gui.getStatusTextArea().setText("The color has been changed to yellow.");
+                }
+                else {
+                    game.getCurrentCard().setColor(game.getCurrentCard().getColor());
+                    gui.getStatusTextArea().setText("The color has not been changed");
+                    gui.getNextPlayerButton().setEnabled(false);
+                    cardFunctionality(playedCard);
+                    gui.getStatusTextArea().setText("Please select the wild card again");
+                }
+                boolean challengeResult = false;
+
+                Card.Color chosenColor = convertStringToColor(newColor);
+                if(!game.isPlayable(playedCard)){
+                    challengeResult = handleWildDrawColorChallenge(playedCard, chosenColor);
+                }
+                if (!challengeResult){
+                    drawUntilColorFound(game.getNextPlayer(), chosenColor);
+                    game.nextPlayer();
+
+                    gui.updatePlayerHand(game.getNextPlayer());
+                }
+
         }
     }
+
+    private boolean handleWildDrawColorChallenge(Card playedCard, Card.Color newColor) {
+        Player currentPlayer = game.getCurrentPlayer();
+        Player nextPlayer = game.getNextPlayer();
+
+        boolean challengeAccepted = promptForChallenge(nextPlayer);
+
+        if(challengeAccepted){
+            if(currentPlayer.hasMatchingColorCards(newColor)){
+                drawUntilColorFound(currentPlayer, newColor);
+                return true;
+            }else {
+                drawUntilColorFound(nextPlayer, newColor);
+                nextPlayer.drawCard(game.getTheDeck());
+                nextPlayer.drawCard(game.getTheDeck());
+                gui.updatePlayerHand(nextPlayer);
+                return false;
+            }
+        }
+        return false;
+
+}
+
+    private Card.Color convertStringToColor(String colorStr) {
+        switch (colorStr) {
+            case "Red": return Card.Color.RED;
+            case "Green": return Card.Color.GREEN;
+            case "Blue": return Card.Color.BLUE;
+            case "Yellow": return Card.Color.YELLOW;
+            default: return null;
+        }
+    }
+
+    private void drawUntilColorFound(Player player, Card.Color chosenColor) {
+        boolean found = false;
+        while (!found) {
+            player.drawCard(game.getTheDeck());
+            Card lastDrawnCard = player.getLastCard();
+            if (lastDrawnCard.getColor() == chosenColor) {
+                found = true;
+            }
+            gui.updatePlayerHand(player);
+        }
+    }
+
 }

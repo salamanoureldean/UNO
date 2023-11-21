@@ -6,6 +6,7 @@
 import java.util.ArrayList;
 
 public class Game {
+    private boolean isLightSide;
     private Deck theDeck;
     private ArrayList<Player> playersInGame;
     private boolean winner = false;
@@ -68,6 +69,21 @@ public class Game {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Toggles the game state between Light Side and Dark Side.
+     */
+    public void flipGameState() {
+        this.isLightSide = !this.isLightSide;
+    }
+
+    /**
+     * get the current game state
+     * @return boolean
+     */
+    public boolean getGameState() {
+        return isLightSide;
     }
 
     /**

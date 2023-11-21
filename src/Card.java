@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * @author: Abody Majeed 101227327, Mahad Mohamed Yonis 101226808, Salama Noureldean 101154365, Pietro Adamvoski 101238885
@@ -6,12 +7,13 @@ import javax.swing.*;
  * @version: 1.00
  */
 public class Card {
-    enum Value{ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, REVERSE, SKIP, WILD, WILDDRAWTWO, FLIP};
+    enum Value{ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, REVERSE, SKIP, WILD, WILDDRAWTWO, FLIP, DRAWFIVE, SKIPALL, WILDDRAWCOLOR};
     public enum Color{RED, GREEN, BLUE, YELLOW, BLANK, PINK, PURPLE, TEAL, ORANGE};
 
     private final Value VALUE;
     private Color color;
     private JButton cardButton;
+    private boolean isLightSide;
 
 
     /**
@@ -30,6 +32,14 @@ public class Card {
         this.cardButton.setIcon(icon);
         this.cardButton.setEnabled(false);
         this.cardButton.setVisible(false);
+    }
+
+    public void flipCard(boolean gameIsLightSide){
+        if(this.isLightSide != gameIsLightSide){
+            this.isLightSide = !this.isLightSide;
+
+            //update card appearance here.
+        }
     }
 
     /**
