@@ -49,13 +49,21 @@ public class Controller implements ActionListener {
      * enables the next player button, updates the status display, and disables the player's hand.
      */
     private void handleDrawCardAction() {
-        if (game.addCardToHand()) {
-            gui.addLatestCardToHandDisplay();
+        try {
+            if (game.addCardToHand()) {
+                gui.addLatestCardToHandDisplay();
+            }
+            gui.getDrawCardButton().setEnabled(false);
+            gui.getNextPlayerButton().setEnabled(true);
+            gui.updateStatusDraw(game.getCurrentPlayer());
+            gui.disableHand();
+        } catch (Exception ex) {
+            ex.printStackTrace(); // Or use logging
+            JOptionPane.showMessageDialog(gui.getGameFrame(),
+                    "Error occurred in Draw Card action: " + ex.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
-        gui.getDrawCardButton().setEnabled(false);
-        gui.getNextPlayerButton().setEnabled(true);
-        gui.updateStatusDraw(game.getCurrentPlayer());
-        gui.disableHand();
     }
 
     /**
@@ -80,14 +88,19 @@ public class Controller implements ActionListener {
      * @param e The ActionEvent triggered by selecting a card button.
      */
     private void handleCardAction(ActionEvent e) {
-
-        Card selectedCard = findSelectedCard(e);
-        if (selectedCard != null && selectedCard!=game.getCurrentCard()) {
-            processCardPlacement(selectedCard);
-
+        try {
+            Card selectedCard = findSelectedCard(e);
+            if (selectedCard != null && selectedCard != game.getCurrentCard()) {
+                processCardPlacement(selectedCard);
+            }
+            checkForGameWinner();
+        } catch (Exception ex) {
+            ex.printStackTrace(); // Or use logging
+            JOptionPane.showMessageDialog(gui.getGameFrame(),
+                    "Error occurred in Card Action: " + ex.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
-        checkForGameWinner();
-
     }
 
     /**

@@ -106,17 +106,19 @@ public class MainMenuGUI extends JFrame {
      */
     private void initialize(){
         gui = new Gui();
-        controller = new Controller(gui.getModel(),gui);
-        for(int i=0; i < gui.getModel().getPlayersInGame().size(); i++){
-            for(int j = 0; j< gui.getModel().getPlayersInGame().get(i).getHand().getCards().size(); j++) {
-                gui.getModel().getPlayersInGame().get(i).getHand().getCards().get(j).getCardButton().addActionListener(controller);
+        game = gui.getModel(); // Initialize the game object with the model from gui
+        controller = new Controller(game, gui);
+
+        for(int i=0; i < game.getPlayersInGame().size(); i++){
+            for(int j = 0; j< game.getPlayersInGame().get(i).getHand().getCards().size(); j++) {
+                game.getPlayersInGame().get(i).getHand().getCards().get(j).getCardButton().addActionListener(controller);
             }
         }
         gui.getDrawCardButton().addActionListener(controller);
         gui.getNextPlayerButton().addActionListener(controller);
         controller.cardFunctionality(game.getCurrentCard());
-
     }
+
 
     /**
      * The main entry point of the UNO game application. Invokes the creation and display
