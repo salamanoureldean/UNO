@@ -14,7 +14,7 @@ public class Deck {
     private Stack<Card> discardPile = new Stack<Card>();
 
     /**
-     * Constructor for deck class that inititalizes every that will be used in the game
+     * Constructor for deck class that initializes every that will be used in the game
      */
     public Deck(){
         //Zeros
@@ -85,6 +85,18 @@ public class Deck {
         //Wild Draw 2s
         initialize(4, Card.Color.BLANK, Card.Value.WILDDRAWTWO);
 
+        //Flips
+        initialize(2, Card.Color.BLUE, Card.Value.FLIP);
+        initialize(2, Card.Color.RED, Card.Value.FLIP);
+        initialize(2, Card.Color.GREEN, Card.Value.FLIP);
+        initialize(2, Card.Color.YELLOW, Card.Value.FLIP);
+
+        //Draw ones
+        initialize(2, Card.Color.BLUE, Card.Value.DRAWONE);
+        initialize(2, Card.Color.RED, Card.Value.DRAWONE);
+        initialize(2, Card.Color.GREEN, Card.Value.DRAWONE);
+        initialize(2, Card.Color.YELLOW, Card.Value.DRAWONE);
+
         shuffle(completeDeck);
     }
 
@@ -105,7 +117,7 @@ public class Deck {
     }
 
     /**
-     * When deck is zero it the discard pile will become the deck with the exception of the current card
+     * When deck is zero it the discard pile will become the deck except for the current card
      * @param currentCard this is the card that will remain in the discard pile and should be the current card being viewed in the game
      */
     public void deckZero(Card currentCard){
