@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * @author: Abody Majeed 101227327, Mahad Mohamed Yonis 101226808, Salama Noureldean 101154365, Pietro Adamvoski 101238885
@@ -7,10 +6,10 @@ import java.awt.*;
  * @version: 1.00
  */
 public class Card {
-    enum Value{ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, REVERSE, SKIP, WILD, WILDDRAWTWO, FLIP, DRAWFIVE, SKIPALL, WILDDRAWCOLOR};
+    enum Value{ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, REVERSE, SKIP, DRAWONE, WILD, WILDDRAWTWO, FLIP, DRAWFIVE, SKIPALL, WILDDRAWCOLOR, WILDDARK};
     public enum Color{RED, GREEN, BLUE, YELLOW, BLANK, PINK, PURPLE, TEAL, ORANGE};
 
-    private final Value VALUE;
+    private Value value;
     private Color color;
     private JButton cardButton;
     private boolean isLightSide;
@@ -23,7 +22,7 @@ public class Card {
      * @param color The color of the card.
      */
     public Card(Value value, Color color) {
-        this.VALUE = value;
+        this.value = value;
         this.color = color;
 
         this.cardButton = new JButton(getFileNameForCard(value, color));
@@ -39,6 +38,91 @@ public class Card {
             this.isLightSide = !this.isLightSide;
 
             //update card appearance here.
+            switchDarkSide();
+            String filePath = "dark\\" + getFileNameForCard(this.value, this.color) + ".png";
+            ImageIcon icon = new ImageIcon(filePath);
+            this.cardButton.setIcon(icon);
+            this.cardButton.setEnabled(false);
+            this.cardButton.setVisible(false);
+        }
+        else{
+            switchLightSide();
+            String filePath = "dark\\" + getFileNameForCard(this.value, this.color) + ".png";
+            ImageIcon icon = new ImageIcon(filePath);
+            this.cardButton.setIcon(icon);
+            this.cardButton.setEnabled(false);
+            this.cardButton.setVisible(false);
+        }
+    }
+
+    public void switchDarkSide(){
+        if(value == Value.WILD){
+            value = Value.WILDDARK;
+        }
+        else if(value == Value.WILDDRAWTWO){
+            value = Value.WILDDRAWCOLOR;
+        }
+        else if (value == Value.SKIP){
+            value = Value.SKIPALL;
+            darkLightColorSwitch();
+        }
+        else if(value == Value.DRAWONE){
+            value = Value.DRAWFIVE;
+            darkLightColorSwitch();
+        }
+        else {
+            darkLightColorSwitch();
+        }
+    }
+    public void switchLightSide(){
+        if(value == Value.WILDDARK){
+            value = Value.WILD;
+        }
+        else if(value == Value.WILDDRAWCOLOR){
+            value = Value.WILDDRAWTWO;
+        }
+        else if (value == Value.SKIPALL){
+            value = Value.SKIP;
+            darkLightColorSwitch();
+        }
+        else if(value == Value.DRAWFIVE){
+            value = Value.DRAWONE;
+            darkLightColorSwitch();
+        }
+        else {
+            darkLightColorSwitch();
+        }
+    }
+
+    public void darkLightColorSwitch(){
+        if(this.isLightSide == false){
+            if(color == Color.RED){
+                color = Color.ORANGE;
+            }
+            else if(color == Color.YELLOW){
+                color = Color.TEAL;
+            }
+            else if(color == Color.GREEN){
+                color = Color.PINK;
+            }
+            else if(color == Color.BLUE){
+                color = Color.PURPLE;
+            }
+        }
+        else{
+            if(color == Color.ORANGE){
+                color = Color.RED;
+            }
+            else if(color == Color.TEAL){
+                color = Color.YELLOW;
+            }
+            else if(color == Color.PINK){
+                color = Color.GREEN;
+            }
+            else if(color == Color.PURPLE){
+                color = Color.BLUE;
+            }
+
         }
     }
 
@@ -56,8 +140,8 @@ public class Card {
      *
      * @return The value of the card.
      */
-    public Value getVALUE(){
-        return VALUE;
+    public Value getValue(){
+        return value;
     }
 
     /**
@@ -66,7 +150,7 @@ public class Card {
      * @return True if the card is a Wild Draw Two card, false otherwise.
      */
     public boolean isWildDrawTwo() {
-        return this.VALUE == Value.WILDDRAWTWO;
+        return this.value == Value.WILDDRAWTWO;
     }
 
     /**
@@ -99,11 +183,11 @@ public class Card {
      * @return The string representation of the card.
      */
     public String stringCard(){
-        if(VALUE == Value.WILD || VALUE == Value.WILDDRAWTWO){
-            return "A " + VALUE;
+        if(value == Value.WILD || value == Value.WILDDRAWTWO){
+            return "A " + value;
         }
         else{
-            return "A " + color + " " + VALUE;
+            return "A " + color + " " + value;
         }
     }
 

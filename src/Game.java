@@ -129,11 +129,11 @@ public class Game {
      * @return true if playable false if not playable
      */
     public boolean isPlayable(Card card) {
-        if (currentCard.getColor() == card.getColor() || currentCard.getVALUE() == card.getVALUE()) {
+        if (currentCard.getColor() == card.getColor() || currentCard.getValue() == card.getValue()) {
             return true;
-        } else if (card.getVALUE() == Card.Value.WILD || card.getVALUE() == Card.Value.WILDDRAWTWO) {
+        } else if (card.getValue() == Card.Value.WILD || card.getValue() == Card.Value.WILDDRAWTWO) {
             return true;
-        } else if (card.getVALUE() == Card.Value.SKIP || card.getVALUE() == Card.Value.REVERSE) {
+        } else if (card.getValue() == Card.Value.SKIP || card.getValue() == Card.Value.REVERSE) {
             return card.getColor() == currentCard.getColor();
         }
 
@@ -153,7 +153,7 @@ public class Game {
 
             //Iterating through each card in players (i) hand
             for (Card card : playersInGame.get(i).getHand().getCards()) {
-                int cardValue = card.getVALUE().ordinal();
+                int cardValue = card.getValue().ordinal();
 
                 //Checking the value of each card (j)
                 if (cardValue >= 0 && cardValue < 10) {

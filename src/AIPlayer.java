@@ -1,5 +1,3 @@
-import java.util.HashMap;
-
 public class AIPlayer extends Player {
 
     private Hand hand;      // A players hand made up of cards
@@ -14,7 +12,7 @@ public class AIPlayer extends Player {
     public void makeMove(Card currentCard, Game game) {
 
         //Check if AIPlayer has one card left, if so c
-        if (this.getHand().getCards().size() == 1 && this.getHand().getCards().get(0).getColor() == currentCard.getColor() && this.getHand().getCards().get(0).getVALUE() == currentCard.getVALUE()) {
+        if (this.getHand().getCards().size() == 1 && this.getHand().getCards().get(0).getColor() == currentCard.getColor() && this.getHand().getCards().get(0).getValue() == currentCard.getValue()) {
             aiHasOneCardLeft(currentCard, game);
         }
 
@@ -41,7 +39,7 @@ public class AIPlayer extends Player {
 
     private void playCard(Card card, Game game) {
         //check if the card is wildcard, if it is then set color of wildcard aswell.
-        if (card.getVALUE() == Card.Value.WILD || card.getVALUE() == Card.Value.WILDDRAWTWO) {
+        if (card.getValue() == Card.Value.WILD || card.getValue() == Card.Value.WILDDRAWTWO) {
             card.setColor(changeWildColor());
         }
         //place the card
@@ -62,7 +60,7 @@ public class AIPlayer extends Player {
             for(int i = 0; i<this.getHand().getCards().size(); i++){
 
                 //Play WildDrawTwo as First priority
-                if (this.getHand().getCards().get(i).getVALUE() == Card.Value.WILDDRAWTWO){
+                if (this.getHand().getCards().get(i).getValue() == Card.Value.WILDDRAWTWO){
                     playCard(this.getHand().getCards().get(i), game);
                     break;
                 }
@@ -76,13 +74,13 @@ public class AIPlayer extends Player {
                  */
 
                 //Play SKIP as Third Priority
-                else if (this.getHand().getCards().get(i).getVALUE() == Card.Value.SKIP && this.getHand().getCards().get(i).getColor() == currentCard.getColor()){
+                else if (this.getHand().getCards().get(i).getValue() == Card.Value.SKIP && this.getHand().getCards().get(i).getColor() == currentCard.getColor()){
                     playCard(this.getHand().getCards().get(i), game);
                     break;
                 }
 
                 //Play REVERSE as Fourth Priority
-                else if (this.getHand().getCards().get(i).getVALUE() == Card.Value.REVERSE && this.getHand().getCards().get(i).getColor() == currentCard.getColor()){
+                else if (this.getHand().getCards().get(i).getValue() == Card.Value.REVERSE && this.getHand().getCards().get(i).getColor() == currentCard.getColor()){
                     playCard(this.getHand().getCards().get(i), game);
                     break;
                 }
@@ -95,7 +93,7 @@ public class AIPlayer extends Player {
                  }
                  */
                 //Play WILD as 6th Priority
-                else if (this.getHand().getCards().get(i).getVALUE() == Card.Value.WILD){
+                else if (this.getHand().getCards().get(i).getValue() == Card.Value.WILD){
                     playCard(this.getHand().getCards().get(i), game);
                     break;
                 }
@@ -115,7 +113,7 @@ public class AIPlayer extends Player {
 
     public void playFirstPlayableCard(Card currentCard, Game game){
         for (int i = 0; i < this.getHand().getCards().size(); i++) {
-        if (this.getHand().getCards().get(i).getVALUE() == currentCard.getVALUE() || this.getHand().getCards().get(i).getColor() == currentCard.getColor()) {
+        if (this.getHand().getCards().get(i).getValue() == currentCard.getValue() || this.getHand().getCards().get(i).getColor() == currentCard.getColor()) {
             playCard(this.getHand().getCards().get(i), game);
             break;
     }

@@ -222,7 +222,7 @@ public class Controller implements ActionListener {
      * @param playedCard The card that has been played and whose functionality is to be executed.
      */
     public void cardFunctionality(Card playedCard) {
-        Card.Value cardValue = playedCard.getVALUE();
+        Card.Value cardValue = playedCard.getValue();
         //Card.Color cardColor = playedCard.getColor();
         String newColor;
         JFrame frame = new JFrame();

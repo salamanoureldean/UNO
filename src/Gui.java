@@ -28,6 +28,7 @@ public class Gui {
         frame1 = new JFrame();
         boolean validSelection = false;
 
+        //Player and AI player selection
         while (!validSelection) {
             Object[] possibilities = {0, 1, 2, 3, 4, 5, 6};
             numberOfPlayers = (Integer) JOptionPane.showInputDialog(
@@ -65,6 +66,7 @@ public class Gui {
 
         frame1.setVisible(false);
 
+        //Initialize frame
         model = new Game(numberOfPlayers, numberOfAIPlayers);
         gameFrame = new JFrame();
         gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
