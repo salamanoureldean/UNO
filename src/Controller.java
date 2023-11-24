@@ -330,16 +330,17 @@ public class Controller implements ActionListener {
             case FLIP:
                 if(game.isPlayable(playedCard)){
                     game.flipGameState();
-
-                    //flip order cards in pile
-                    Collections.reverse(game.getTheDeck().getDiscardPile());
-
                     boolean currentGameState = game.getGameState();
+
+                    //flip the complete deck so that when a card is drawn, it is a dark/light card according to the gameState
+                    for(Card card: game.getTheDeck().getCompleteDeck()){
+                        card.flipCard(currentGameState);
+                    }
 
                     //flip each player's hand
                     for(Player player : game.getPlayersInGame()) {
-                        for (Card cards : player.getHand().getCards()) {
-                            playedCard.flipCard(currentGameState);
+                        for (Card card : player.getHand().getCards()) {
+                            card.flipCard(currentGameState);
                         }
                     }
                     //update gui later
@@ -433,7 +434,7 @@ public class Controller implements ActionListener {
         }
         return false;
 
-}
+    }
 
     private Card.Color convertStringToColor(String colorStr) {
         switch (colorStr) {

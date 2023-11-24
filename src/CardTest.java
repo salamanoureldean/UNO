@@ -56,4 +56,3 @@ public class CardTest {
         assertEquals(Card.Color.RED, card.getColor());
     }
 }
-

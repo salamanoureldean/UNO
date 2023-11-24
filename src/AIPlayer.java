@@ -21,14 +21,14 @@ public class AIPlayer extends Player {
         }
 
 
-         else if (game.getNextPlayer().getHand().getCards().size()>2){
+        else if (game.getNextPlayer().getHand().getCards().size()>2){
             playFirstPlayableCard(currentCard, game);
         }
 
-         else {
-                drawCard(game.getTheDeck());
-            }
+        else {
+            drawCard(game.getTheDeck());
         }
+    }
 
 
 
@@ -57,66 +57,66 @@ public class AIPlayer extends Player {
 
 
 
-            for(int i = 0; i<this.getHand().getCards().size(); i++){
+        for(int i = 0; i<this.getHand().getCards().size(); i++){
 
-                //Play WildDrawTwo as First priority
-                if (this.getHand().getCards().get(i).getValue() == Card.Value.WILDDRAWTWO){
-                    playCard(this.getHand().getCards().get(i), game);
-                    break;
-                }
-
-                //Play Draw One as Second Priority
-                /** Waiting for Implementation
-                 else if (this.getHand().getCards().get(i).getVALUE() == Card.Value.DRAWONE && this.getHand().getCards().get(i).getColor() == currentCard.getColor()){
-                 playCard(this.getHand().getCards().get(i), game);
-                 break;
-                 }
-                 */
-
-                //Play SKIP as Third Priority
-                else if (this.getHand().getCards().get(i).getValue() == Card.Value.SKIP && this.getHand().getCards().get(i).getColor() == currentCard.getColor()){
-                    playCard(this.getHand().getCards().get(i), game);
-                    break;
-                }
-
-                //Play REVERSE as Fourth Priority
-                else if (this.getHand().getCards().get(i).getValue() == Card.Value.REVERSE && this.getHand().getCards().get(i).getColor() == currentCard.getColor()){
-                    playCard(this.getHand().getCards().get(i), game);
-                    break;
-                }
-
-                //Play FLIP as Fifth Priority
-                /** Waiting for Implementation
-                 else if (this.getHand().getCards().get(i).getVALUE() == Card.Value.FLIP && this.getHand().getCards().get(i).getColor() == currentCard.getColor()){
-                 playCard(this.getHand().getCards().get(i), game);
-                 break;
-                 }
-                 */
-                //Play WILD as 6th Priority
-                else if (this.getHand().getCards().get(i).getValue() == Card.Value.WILD){
-                    playCard(this.getHand().getCards().get(i), game);
-                    break;
-                }
-
-                //If not Wild Card, Play first Playable Card
-
-                else {
-                    playFirstPlayableCard(currentCard, game);
-                    break;
-                }
-
+            //Play WildDrawTwo as First priority
+            if (this.getHand().getCards().get(i).getValue() == Card.Value.WILDDRAWTWO){
+                playCard(this.getHand().getCards().get(i), game);
+                break;
             }
 
+            //Play Draw One as Second Priority
+            /** Waiting for Implementation
+             else if (this.getHand().getCards().get(i).getVALUE() == Card.Value.DRAWONE && this.getHand().getCards().get(i).getColor() == currentCard.getColor()){
+             playCard(this.getHand().getCards().get(i), game);
+             break;
+             }
+             */
+
+            //Play SKIP as Third Priority
+            else if (this.getHand().getCards().get(i).getValue() == Card.Value.SKIP && this.getHand().getCards().get(i).getColor() == currentCard.getColor()){
+                playCard(this.getHand().getCards().get(i), game);
+                break;
+            }
+
+            //Play REVERSE as Fourth Priority
+            else if (this.getHand().getCards().get(i).getValue() == Card.Value.REVERSE && this.getHand().getCards().get(i).getColor() == currentCard.getColor()){
+                playCard(this.getHand().getCards().get(i), game);
+                break;
+            }
+
+            //Play FLIP as Fifth Priority
+            /** Waiting for Implementation
+             else if (this.getHand().getCards().get(i).getVALUE() == Card.Value.FLIP && this.getHand().getCards().get(i).getColor() == currentCard.getColor()){
+             playCard(this.getHand().getCards().get(i), game);
+             break;
+             }
+             */
+            //Play WILD as 6th Priority
+            else if (this.getHand().getCards().get(i).getValue() == Card.Value.WILD){
+                playCard(this.getHand().getCards().get(i), game);
+                break;
+            }
+
+            //If not Wild Card, Play first Playable Card
+
+            else {
+                playFirstPlayableCard(currentCard, game);
+                break;
+            }
 
         }
 
 
+    }
+
+
     public void playFirstPlayableCard(Card currentCard, Game game){
         for (int i = 0; i < this.getHand().getCards().size(); i++) {
-        if (this.getHand().getCards().get(i).getValue() == currentCard.getValue() || this.getHand().getCards().get(i).getColor() == currentCard.getColor()) {
-            playCard(this.getHand().getCards().get(i), game);
-            break;
-    }
+            if (this.getHand().getCards().get(i).getValue() == currentCard.getValue() || this.getHand().getCards().get(i).getColor() == currentCard.getColor()) {
+                playCard(this.getHand().getCards().get(i), game);
+                break;
+            }
         }
     }
 
