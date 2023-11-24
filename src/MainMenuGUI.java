@@ -17,7 +17,7 @@ public class MainMenuGUI extends JFrame {
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBackground(new Color(0, 0, 24)); // Light grey background
+        panel.setBackground(new Color(0, 0, 24));
         panel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
         getContentPane().add(panel);
 
@@ -41,7 +41,7 @@ public class MainMenuGUI extends JFrame {
             }
 
             public void mouseExited(MouseEvent evt) {
-                styleButton(button, text); // Reset to original color
+                styleButton(button, text);
             }
         });
 
@@ -75,18 +75,16 @@ public class MainMenuGUI extends JFrame {
     }
 
     private void rulesMenu() {
-        JOptionPane.showMessageDialog(this, "The rules of UNO are simple...\n[add a brief summary here]", "Rules", JOptionPane.INFORMATION_MESSAGE);
-    }
+        JOptionPane.showMessageDialog(this, "Google the rules!", "Rules", JOptionPane.INFORMATION_MESSAGE);    }
 
     private void quit() {
         System.exit(0);
     }
 
     private void helpMenu() {
-        JOptionPane.showMessageDialog(this, "To navigate through the menus, select the button for the action you want to perform. For more help, visit our FAQ section.", "Help", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "To navigate through the menus, select the button for the action you want to perform.", "Help", JOptionPane.INFORMATION_MESSAGE);
     }
-
-    private void initialize() {
+        private void initialize() {
         gui = new Gui();
         game = gui.getModel();
         controller = new Controller(game, gui);
