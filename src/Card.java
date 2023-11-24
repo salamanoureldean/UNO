@@ -44,10 +44,12 @@ public class Card {
             this.cardButton.setIcon(icon);
             this.cardButton.setEnabled(false);
             this.cardButton.setVisible(false);
+
+
         }
         else{
             switchLightSide();
-            String filePath = "dark\\" + getFileNameForCard(this.value, this.color) + ".png";
+            String filePath = "small\\" + getFileNameForCard(this.value, this.color) + ".png";
             ImageIcon icon = new ImageIcon(filePath);
             this.cardButton.setIcon(icon);
             this.cardButton.setEnabled(false);
