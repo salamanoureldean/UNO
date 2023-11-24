@@ -66,9 +66,6 @@ public class MainMenuGUI extends JFrame {
             case "Help":
                 button.setBackground(Color.ORANGE);
                 break;
-            default:
-                button.setBackground(Color.GRAY);
-                break;
         }
 
         button.setFocusPainted(false);
