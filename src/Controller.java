@@ -343,6 +343,10 @@ public class Controller implements ActionListener {
                             card.flipCard(currentGameState);
                         }
                     }
+
+                    //flip the current flip card (that has been played) to display new color
+                    playedCard.flipCard(currentGameState);
+
                     //update gui later
                 }
                 break;
