@@ -129,16 +129,35 @@ public class Game {
      * @return true if playable false if not playable
      */
     public boolean isPlayable(Card card) {
+        // Check for color or value match
         if (currentCard.getColor() == card.getColor() || currentCard.getValue() == card.getValue()) {
             return true;
-        } else if (card.getValue() == Card.Value.WILD || card.getValue() == Card.Value.WILDDRAWTWO) {
+        }
+
+        // Check for special cards
+        if (card.getValue() == Card.Value.WILD ||
+                card.getValue() == Card.Value.WILDDRAWTWO ||
+                card.getValue() == Card.Value.WILDDRAWCOLOR) {
             return true;
-        } else if (card.getValue() == Card.Value.SKIP || card.getValue() == Card.Value.REVERSE) {
+        }
+
+        if (card.getValue() == Card.Value.FLIP) {
+            return true;
+        }
+
+        // draw one
+        if (isLightSide && card.getValue() == Card.Value.DRAWONE) {
             return card.getColor() == currentCard.getColor();
+        }
+
+        //check dark specific cards
+        if (!isLightSide && (card.getValue() == Card.Value.DRAWFIVE || card.getValue() == Card.Value.SKIPALL)) {
+            return true;
         }
 
         return false;
     }
+
 
     /**
      * Calculates and returns the winner's score.

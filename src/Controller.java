@@ -431,6 +431,15 @@ public class Controller implements ActionListener {
                     gui.updatePlayerHand(game.getNextPlayer());
                 }
 
+            case DRAWONE:
+                nextPlayerIndex = (game.getCurrentTurn() + 1) % game.getPlayersInGame().size();
+                nextPlayer = game.getPlayersInGame().get(nextPlayerIndex);
+
+                nextPlayer.drawCard(game.getTheDeck());
+
+                gui.updatePlayerHand(nextPlayer);
+
+                break;
         }
     }
 
