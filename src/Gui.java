@@ -358,4 +358,11 @@ public class Gui {
         handPanel.repaint();
     }
 
+    public JPanel getTopCardPanel() {
+        return topCardPanel;
+    }
+
+    public JPanel getHandPanel() {
+        return handPanel;
+    }
 }

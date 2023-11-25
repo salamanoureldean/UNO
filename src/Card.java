@@ -38,101 +38,95 @@ public class Card {
             this.isLightSide = !this.isLightSide;
 
             //update card appearance here.
-            switchDarkSide();
+            switchDarkSide(gameIsLightSide);
             String filePath = "dark\\" + getFileNameForCard(this.value, this.color) + ".png";
             ImageIcon icon = new ImageIcon(filePath);
             this.cardButton.setIcon(icon);
             //my changes-----------------------------------------
             this.cardButton.setText(stringCard());
-            this.cardButton.revalidate();
-            this.cardButton.repaint();
-
-            this.cardButton.setEnabled(false);
-            this.cardButton.setVisible(false);
+            this.cardButton.setEnabled(true);
+            this.cardButton.setVisible(true);
 
 
         }
         else{
-            switchLightSide();
+            switchLightSide(gameIsLightSide);
             String filePath = "small\\" + getFileNameForCard(this.value, this.color) + ".png";
             ImageIcon icon = new ImageIcon(filePath);
             this.cardButton.setIcon(icon);
             //my changes----------------------------------------------------
             this.cardButton.setText(stringCard());
-            this.cardButton.revalidate();
-            this.cardButton.repaint();
-
-            this.cardButton.setEnabled(false);
-            this.cardButton.setVisible(false);
+            this.cardButton.setEnabled(true);
+            this.cardButton.setVisible(true);
         }
     }
 
-    public void switchDarkSide(){
+    public void switchDarkSide(boolean gameIsLightSide){
         if(value == Value.WILD){
-            this.value = Value.WILDDARK;
+            value = Value.WILDDARK;
         }
         else if(value == Value.WILDDRAWTWO){
-            this.value = Value.WILDDRAWCOLOR;
+            value = Value.WILDDRAWCOLOR;
         }
         else if (value == Value.SKIP){
-            this.value = Value.SKIPALL;
-            darkLightColorSwitch();
+            value = Value.SKIPALL;
+            darkLightColorSwitch(gameIsLightSide);
         }
         else if(value == Value.DRAWONE){
-            this.value = Value.DRAWFIVE;
-            darkLightColorSwitch();
+            value = Value.DRAWFIVE;
+            darkLightColorSwitch(gameIsLightSide);
         }
         else {
-            darkLightColorSwitch();
+            darkLightColorSwitch(gameIsLightSide);
         }
     }
-    public void switchLightSide(){
-        if(value == Value.WILDDARK){
-            this.value = Value.WILD;
+    public void switchLightSide(boolean gameIsLightSide){
+        if(value.equals(Value.WILDDARK)){
+            value = Value.WILD;
         }
-        else if(value == Value.WILDDRAWCOLOR){
-            this.value = Value.WILDDRAWTWO;
+        else if(value.equals(Value.WILDDRAWCOLOR)){
+            value = Value.WILDDRAWTWO;
         }
-        else if (value == Value.SKIPALL){
-            this.value = Value.SKIP;
-            darkLightColorSwitch();
+        else if (value.equals(Value.SKIPALL)){
+            value = Value.SKIP;
+            darkLightColorSwitch(gameIsLightSide);
         }
-        else if(value == Value.DRAWFIVE){
-            this.value = Value.DRAWONE;
-            darkLightColorSwitch();
+        else if(value.equals(Value.DRAWFIVE)){
+            value = Value.DRAWONE;
+            darkLightColorSwitch(gameIsLightSide);
         }
         else {
-            darkLightColorSwitch();
+            darkLightColorSwitch(gameIsLightSide);
         }
     }
 
-    public void darkLightColorSwitch(){
-        if(this.isLightSide == false){
-            if(this.color == Color.RED){
-                this.color = Color.ORANGE;
+    public void darkLightColorSwitch(boolean gameIsLightSide){
+        if(this.isLightSide != gameIsLightSide){
+            if(color.equals(Color.RED)){
+                color = Color.ORANGE;
             }
-            else if(this.color == Color.YELLOW){
-                this.color = Color.TEAL;
+            else if(color.equals(Color.YELLOW)){
+                color = Color.TEAL;
             }
-            else if(this.color == Color.GREEN){
-                this.color = Color.PINK;
+            else if(color.equals(Color.GREEN)){
+                color = Color.PINK;
             }
-            else if(this.color == Color.BLUE){
-                this.color = Color.PURPLE;
+            else if(color.equals(Color.BLUE)){
+                color = Color.PURPLE;
             }
         }
         else{
-            if(this.color == Color.ORANGE){
-                this.color = Color.RED;
+            if(color.equals(Color.ORANGE)){
+                color = Color.RED;
             }
-            else if(this.color == Color.TEAL){
-                this.color = Color.YELLOW;
+            else if(color.equals(Color.TEAL)){
+                color = Color.YELLOW;
             }
-            else if(this.color == Color.PINK){
-                this.color = Color.GREEN;
+            else if(color.equals(Color.PINK)){
+                color = Color.GREEN;
             }
-            else if(this.color == Color.PURPLE){
-                this.color = Color.BLUE;
+            else if(color.equals(Color.PURPLE)){
+                color = Color.BLUE;
             }
 
         }

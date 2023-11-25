@@ -238,6 +238,8 @@ public class Controller implements ActionListener {
      * @param playedCard The card that has been played and whose functionality is to be executed.
      */
     public void cardFunctionality(Card playedCard) {
+        int nextPlayerIndex = (game.getCurrentTurn() + 1) % game.getPlayersInGame().size();
+        Player nextPlayer = game.getPlayersInGame().get(nextPlayerIndex);
         Card.Value cardValue = playedCard.getValue();
         //Card.Color cardColor = playedCard.getColor();
         String newColor;
@@ -298,10 +300,6 @@ public class Controller implements ActionListener {
                 }
                 break;
             case WILDDRAWTWO:
-                // Getting next player's index in order to make them draw two cards
-                int nextPlayerIndex = (game.getCurrentTurn() + 1) % game.getPlayersInGame().size();
-                Player nextPlayer = game.getPlayersInGame().get(nextPlayerIndex);
-
                 // Changing current color of cards being played based on user input
                 frame.setVisible(true);
                 newColor = (String) JOptionPane.showInputDialog(frame,
@@ -362,6 +360,8 @@ public class Controller implements ActionListener {
 
                     //flip the current flip card (that has been played) to display new color
                     playedCard.flipCard(currentGameState);
+                    gui.updatePlayerHand(nextPlayer);
+                    gui.updateCurrentCard(playedCard);
 
                     // my changes---------------------------------------------------------
 
