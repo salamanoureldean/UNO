@@ -42,6 +42,11 @@ public class Card {
             String filePath = "dark\\" + getFileNameForCard(this.value, this.color) + ".png";
             ImageIcon icon = new ImageIcon(filePath);
             this.cardButton.setIcon(icon);
+            //my changes-----------------------------------------
+            this.cardButton.setText(stringCard());
+            this.cardButton.revalidate();
+            this.cardButton.repaint();
+
             this.cardButton.setEnabled(false);
             this.cardButton.setVisible(false);
 
@@ -52,6 +57,11 @@ public class Card {
             String filePath = "small\\" + getFileNameForCard(this.value, this.color) + ".png";
             ImageIcon icon = new ImageIcon(filePath);
             this.cardButton.setIcon(icon);
+            //my changes----------------------------------------------------
+            this.cardButton.setText(stringCard());
+            this.cardButton.revalidate();
+            this.cardButton.repaint();
+
             this.cardButton.setEnabled(false);
             this.cardButton.setVisible(false);
         }
@@ -59,17 +69,17 @@ public class Card {
 
     public void switchDarkSide(){
         if(value == Value.WILD){
-            value = Value.WILDDARK;
+            this.value = Value.WILDDARK;
         }
         else if(value == Value.WILDDRAWTWO){
-            value = Value.WILDDRAWCOLOR;
+            this.value = Value.WILDDRAWCOLOR;
         }
         else if (value == Value.SKIP){
-            value = Value.SKIPALL;
+            this.value = Value.SKIPALL;
             darkLightColorSwitch();
         }
         else if(value == Value.DRAWONE){
-            value = Value.DRAWFIVE;
+            this.value = Value.DRAWFIVE;
             darkLightColorSwitch();
         }
         else {
@@ -78,17 +88,17 @@ public class Card {
     }
     public void switchLightSide(){
         if(value == Value.WILDDARK){
-            value = Value.WILD;
+            this.value = Value.WILD;
         }
         else if(value == Value.WILDDRAWCOLOR){
-            value = Value.WILDDRAWTWO;
+            this.value = Value.WILDDRAWTWO;
         }
         else if (value == Value.SKIPALL){
-            value = Value.SKIP;
+            this.value = Value.SKIP;
             darkLightColorSwitch();
         }
         else if(value == Value.DRAWFIVE){
-            value = Value.DRAWONE;
+            this.value = Value.DRAWONE;
             darkLightColorSwitch();
         }
         else {
@@ -98,31 +108,31 @@ public class Card {
 
     public void darkLightColorSwitch(){
         if(this.isLightSide == false){
-            if(color == Color.RED){
-                color = Color.ORANGE;
+            if(this.color == Color.RED){
+                this.color = Color.ORANGE;
             }
-            else if(color == Color.YELLOW){
-                color = Color.TEAL;
+            else if(this.color == Color.YELLOW){
+                this.color = Color.TEAL;
             }
-            else if(color == Color.GREEN){
-                color = Color.PINK;
+            else if(this.color == Color.GREEN){
+                this.color = Color.PINK;
             }
-            else if(color == Color.BLUE){
-                color = Color.PURPLE;
+            else if(this.color == Color.BLUE){
+                this.color = Color.PURPLE;
             }
         }
         else{
-            if(color == Color.ORANGE){
-                color = Color.RED;
+            if(this.color == Color.ORANGE){
+                this.color = Color.RED;
             }
-            else if(color == Color.TEAL){
-                color = Color.YELLOW;
+            else if(this.color == Color.TEAL){
+                this.color = Color.YELLOW;
             }
-            else if(color == Color.PINK){
-                color = Color.GREEN;
+            else if(this.color == Color.PINK){
+                this.color = Color.GREEN;
             }
-            else if(color == Color.PURPLE){
-                color = Color.BLUE;
+            else if(this.color == Color.PURPLE){
+                this.color = Color.BLUE;
             }
 
         }

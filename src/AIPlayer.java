@@ -108,8 +108,8 @@ public class AIPlayer extends Player {
             if (this.getHand().getCards().get(i).getValue() == currentCard.getValue() || this.getHand().getCards().get(i).getColor() == currentCard.getColor()) {
                 playCard(this.getHand().getCards().get(i), game);
                 break;
-         }
-    }
+            }
+        }
     }
 
     public Card.Color changeWildColor() {

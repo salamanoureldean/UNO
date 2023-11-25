@@ -363,7 +363,15 @@ public class Controller implements ActionListener {
                     //flip the current flip card (that has been played) to display new color
                     playedCard.flipCard(currentGameState);
 
+                    // my changes---------------------------------------------------------
+
                     //update gui later
+                    Player currentPlayer = game.getCurrentPlayer();
+                    //gui.updatePlayerHand(currentPlayer);
+                    for(Player player: game.getPlayersInGame()){
+                        gui.updatePlayerHand(currentPlayer);
+                    }
+                    gui.updateCurrentCard(playedCard);
                 }
                 break;
 
