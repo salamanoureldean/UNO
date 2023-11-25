@@ -76,6 +76,7 @@ public class Controller implements ActionListener {
             gui.updateAIHand((AIPlayer) currentPlayer);
             ((AIPlayer)currentPlayer).makeMove(game.getCurrentCard(), game);
             gui.updateCurrentCard(game.getCurrentCard());
+            cardFunctionality(game.getCurrentCard());
 
             checkForGameWinner();
         } else {
@@ -113,8 +114,7 @@ public class Controller implements ActionListener {
                     JOptionPane.ERROR_MESSAGE);
         }
         if (game.getCurrentPlayer() instanceof AIPlayer) {
-            gui.getDrawCardButton().setEnabled(false);
-            gui.getNextPlayerButton().setEnabled(true);
+            handleSuccessfulCardPlacement();
         }
 
     }
