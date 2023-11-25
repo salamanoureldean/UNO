@@ -54,17 +54,8 @@ public class MainMenuGUI extends JFrame {
         button.setForeground(Color.WHITE);
 
         switch (buttonText) {
-            case "Play":
-                button.setBackground(Color.GREEN);
-                break;
-            case "Rules":
-                button.setBackground(Color.BLUE);
-                break;
-            case "Quit":
-                button.setBackground(Color.RED);
-                break;
-            case "Help":
-                button.setBackground(Color.ORANGE);
+            case "Play", "Help", "Rules", "Quit":
+                button.setBackground(Color.blue);
                 break;
         }
 
