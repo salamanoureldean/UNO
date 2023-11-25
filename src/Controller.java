@@ -245,6 +245,8 @@ public class Controller implements ActionListener {
         String newColor;
         JFrame frame = new JFrame();
         String[] choose = {"Red","Green","Blue","Yellow"};
+        //dark color selection
+        String[] chooseDark = {"Pink", "Purple", "Teal", "Orange"};
 
         switch (cardValue) {
             case REVERSE:
@@ -394,24 +396,24 @@ public class Controller implements ActionListener {
                         "Color selection",
                         JOptionPane.PLAIN_MESSAGE,
                         null,
-                        choose,
+                        chooseDark,
                         0);
 
-                if (newColor != null && newColor.equals("Red")) {
-                    game.getCurrentCard().setColor(Card.Color.RED);
-                    gui.getStatusTextArea().setText("The color has been changed to red");
+                if (newColor != null && newColor.equals("Pink")) {
+                    game.getCurrentCard().setColor(Card.Color.PINK);
+                    gui.getStatusTextArea().setText("The color has been changed to pink");
                 }
-                else if (newColor != null && newColor.equals("Green")) {
-                    game.getCurrentCard().setColor(Card.Color.GREEN);
-                    gui.getStatusTextArea().setText("The color has changed to green");
+                else if (newColor != null && newColor.equals("Purple")) {
+                    game.getCurrentCard().setColor(Card.Color.PURPLE);
+                    gui.getStatusTextArea().setText("The color has changed to purple");
                 }
-                else if (newColor != null && newColor.equals("Blue")) {
-                    game.getCurrentCard().setColor(Card.Color.BLUE);
-                    gui.getStatusTextArea().setText("The color has changed to blue");
+                else if (newColor != null && newColor.equals("Teal")) {
+                    game.getCurrentCard().setColor(Card.Color.TEAL);
+                    gui.getStatusTextArea().setText("The color has changed to teal");
                 }
-                else if (newColor != null && newColor.equals("Yellow")) {
-                    game.getCurrentCard().setColor(Card.Color.YELLOW);
-                    gui.getStatusTextArea().setText("The color has been changed to yellow.");
+                else if (newColor != null && newColor.equals("Orange")) {
+                    game.getCurrentCard().setColor(Card.Color.ORANGE);
+                    gui.getStatusTextArea().setText("The color has been changed to orange.");
                 }
                 else {
                     game.getCurrentCard().setColor(game.getCurrentCard().getColor());
@@ -432,6 +434,7 @@ public class Controller implements ActionListener {
 
                     gui.updatePlayerHand(game.getNextPlayer());
                 }
+                break;
 
             case DRAWONE:
                 nextPlayerIndex = (game.getCurrentTurn() + 1) % game.getPlayersInGame().size();

@@ -141,17 +141,22 @@ public class Game {
             return true;
         }
 
-        if (card.getValue() == Card.Value.FLIP) {
+        if (card.getValue() == Card.Value.FLIP && currentCard.getColor().equals(card.getColor())) {
             return true;
         }
 
         // draw one
-        if (isLightSide && card.getValue() == Card.Value.DRAWONE) {
-            return card.getColor() == currentCard.getColor();
+        if (isLightSide && card.getValue() == Card.Value.DRAWONE && card.getColor() == currentCard.getColor()) {
+            return true;
         }
 
         //check dark specific cards
-        if (!isLightSide && (card.getValue() == Card.Value.DRAWFIVE || card.getValue() == Card.Value.SKIPALL)) {
+        if (!isLightSide && card.getColor() == currentCard.getColor() && (card.getValue() == Card.Value.DRAWFIVE || card.getValue() == Card.Value.SKIPALL)) {
+            return true;
+        }
+
+        // wild draw color and wild dark
+        if (!isLightSide && (card.getValue() == Card.Value.WILDDRAWCOLOR || card.getValue() == Card.Value.WILDDARK)) {
             return true;
         }
 
