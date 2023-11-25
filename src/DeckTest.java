@@ -62,8 +62,8 @@ public class DeckTest {
     }
     @Test
     public void test_Place(){
-        Card card1 = new Card(Card.Value.ZERO, Card.Color.RED);
-        Card card2 = new Card(Card.Value.ZERO, Card.Color.GREEN);
+        Card card1 = new Card(Card.Value.ONE, Card.Color.RED);
+        Card card2 = new Card(Card.Value.ONE, Card.Color.GREEN);
         deck = new Deck();
         deck.place(card1);
         deck.place(card2);

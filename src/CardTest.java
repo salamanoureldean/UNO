@@ -25,8 +25,8 @@ public class CardTest {
 
     @Test
     public void test_defaultCardConstructor(){
-        Card card = new Card(Card.Value.ZERO, Card.Color.BLUE);
-        assertEquals(Card.Value.ZERO, card.getValue());
+        Card card = new Card(Card.Value.ONE, Card.Color.BLUE);
+        assertEquals(Card.Value.ONE, card.getValue());
         assertEquals(Card.Color.BLUE, card.getColor());
     }
 
@@ -39,19 +39,19 @@ public class CardTest {
 
     @Test
     public void test_getValue(){
-        Card card = new Card(Card.Value.ZERO, Card.Color.BLUE);
-        assertEquals(Card.Value.ZERO, card.getValue());
+        Card card = new Card(Card.Value.ONE, Card.Color.BLUE);
+        assertEquals(Card.Value.ONE, card.getValue());
     }
 
     @Test
     public void test_getColor(){
-        Card card = new Card(Card.Value.ZERO, Card.Color.BLUE);
+        Card card = new Card(Card.Value.ONE, Card.Color.BLUE);
         assertEquals(Card.Color.BLUE, card.getColor());
     }
 
     @Test
     public void test_setColor(){
-        Card card = new Card(Card.Value.ZERO, Card.Color.BLUE);
+        Card card = new Card(Card.Value.ONE, Card.Color.BLUE);
         card.setColor(Card.Color.RED);
         assertEquals(Card.Color.RED, card.getColor());
     }

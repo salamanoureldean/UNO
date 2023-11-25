@@ -17,12 +17,6 @@ public class Deck {
      * Constructor for deck class that initializes every that will be used in the game
      */
     public Deck(){
-        //Zeros
-        initialize(1, Card.Color.RED, Card.Value.ZERO);
-        initialize(1, Card.Color.BLUE, Card.Value.ZERO);
-        initialize(1, Card.Color.GREEN, Card.Value.ZERO);
-        initialize(1, Card.Color.YELLOW, Card.Value.ZERO);
-
         //Reds
         initialize(2, Card.Color.RED, Card.Value.ONE);
         initialize(2, Card.Color.RED, Card.Value.TWO);

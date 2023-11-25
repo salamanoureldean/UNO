@@ -344,32 +344,26 @@ public class Controller implements ActionListener {
             case FLIP:
                 if(game.isPlayable(playedCard)){
                     game.flipGameState();
-                    boolean currentGameState = game.getGameState();
+                    //boolean currentGameState = game.getGameState();
 
                     //flip the complete deck so that when a card is drawn, it is a dark/light card according to the gameState
                     for(Card card: game.getTheDeck().getCompleteDeck()){
-                        card.flipCard(currentGameState);
+                        card.flipCard();
                     }
 
                     //flip each player's hand
                     for(Player player : game.getPlayersInGame()) {
                         for (Card card : player.getHand().getCards()) {
-                            card.flipCard(currentGameState);
+                            card.flipCard();
                         }
                     }
 
                     //flip the current flip card (that has been played) to display new color
-                    playedCard.flipCard(currentGameState);
-                    gui.updatePlayerHand(nextPlayer);
-                    gui.updateCurrentCard(playedCard);
+                    playedCard.flipCard();
 
-                    // my changes---------------------------------------------------------
-
-                    //update gui later
-                    Player currentPlayer = game.getCurrentPlayer();
                     //gui.updatePlayerHand(currentPlayer);
                     for(Player player: game.getPlayersInGame()){
-                        gui.updatePlayerHand(currentPlayer);
+                        gui.updatePlayerHand(player);
                     }
                     gui.updateCurrentCard(playedCard);
                 }

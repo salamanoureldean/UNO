@@ -75,9 +75,4 @@ public class Hand {
      */
     public ArrayList<Card> getCards(){return cards;}
 
-    public void changeCardMode(boolean mode){
-        for(Card card: cards){
-            card.flipCard(mode);
-        }
-    }
 }

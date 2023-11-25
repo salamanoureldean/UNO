@@ -36,7 +36,7 @@ public class Game {
             playersInGame.add(new AIPlayer(aiName, theDeck)); // Assuming AIPlayer extends Player
         }
 
-
+        isLightSide = true;
         currentCard = theDeck.draw();
 
     }
@@ -130,7 +130,7 @@ public class Game {
      */
     public boolean isPlayable(Card card) {
         // Check for color or value match
-        if (currentCard.getColor() == card.getColor() || currentCard.getValue() == card.getValue()) {
+        if (currentCard.getColor().equals(card.getColor()) || currentCard.getValue().equals(card.getValue())) {
             return true;
         }
 

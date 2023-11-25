@@ -6,13 +6,14 @@ import javax.swing.*;
  * @version: 1.00
  */
 public class Card {
-    enum Value{ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, REVERSE, SKIP, DRAWONE, WILD, WILDDRAWTWO, FLIP, DRAWFIVE, SKIPALL, WILDDRAWCOLOR, WILDDARK};
+    enum Value{ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, REVERSE, SKIP, DRAWONE, WILD, WILDDRAWTWO, FLIP, DRAWFIVE, SKIPALL, WILDDRAWCOLOR, WILDDARK};
     public enum Color{RED, GREEN, BLUE, YELLOW, BLANK, PINK, PURPLE, TEAL, ORANGE};
 
     private Value value;
     private Color color;
     private JButton cardButton;
     private boolean isLightSide;
+    private boolean gameIsLightSide = true;
 
 
     /**
@@ -31,14 +32,14 @@ public class Card {
         this.cardButton.setIcon(icon);
         this.cardButton.setEnabled(false);
         this.cardButton.setVisible(false);
+        isLightSide = false;
     }
 
-    public void flipCard(boolean gameIsLightSide){
-        if(this.isLightSide != gameIsLightSide){
-            this.isLightSide = !this.isLightSide;
+    public void flipCard(){
+        if(this.isLightSide != true){
 
             //update card appearance here.
-            switchDarkSide(gameIsLightSide);
+            switchDarkSide();
             String filePath = "dark\\" + getFileNameForCard(this.value, this.color) + ".png";
             ImageIcon icon = new ImageIcon(filePath);
             this.cardButton.setIcon(icon);
@@ -46,11 +47,11 @@ public class Card {
             this.cardButton.setText(stringCard());
             this.cardButton.setEnabled(true);
             this.cardButton.setVisible(true);
-
+            this.isLightSide = !this.isLightSide;
 
         }
         else{
-            switchLightSide(gameIsLightSide);
+            switchLightSide();
             String filePath = "small\\" + getFileNameForCard(this.value, this.color) + ".png";
             ImageIcon icon = new ImageIcon(filePath);
             this.cardButton.setIcon(icon);
@@ -58,10 +59,11 @@ public class Card {
             this.cardButton.setText(stringCard());
             this.cardButton.setEnabled(true);
             this.cardButton.setVisible(true);
+            this.isLightSide = !this.isLightSide;
         }
     }
 
-    public void switchDarkSide(boolean gameIsLightSide){
+    public void switchDarkSide( ){
         if(value == Value.WILD){
             value = Value.WILDDARK;
         }
@@ -70,17 +72,17 @@ public class Card {
         }
         else if (value == Value.SKIP){
             value = Value.SKIPALL;
-            darkLightColorSwitch(gameIsLightSide);
+            darkLightColorSwitch();
         }
         else if(value == Value.DRAWONE){
             value = Value.DRAWFIVE;
-            darkLightColorSwitch(gameIsLightSide);
+            darkLightColorSwitch();
         }
         else {
-            darkLightColorSwitch(gameIsLightSide);
+            darkLightColorSwitch();
         }
     }
-    public void switchLightSide(boolean gameIsLightSide){
+    public void switchLightSide(){
         if(value.equals(Value.WILDDARK)){
             value = Value.WILD;
         }
@@ -89,19 +91,19 @@ public class Card {
         }
         else if (value.equals(Value.SKIPALL)){
             value = Value.SKIP;
-            darkLightColorSwitch(gameIsLightSide);
+            darkLightColorSwitch();
         }
         else if(value.equals(Value.DRAWFIVE)){
             value = Value.DRAWONE;
-            darkLightColorSwitch(gameIsLightSide);
+            darkLightColorSwitch();
         }
         else {
-            darkLightColorSwitch(gameIsLightSide);
+            darkLightColorSwitch();
         }
     }
 
-    public void darkLightColorSwitch(boolean gameIsLightSide){
-        if(this.isLightSide != gameIsLightSide){
+    public void darkLightColorSwitch(){
+        if(this.isLightSide == false){
             if(color.equals(Color.RED)){
                 color = Color.ORANGE;
             }
