@@ -229,14 +229,15 @@ public class Gui {
     public void updatePlayerHand(Player player) {
         handPanel.removeAll();
         for (Card card : player.getHand().getCards()) {
-            card.getCardButton().setVisible(true);
-            card.getCardButton().setEnabled(true);
-            handPanel.add(card.getCardButton());
+            JButton cardButton = card.getCardButton();
+            cardButton.setVisible(true);
+            cardButton.setEnabled(true);
+            handPanel.add(cardButton);
         }
         handPanel.revalidate();
         handPanel.repaint();
-
     }
+
 
     /**
      * Disables the buttons in the player's hand.
@@ -264,15 +265,30 @@ public class Gui {
      *
      * @param card The card to be displayed.
      */
-    public void updateCurrentCard(Card card){
-        topCardPanel.removeAll();
-        topCardPanel.add(card.getCardButton());
+    public void updateCurrentCard(Card card) {
+        SwingUtilities.invokeLater(() -> {
+            topCardPanel.removeAll();
 
-        card.getCardButton().setVisible(true);
-        topCardPanel.revalidate();
-        topCardPanel.repaint();
+            JButton cardButton = card.getCardButton();
+            if (cardButton != null) {
+                cardButton.setVisible(true);
+                cardButton.setEnabled(true);
+                topCardPanel.add(cardButton);
 
+                // Optionally, add padding or alignment for better presentation
+                topCardPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+                topCardPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+            } else {
+                // Handle the case where card button is not available
+                System.err.println("Card button is null for card: " + card);
+            }
+
+            topCardPanel.revalidate();
+            topCardPanel.repaint();
+        });
     }
+
+
 
     /**
      * Adds the latest card to the player's hand display.
@@ -324,6 +340,22 @@ public class Gui {
             return  true;
         }
         return false;
+    }
+
+    public void updateAIHand(AIPlayer aiPlayer) {
+        handPanel.removeAll();
+
+        for (Card card : aiPlayer.getHand().getCards()) {
+            JButton cardButton = new JButton(card.stringCard());
+            String filePath = "small\\" + card.getFileNameForCard(card.getValue(), card.getColor()) + ".png";
+            ImageIcon icon = new ImageIcon(filePath);
+            cardButton.setIcon(icon);
+            cardButton.setEnabled(false);
+            handPanel.add(cardButton);
+        }
+
+        handPanel.revalidate();
+        handPanel.repaint();
     }
 
 }

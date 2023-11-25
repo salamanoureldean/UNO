@@ -173,7 +173,7 @@ public class Card {
      * @param color The color of the card.
      * @return The file name for the card's image.
      */
-    private String getFileNameForCard(Value value, Color color) {
+    public String getFileNameForCard(Value value, Color color) {
         return color.toString().toLowerCase() + "_" + value.toString().toLowerCase();
     }
 

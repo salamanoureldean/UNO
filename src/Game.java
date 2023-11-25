@@ -187,9 +187,8 @@ public class Game {
      *
      * @return The index of the next player.
      */
-    public int nextPlayer() {
+    public void nextPlayer() {
         currentTurn = (currentTurn+1) % playersInGame.size();
-        return currentTurn;
     }
 
     /**

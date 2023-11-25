@@ -49,21 +49,13 @@ public class Controller implements ActionListener {
      * enables the next player button, updates the status display, and disables the player's hand.
      */
     private void handleDrawCardAction() {
-        try {
-            if (game.addCardToHand()) {
-                gui.addLatestCardToHandDisplay();
-            }
-            gui.getDrawCardButton().setEnabled(false);
-            gui.getNextPlayerButton().setEnabled(true);
-            gui.updateStatusDraw(game.getCurrentPlayer());
-            gui.disableHand();
-        } catch (Exception ex) {
-            ex.printStackTrace(); // Or use logging
-            JOptionPane.showMessageDialog(gui.getGameFrame(),
-                    "Error occurred in Draw Card action: " + ex.getMessage(),
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
+        if (game.addCardToHand()) {
+            gui.addLatestCardToHandDisplay();
         }
+        gui.getDrawCardButton().setEnabled(false);
+        gui.getNextPlayerButton().setEnabled(true);
+        gui.updateStatusDraw(game.getCurrentPlayer());
+        gui.disableHand();
     }
 
     /**
@@ -73,12 +65,31 @@ public class Controller implements ActionListener {
      */
     private void handleNextPlayerAction() {
         game.nextPlayer();
+        processTurn();
+    }
+
+    private void processTurn(){
+        Player currentPlayer = game.getCurrentPlayer();
         gui.updatePlayerTurnLabel(game.getCurrentTurn());
-        gui.updatePlayerHand(game.getCurrentPlayer());
-        gui.getDrawCardButton().setEnabled(true);
-        gui.getNextPlayerButton().setEnabled(false);
+        if (currentPlayer instanceof AIPlayer) {
+            //AI
+            gui.updateAIHand((AIPlayer) currentPlayer);
+            ((AIPlayer)currentPlayer).makeMove(game.getCurrentCard(), game);
+            gui.updateCurrentCard(game.getCurrentCard());
+
+            checkForGameWinner();
+        } else {
+            //Human
+            gui.updatePlayerTurnLabel(game.getCurrentTurn());
+            gui.updatePlayerHand(game.getCurrentPlayer());
+            gui.getDrawCardButton().setEnabled(true);
+            gui.getNextPlayerButton().setEnabled(false);
+        }
+
+        // Update the status
         gui.getStatusTextArea().setText("Current Card: " + game.getCurrentCard().stringCard());
     }
+
 
     /**
      * Handles the action triggered by selecting a card button. It identifies the
@@ -101,6 +112,11 @@ public class Controller implements ActionListener {
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
         }
+        if (game.getCurrentPlayer() instanceof AIPlayer) {
+            gui.getDrawCardButton().setEnabled(false);
+            gui.getNextPlayerButton().setEnabled(true);
+        }
+
     }
 
     /**

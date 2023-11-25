@@ -26,26 +26,18 @@ public class AIPlayer extends Player {
         }
 
         else {
-            drawCard(game.getTheDeck());
+            game.addCardToHand();
         }
     }
-
-
-
-
-
-
-
 
     private void playCard(Card card, Game game) {
         //check if the card is wildcard, if it is then set color of wildcard aswell.
         if (card.getValue() == Card.Value.WILD || card.getValue() == Card.Value.WILDDRAWTWO) {
             card.setColor(changeWildColor());
         }
-        //place the card
-        this.getHand().removeCard(card);
-        game.setCurrentCard(card);
 
+        game.removeCardFromHand(card);
+        game.setCurrentCard(card);
     }
 
     private void aiHasOneCardLeft(Card card, Game game){
@@ -116,8 +108,8 @@ public class AIPlayer extends Player {
             if (this.getHand().getCards().get(i).getValue() == currentCard.getValue() || this.getHand().getCards().get(i).getColor() == currentCard.getColor()) {
                 playCard(this.getHand().getCards().get(i), game);
                 break;
-            }
-        }
+         }
+    }
     }
 
     public Card.Color changeWildColor() {
