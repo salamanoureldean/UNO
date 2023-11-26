@@ -413,7 +413,7 @@ public class Controller implements ActionListener {
                     cardFunctionality(playedCard);
                     gui.getStatusTextArea().setText("Please select the wild card again");
                 }
-
+//comment
                 currentPlayer = game.getCurrentPlayer();
                 Card.Color chosenColor = convertStringToColor(newColor);
 
