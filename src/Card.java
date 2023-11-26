@@ -207,4 +207,9 @@ public class Card {
     public JButton getCardButton() {
         return cardButton;
     }
+
+    public boolean isWild() {
+        return this.value == Value.WILD || this.value == Value.WILDDRAWTWO || this.value == Value.WILDDARK || this.value == Value.WILDDRAWCOLOR;
+    }
+
 }

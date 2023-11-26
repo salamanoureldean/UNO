@@ -69,31 +69,36 @@ public class Controller implements ActionListener {
         processTurn();
     }
 
-    private void processTurn(){
+    private void processTurn() {
         Player currentPlayer = game.getCurrentPlayer();
         gui.updatePlayerTurnLabel(game.getCurrentTurn());
 
         if (currentPlayer instanceof AIPlayer) {
-            //AI
-            gui.updateAIHand((AIPlayer) currentPlayer);
-            ((AIPlayer)currentPlayer).makeMove(game.getCurrentCard(), game);
-            if(game.addCardToHand()){
+            AIPlayer aiPlayer = (AIPlayer) currentPlayer;
+            gui.updateAIHand(aiPlayer);
+
+            boolean shouldDrawCard = aiPlayer.shouldDrawCard(game.getCurrentCard(), game);
+            if (shouldDrawCard) {
+                game.addCardToHand();
                 handleDrawCardAction();
+            } else {
+                aiPlayer.makeMove(game.getCurrentCard(), game);
             }
+
             gui.updateCurrentCard(game.getCurrentCard());
-            gui.updateAIHand((AIPlayer) currentPlayer);
-            checkForGameWinner();
+            gui.updateAIHand(aiPlayer);
+
         } else {
-            //Human
-            gui.updatePlayerTurnLabel(game.getCurrentTurn());
+            // Human player logic
             gui.updatePlayerHand(game.getCurrentPlayer());
             gui.getDrawCardButton().setEnabled(true);
             gui.getNextPlayerButton().setEnabled(false);
         }
 
-        // Update the status
         gui.getStatusTextArea().setText("Current Card: " + game.getCurrentCard().stringCard());
+        checkForGameWinner();
     }
+
 
 
     /**

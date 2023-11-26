@@ -22,10 +22,25 @@ public class AIPlayer extends Player {
         else if (game.getNextPlayer().getHand().getCards().size()>2){
             playFirstPlayableCard(currentCard, game);
         }
-        else {
-            game.addCardToHand();
-        }
     }
+
+    public boolean shouldDrawCard(Card currentCard, Game game) {
+        // Check if there's a playable card
+        for (Card card : this.getHand().getCards()) {
+            if (isPlayable(card, currentCard)) {
+                return false; // Don't draw
+            }
+        }
+
+
+        return true; // Draw a card if no playable card
+    }
+
+    private boolean isPlayable(Card cardToPlay, Card currentCard) {
+        // Check if the card can be played on the current card
+        return cardToPlay.getColor() == currentCard.getColor() || cardToPlay.getValue() == currentCard.getValue() || cardToPlay.isWild();
+    }
+
 
 
     private void playCard(Card card, Game game) {
