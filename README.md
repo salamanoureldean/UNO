@@ -1,31 +1,33 @@
-# Uno Card Game
+# Uno FLip Card Game
 
-Uno Card Game is a Java GUI-based implementation of the classic Uno card game. This updated README provides an overview of the game's GUI version, its features, instructions on how to play, and the technicalities involved in the GUI and game logic.
+The Uno Flip Card Game is an enhanced Java GUI-based implementation of the classic Uno game, integrating the exciting Uno Flip variant. This README provides an overview of the Uno Flip game's GUI version, highlighting its unique features, game rules, instructions on how to play, and the technicalities involved in the GUI and game logic.
 
 ## Table of Contents
 - [Features](#features)
 - [Game Rules](#game-rules)
 - [Getting Started](#getting-started)
 - [How to Play](#how-to-play)
-- [Challenging Wild Draw Twos](#challenging-uno-calls)
+- [Challenging UNO Flip Rules](#challenging-uno-flip-rules)
 - [Contributing](#contributing)
 - [License](#license)
 
 ## Features
 
-- Supports 2 to 4 players with an interactive graphical user interface.
-- Implements standard Uno rules with additional GUI-based functionalities.
+- Supports 2 to 12 players with an interactive graphical user interface.
+- Combines standard Uno with the light and dark sides of Uno Flip, offering a dynamic gameplay experience.
 - Enhanced gameplay experience through mouse interactions in a JFrame environment.
 - Includes a "Next Player" button to facilitate controlled game progression.
+- Flip Card to switch between light and dark sides of the deck.
 - User-friendly and visually appealing design for an immersive playing experience.
 
 ## Game Rules
 
-Uno is a card game where the objective is to be the first player to get rid of all your cards. The game follows these basic rules:
+Uno Flip extends the classic Uno game with a twist, featuring dual-sided cards with a light side and a dark side, each with distinct rules and action cards. The objective remains to be the first player to get rid of all your cards. Key points include:
 
-- Players take turns playing a card that matches the color or value of the top card on the discard pile.
-- Special cards (e.g., Skip, Reverse, Wild) have unique effects.
-- Players can challenge Wild Draw Twos.
+- The Light Side features blue/green/yellow/red cards with action cards like Draw One, Wild Draw Two, and Flip.
+- The Dark Side introduces pink/teal/purple/orange cards with action cards like Draw Five, Wild Draw Color, and Flip.
+- Gameplay starts on the Light Side and switches sides through Flip cards.
+Players must match the topmost card on the discard pile by number, color, or symbol, depending on the side currently in play.
 
 ## Getting Started
 
@@ -53,17 +55,18 @@ The GUI will open, and you can start playing by following the on-screen instruct
 
 ## How to Play
 
-Uno Card Game can be played by 2 to 4 players. Here's how to play:
 1. Launch the game following the "Getting Started" instructions.
-2. Select the number of players from the main menu.
-3. The game begins with the GUI showing each player's hand and the current card in play.
-4. Players use the mouse to interact with the game, choosing to draw or play cards.
-5. Use the "Next Player" button to proceed to the next player's turn.
-6. The game continues until a player has no cards left.
+2. Select the number of players (2-10) from the main menu.
+3. Each player is dealt 7 cards, with gameplay beginning on the Light Side.
+4. Players match the top card of the discard pile in color, number, or symbol, depending on the current side.
+5. Action cards have various effects, such as drawing extra cards, skipping turns, reversing play directions, and flipping sides.
+6. If unable to play, draw a card from the draw pile. If it's playable, you may choose to play it or keep it.
+7. The round ends when a player has no cards left. Points are scored based on the cards remaining in other players' hands.
 
-## Challenging
-
-If a player plays a wild draw two, the next player can challenge it. If the next player wins, the person who initially played the wild draw two picks up 2 cards. If the current player wins, or the next player denies the challenge, the next player picks up 2 cards.
+## Challenging Uno Flip Rules
+Players can challenge Wild Draw Two and Wild Draw Color cards if they suspect the card was played illegally.
+In case of a successful challenge, the player who played the action card draws cards instead.
+If the challenge is unsuccessful, the challenger draws additional cards as per the rules of the challenged card.
 
 ## Contributing
 
