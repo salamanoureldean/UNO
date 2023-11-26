@@ -401,7 +401,10 @@ public class Controller implements ActionListener {
             case SKIPALL:
                 if (game.isPlayable(playedCard)){
                     int currentPlayerIndex = game.getCurrentTurn();
-                    game.setCurrentTurn(currentPlayerIndex);
+                    if(currentPlayerIndex-1 < 0){
+                        currentPlayerIndex = game.getPlayersInGame().size();
+                    }
+                    game.setCurrentTurn(currentPlayerIndex-1);
                 }
                 break;
 
