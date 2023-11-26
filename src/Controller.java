@@ -432,22 +432,48 @@ public class Controller implements ActionListener {
                     cardFunctionality(playedCard);
                     gui.getStatusTextArea().setText("Please select the wild card again");
                 }
-                boolean challengeResult = false;
+                ////----------------------------------------------------------------------------------
 
+                Player currentPlayer = game.getCurrentPlayer();
                 Card.Color chosenColor = convertStringToColor(newColor);
-                //if(!game.isPlayable(playedCard)){
-                    //challengeResult = handleWildDrawColorChallenge(playedCard, chosenColor);
-                //}
+
+                boolean challengeAccepted = promptForChallenge(nextPlayer);
+
+                if(challengeAccepted){
+                    if(currentPlayer.hasMatchingColorCards(chosenColor)){
+                        drawUntilColorFound(currentPlayer, chosenColor);
+                        break;
+                    }else {
+                        drawUntilColorFound(nextPlayer, chosenColor);
+                        nextPlayer.drawCard(game.getTheDeck());
+                        nextPlayer.drawCard(game.getTheDeck());
+                        gui.updatePlayerHand(nextPlayer);
+                        break;
+                    }
+                }
+                break;
+                /*
+
+                boolean challengeResult = promptForChallenge(game.getNextPlayer());
+
+
+
+
+                if(challengeResult){
+                    challengeResult = handleWildDrawColorChallenge(playedCard, chosenColor);
+                }
                 if (!challengeResult){
                     nextPlayerIndex = (game.getCurrentTurn() + 1) % game.getPlayersInGame().size();
                     nextPlayer = game.getPlayersInGame().get(nextPlayerIndex);
-                    //drawUntilColorFound(game.getNextPlayer(), chosenColor);
+
                     drawUntilColorFound(nextPlayer, chosenColor);
 
                     gui.updatePlayerHand(nextPlayer);
                     //game.nextPlayer();
                 }
                 break;
+                */
+
 
             case DRAWONE:
                 nextPlayerIndex = (game.getCurrentTurn() + 1) % game.getPlayersInGame().size();
