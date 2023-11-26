@@ -82,7 +82,8 @@ public class Controller implements ActionListener {
                 game.addCardToHand();
                 handleDrawCardAction();
             } else {
-                aiPlayer.makeMove(game.getCurrentCard(), game);
+                Card playedCard = aiPlayer.makeMove(game.getCurrentCard(), game);
+                cardFunctionality(playedCard);
             }
 
             gui.updateCurrentCard(game.getCurrentCard());
