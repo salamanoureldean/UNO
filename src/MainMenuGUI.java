@@ -54,7 +54,19 @@ public class MainMenuGUI extends JFrame {
         button.setForeground(Color.WHITE);
 
         switch (buttonText) {
-            case "Play", "Help", "Rules", "Quit":
+            case "Play":
+                button.setBackground(Color.blue);
+                break;
+            case "Help":
+                button.setBackground(Color.blue);
+                break;
+            case "Rules":
+                button.setBackground(Color.blue);
+                break;
+            case "Quit":
+                button.setBackground(Color.blue);
+                break;
+            default:
                 button.setBackground(Color.blue);
                 break;
         }
@@ -64,6 +76,7 @@ public class MainMenuGUI extends JFrame {
         button.setOpaque(true);
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
+
 
     private void rulesMenu() {
         JOptionPane.showMessageDialog(this, "Google the rules!", "Rules", JOptionPane.INFORMATION_MESSAGE);    }
