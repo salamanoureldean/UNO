@@ -9,6 +9,7 @@ public class Player {
     private boolean unoCalled;  // Indicates whether Uno has been called by the player
 
     private String name;
+
     /**
      * Constructs a new player with an empty hand, a score of 0, and Uno not called.
      */

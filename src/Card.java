@@ -38,12 +38,12 @@ public class Card {
     public void flipCard(){
         if(this.isLightSide != true){
 
-            //update card appearance here.
+
             switchDarkSide();
             String filePath = "dark\\" + getFileNameForCard(this.value, this.color) + ".png";
             ImageIcon icon = new ImageIcon(filePath);
             this.cardButton.setIcon(icon);
-            //my changes-----------------------------------------
+
             this.cardButton.setText(stringCard());
             this.cardButton.setEnabled(true);
             this.cardButton.setVisible(true);
@@ -55,7 +55,7 @@ public class Card {
             String filePath = "small\\" + getFileNameForCard(this.value, this.color) + ".png";
             ImageIcon icon = new ImageIcon(filePath);
             this.cardButton.setIcon(icon);
-            //my changes----------------------------------------------------
+
             this.cardButton.setText(stringCard());
             this.cardButton.setEnabled(true);
             this.cardButton.setVisible(true);

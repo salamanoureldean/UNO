@@ -12,8 +12,6 @@ public class Controller implements ActionListener {
     private Game game;
     private Gui gui;
     private boolean tf;
-    private boolean gameStart = true;
-    private int round =1;
 
     /**
      * Constructs a new Controller object that manages the interaction between the
@@ -36,10 +34,6 @@ public class Controller implements ActionListener {
      * @param e The ActionEvent triggered by a GUI component.
      */
     public void actionPerformed(ActionEvent e) {
-        round += 1;
-        if(round > 1){
-            gameStart = false;
-        }
         if (e.getSource() == gui.getDrawCardButton()) {
             handleDrawCardAction();
         } else if (e.getSource() == gui.getNextPlayerButton()) {
@@ -163,6 +157,7 @@ public class Controller implements ActionListener {
         if (gui.removeCardFromHand(card)) {
             cardFunctionality(card);
             handleSuccessfulCardPlacement();
+            gui.disableHand();
         } else {
             //SHOW INVALID MOVE IN STATUS
             gui.getStatusTextArea().setText("Invalid Move!");
@@ -371,7 +366,6 @@ public class Controller implements ActionListener {
 
                 for (int i = 0; i < 5; i++){
                     nextPlayer.drawCard(game.getTheDeck());
-                    nextPlayer.getLastCard().getCardButton().addActionListener(this);
                 }
                 gui.updatePlayerHand(nextPlayer);
 
@@ -419,7 +413,7 @@ public class Controller implements ActionListener {
                     cardFunctionality(playedCard);
                     gui.getStatusTextArea().setText("Please select the wild card again");
                 }
-//comment
+
                 currentPlayer = game.getCurrentPlayer();
                 Card.Color chosenColor = convertStringToColor(newColor);
 
@@ -432,54 +426,20 @@ public class Controller implements ActionListener {
                     }else {
                         drawUntilColorFound(nextPlayer, chosenColor);
                         nextPlayer.drawCard(game.getTheDeck());
-                        game.getNextPlayer().getLastCard().getCardButton().addActionListener(this);
                         nextPlayer.drawCard(game.getTheDeck());
-                        game.getNextPlayer().getLastCard().getCardButton().addActionListener(this);
                         gui.updatePlayerHand(nextPlayer);
                         break;
                     }
                 }
                 break;
-                /*
-
-                boolean challengeResult = promptForChallenge(game.getNextPlayer());
-
-
-
-
-                if(challengeResult){
-                    challengeResult = handleWildDrawColorChallenge(playedCard, chosenColor);
-                }
-                if (!challengeResult){
-                    nextPlayerIndex = (game.getCurrentTurn() + 1) % game.getPlayersInGame().size();
-                    nextPlayer = game.getPlayersInGame().get(nextPlayerIndex);
-
-                    drawUntilColorFound(nextPlayer, chosenColor);
-
-                    gui.updatePlayerHand(nextPlayer);
-                    //game.nextPlayer();
-                }
-                break;
-                */
-
 
             case DRAWONE:
-                if(gameStart == true){
-                    nextPlayer = game.getCurrentPlayer();
+                nextPlayerIndex = (game.getCurrentTurn() + 1) % game.getPlayersInGame().size();
+                nextPlayer = game.getPlayersInGame().get(nextPlayerIndex);
 
-                    nextPlayer.drawCard(game.getTheDeck());
-                    nextPlayer.getLastCard().getCardButton().addActionListener(this);
+                nextPlayer.drawCard(game.getTheDeck());
 
-                    gui.updatePlayerHand(nextPlayer);
-                }
-                else {
-                    nextPlayer = game.getNextPlayer();
-
-                    nextPlayer.drawCard(game.getTheDeck());
-                    nextPlayer.getLastCard().getCardButton().addActionListener(this);
-
-                    gui.updatePlayerHand(nextPlayer);
-                }
+                gui.updatePlayerHand(nextPlayer);
                 break;
 
             case WILDDARK:
@@ -557,7 +517,7 @@ public class Controller implements ActionListener {
             default: return null;
         }
     }
-//push
+
     private void drawUntilColorFound(Player player, Card.Color chosenColor) {
         boolean found = false;
         while (!found) {
