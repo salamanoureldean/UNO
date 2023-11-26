@@ -3,10 +3,10 @@ public class AIPlayer extends Player {
     private Hand hand;      // A players hand made up of cards
     private int score;     // Players score
 
+
     public AIPlayer(String name, Deck deck) {
         super(name, deck);
         this.score = 0;
-
     }
 
     public void makeMove(Card currentCard, Game game) {
@@ -15,20 +15,18 @@ public class AIPlayer extends Player {
         if (this.getHand().getCards().size() == 1 && this.getHand().getCards().get(0).getColor() == currentCard.getColor() && this.getHand().getCards().get(0).getValue() == currentCard.getValue()) {
             aiHasOneCardLeft(currentCard, game);
         }
-
         else if (game.getNextPlayer().getHand().getCards().size()<=2){
             nextPlayerHasTwoOrLessCards(currentCard, game);
         }
 
-
         else if (game.getNextPlayer().getHand().getCards().size()>2){
             playFirstPlayableCard(currentCard, game);
         }
-
         else {
             game.addCardToHand();
         }
     }
+
 
     private void playCard(Card card, Game game) {
         //check if the card is wildcard, if it is then set color of wildcard aswell.

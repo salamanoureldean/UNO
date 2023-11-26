@@ -71,13 +71,16 @@ public class Controller implements ActionListener {
     private void processTurn(){
         Player currentPlayer = game.getCurrentPlayer();
         gui.updatePlayerTurnLabel(game.getCurrentTurn());
+
         if (currentPlayer instanceof AIPlayer) {
             //AI
             gui.updateAIHand((AIPlayer) currentPlayer);
             ((AIPlayer)currentPlayer).makeMove(game.getCurrentCard(), game);
+            if(game.addCardToHand()){
+                handleDrawCardAction();
+            }
             gui.updateCurrentCard(game.getCurrentCard());
-            cardFunctionality(game.getCurrentCard());
-
+            gui.updateAIHand((AIPlayer) currentPlayer);
             checkForGameWinner();
         } else {
             //Human
@@ -223,7 +226,7 @@ public class Controller implements ActionListener {
      */
     private void checkForGameWinner() {
         if (game.checkWinner()) {
-            JOptionPane.showMessageDialog(gui.getGameFrame(), "You Won!");
+            JOptionPane.showMessageDialog(gui.getGameFrame(), "Congratulations " + game.getCurrentPlayer().getName() + " you WON with a score of: " + game.winnerScore());
             System.exit(0);
         }
     }
@@ -440,7 +443,6 @@ public class Controller implements ActionListener {
                 nextPlayer.drawCard(game.getTheDeck());
 
                 gui.updatePlayerHand(nextPlayer);
-
                 break;
         }
     }
