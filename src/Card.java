@@ -36,6 +36,9 @@ public class Card {
         isLightSide = false;
     }
 
+    /**
+     * Flips the card between its light and dark sides.
+     */
     public void flipCard(){
         if(this.isLightSide != true){
 
@@ -64,6 +67,9 @@ public class Card {
         }
     }
 
+    /**
+     * Switches the card to its dark side, updating its value and color accordingly.
+     */
     public void switchDarkSide( ){
         if(value == Value.WILD){
             value = Value.WILDDARK;
@@ -83,6 +89,10 @@ public class Card {
             darkLightColorSwitch();
         }
     }
+
+    /**
+     * Switches the card to its light side, updating its value and color accordingly.
+     **/
     public void switchLightSide(){
         if(value.equals(Value.WILDDARK)){
             value = Value.WILD;
@@ -103,6 +113,9 @@ public class Card {
         }
     }
 
+    /**
+     * Switches the color and dark/light attributes of the card.
+     */
     public void darkLightColorSwitch(){
         if(this.isLightSide == false){
             if(color.equals(Color.RED)){
@@ -209,6 +222,11 @@ public class Card {
         return cardButton;
     }
 
+    /**
+     * Checks if the card is a wild card.
+     *
+     * @return True if the card is a wild card, false otherwise.
+     */
     public boolean isWild() {
         return this.value == Value.WILD || this.value == Value.WILDDRAWTWO || this.value == Value.WILDDARK || this.value == Value.WILDDRAWCOLOR;
     }

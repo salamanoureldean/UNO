@@ -309,6 +309,11 @@ public class Game {
         return playersInGame.get(nextPlayerIndex);
     }
 
+    /**
+     * Retrieves the current game state, indicating whether the game is in the Light Side or Dark Side.
+     *
+     * @return True if the game is in the Light Side; false if it is in the Dark Side.
+     */
     public boolean getIsLightSide(){
         return isLightSide;
     }

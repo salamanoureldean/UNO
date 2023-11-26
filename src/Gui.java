@@ -349,6 +349,12 @@ public class Gui {
         return false;
     }
 
+    /**
+     * Updates the AI player's hand display.
+     *
+     * @param aiPlayer The AI player whose hand is updated.
+     * @param mode The current mode (light or dark).
+     */
     public void updateAIHand(AIPlayer aiPlayer, boolean mode) {
         handPanel.removeAll();
 
@@ -378,10 +384,20 @@ public class Gui {
         handPanel.repaint();
     }
 
+    /**
+     * Retrieves the top card panel.
+     *
+     * @return The top card panel.
+     */
     public JPanel getTopCardPanel() {
         return topCardPanel;
     }
 
+     /**
+     * Retrieves the hand panel.
+     *
+     * @return The hand panel.
+     */
     public JPanel getHandPanel() {
         return handPanel;
     }

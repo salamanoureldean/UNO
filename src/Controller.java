@@ -210,7 +210,7 @@ public class Controller implements ActionListener {
 
     /**
      * Executes the functionality associated with a played card. This method handles
-     * various card types such as REVERSE, SKIP, WILD, and WILDDRAWTWO. It interacts
+     * various card types such as REVERSE, SKIP, WILD, and WILDDRAWTWO, and the flip values. It interacts
      * with the game state and GUI to perform actions like reversing the order of players,
      * skipping a player's turn, allowing color selection for Wild cards, and making the
      * next player draw two cards for Wild Draw Two cards.
@@ -500,6 +500,12 @@ public class Controller implements ActionListener {
 
     }
 
+    /**
+     * Converts a color string to the corresponding Card.Color enum.
+     *
+     * @param colorStr The color string.
+     * @return The corresponding Card.Color enum.
+     */
     private Card.Color convertStringToColor(String colorStr) {
         switch (colorStr) {
             case "Red": return Card.Color.RED;
@@ -514,6 +520,12 @@ public class Controller implements ActionListener {
         }
     }
 
+    /**
+     * Draws cards from the deck for the specified player until a card of the chosen color is found.
+     *
+     * @param player      The player whom's cards are drawn.
+     * @param chosenColor The color to be matched.
+     */
     private void drawUntilColorFound(Player player, Card.Color chosenColor) {
         boolean found = false;
         while (!found) {
