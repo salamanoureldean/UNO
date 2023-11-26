@@ -152,7 +152,7 @@ public class Controller implements ActionListener {
 
             handleWildDrawTwoChallenge(card);
         }
-        if (gui.removeCardFromHand(card)) {
+        else if (gui.removeCardFromHand(card)) {
             cardFunctionality(card);
             handleSuccessfulCardPlacement();
             gui.disableHand();
@@ -429,9 +429,9 @@ public class Controller implements ActionListener {
                 boolean challengeResult = false;
 
                 Card.Color chosenColor = convertStringToColor(newColor);
-                if(!game.isPlayable(playedCard)){
-                    challengeResult = handleWildDrawColorChallenge(playedCard, chosenColor);
-                }
+                //if(!game.isPlayable(playedCard)){
+                    //challengeResult = handleWildDrawColorChallenge(playedCard, chosenColor);
+                //}
                 if (!challengeResult){
                     drawUntilColorFound(game.getNextPlayer(), chosenColor);
                     game.nextPlayer();
@@ -517,6 +517,10 @@ public class Controller implements ActionListener {
             case "Green": return Card.Color.GREEN;
             case "Blue": return Card.Color.BLUE;
             case "Yellow": return Card.Color.YELLOW;
+            case "Teal": return Card.Color.TEAL;
+            case "Pink": return Card.Color.PINK;
+            case "Purple": return Card.Color.PURPLE;
+            case "Orange": return Card.Color.ORANGE;
             default: return null;
         }
     }
