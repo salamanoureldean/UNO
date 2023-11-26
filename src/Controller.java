@@ -448,7 +448,45 @@ public class Controller implements ActionListener {
 
                 gui.updatePlayerHand(nextPlayer);
                 break;
+
+            case WILDDARK:
+                frame.setVisible(true);
+                newColor = (String) JOptionPane.showInputDialog(frame,
+                        "Choose the color",
+                        "Color selection",
+                        JOptionPane.PLAIN_MESSAGE,
+                        null,
+                        chooseDark,
+                        0);
+                frame.setVisible(false);
+                // Changing current color based on user input
+                if (newColor != null && newColor.equals("Pink")) {
+                    game.getCurrentCard().setColor(Card.Color.PINK);
+                    gui.getStatusTextArea().setText("The color has been changed to pink");
+                }
+                else if (newColor != null && newColor.equals("Purple")) {
+                    game.getCurrentCard().setColor(Card.Color.PURPLE);
+                    gui.getStatusTextArea().setText("The color has changed to purple");
+                }
+                else if (newColor != null && newColor.equals("Teal")) {
+                    game.getCurrentCard().setColor(Card.Color.TEAL);
+                    gui.getStatusTextArea().setText("The color has changed to teal");
+                }
+                else if (newColor != null && newColor.equals("Orange")) {
+                    game.getCurrentCard().setColor(Card.Color.ORANGE);
+                    gui.getStatusTextArea().setText("The color has been changed to orange.");
+                }
+                else{
+                    game.getCurrentCard().setColor(game.getCurrentCard().getColor());
+                    gui.getStatusTextArea().setText("The color has not been changed");
+                    gui.getNextPlayerButton().setEnabled(false);
+                    cardFunctionality(playedCard);
+                    gui.getStatusTextArea().setText("Please select the wild card again");
+                }
+                break;
         }
+
+
     }
 
     private boolean handleWildDrawColorChallenge(Card playedCard, Card.Color newColor) {
