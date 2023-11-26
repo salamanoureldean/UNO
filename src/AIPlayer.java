@@ -65,50 +65,34 @@ public class AIPlayer extends Player {
         for (int i = 0; i < this.getHand().getCards().size(); i++) {
             Card cardToPlay = this.getHand().getCards().get(i);
 
-            // Play WildDrawTwo as First priority
             if (cardToPlay.getValue() == Card.Value.WILDDRAWTWO) {
                 playCard(cardToPlay, game);
                 return cardToPlay;
             }
-
-            // Play Draw One as Second Priority
-            // Uncomment and complete the following when implemented
-            // if (cardToPlay.getValue() == Card.Value.DRAWONE && cardToPlay.getColor() == currentCard.getColor()) {
-            //     playCard(cardToPlay, game);
-            //     return cardToPlay;
-            // }
-
-            // Play SKIP as Third Priority
+            else if (cardToPlay.getValue() == Card.Value.DRAWONE && cardToPlay.getColor() == currentCard.getColor()) {
+                playCard(cardToPlay, game);
+                return cardToPlay;
+            }
             else if (cardToPlay.getValue() == Card.Value.SKIP && cardToPlay.getColor() == currentCard.getColor()) {
                 playCard(cardToPlay, game);
                 return cardToPlay;
             }
-
-            // Play REVERSE as Fourth Priority
             else if (cardToPlay.getValue() == Card.Value.REVERSE && cardToPlay.getColor() == currentCard.getColor()) {
                 playCard(cardToPlay, game);
                 return cardToPlay;
             }
-
-            // Play FLIP as Fifth Priority
-            // Uncomment and complete the following when implemented
-            // if (cardToPlay.getValue() == Card.Value.FLIP && cardToPlay.getColor() == currentCard.getColor()) {
-            //     playCard(cardToPlay, game);
-            //     return cardToPlay;
-            // }
-
-            // Play WILD as 6th Priority
+            else if (cardToPlay.getValue() == Card.Value.FLIP && cardToPlay.getColor() == currentCard.getColor()) {
+                playCard(cardToPlay, game);
+                return cardToPlay;
+            }
             else if (cardToPlay.getValue() == Card.Value.WILD) {
                 playCard(cardToPlay, game);
                 return cardToPlay;
             }
         }
 
-        // If no card is played, play the first playable card
         return playFirstPlayableCard(currentCard, game);
     }
-
-
 
     public Card playFirstPlayableCard(Card currentCard, Game game){
         for (int i = 0; i < this.getHand().getCards().size(); i++) {
