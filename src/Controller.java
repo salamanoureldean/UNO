@@ -75,7 +75,7 @@ public class Controller implements ActionListener {
 
         if (currentPlayer instanceof AIPlayer) {
             AIPlayer aiPlayer = (AIPlayer) currentPlayer;
-            gui.updateAIHand(aiPlayer);
+            gui.updateAIHand(aiPlayer, game.getIsLightSide());
 
             boolean shouldDrawCard = aiPlayer.shouldDrawCard(game.getCurrentCard(), game);
             if (shouldDrawCard) {
@@ -87,7 +87,7 @@ public class Controller implements ActionListener {
             }
 
             gui.updateCurrentCard(game.getCurrentCard());
-            gui.updateAIHand(aiPlayer);
+            gui.updateAIHand(aiPlayer, game.getIsLightSide());
 
         } else {
             // Human player logic
@@ -375,7 +375,12 @@ public class Controller implements ActionListener {
 
                     //gui.updatePlayerHand(currentPlayer);
                     for(Player player: game.getPlayersInGame()){
-                        gui.updatePlayerHand(player);
+                        if(player instanceof AIPlayer) {
+                            gui.updateAIHand((AIPlayer) player, game.getIsLightSide());
+                        }
+                        else {
+                            gui.updatePlayerHand(player);
+                        }
                     }
                     gui.updateCurrentCard(playedCard);
                 }
@@ -435,9 +440,7 @@ public class Controller implements ActionListener {
                 boolean challengeResult = false;
 
                 Card.Color chosenColor = convertStringToColor(newColor);
-                //if(!game.isPlayable(playedCard)){
-                    //challengeResult = handleWildDrawColorChallenge(playedCard, chosenColor);
-                //}
+
                 if (!challengeResult){
                     nextPlayerIndex = (game.getCurrentTurn() + 1) % game.getPlayersInGame().size();
                     nextPlayer = game.getPlayersInGame().get(nextPlayerIndex);
