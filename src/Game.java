@@ -39,6 +39,11 @@ public class Game {
         isLightSide = true;
         currentCard = theDeck.draw();
 
+        // Ensure the first current card is not a Flip card
+        while (currentCard.getValue() == Card.Value.FLIP) {
+            currentCard = theDeck.draw(); // Draw again if the card is Flip
+        }
+
     }
 
 
