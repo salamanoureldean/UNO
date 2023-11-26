@@ -52,6 +52,7 @@ public class Controller implements ActionListener {
         if (game.addCardToHand()) {
             gui.addLatestCardToHandDisplay();
         }
+        game.getCurrentPlayer().getLastCard().getCardButton().addActionListener(this);
         gui.getDrawCardButton().setEnabled(false);
         gui.getNextPlayerButton().setEnabled(true);
         gui.updateStatusDraw(game.getCurrentPlayer());
