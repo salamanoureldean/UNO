@@ -154,11 +154,7 @@ public class Controller implements ActionListener {
      * @param card The card to be placed in the game.
      */
     private void processCardPlacement(Card card) {
-        if (card.isWildDrawTwo()) {
-
-            handleWildDrawTwoChallenge(card);
-        }
-        else if (gui.removeCardFromHand(card)) {
+        if (gui.removeCardFromHand(card)) {
             cardFunctionality(card);
             handleSuccessfulCardPlacement();
             gui.disableHand();
@@ -168,37 +164,6 @@ public class Controller implements ActionListener {
         }
     }
 
-    /**
-     * Handles the challenge for a Wild Draw Two card played in the game.
-     * This method prompts the next player for a challenge, checks the challenge result,
-     * and updates the game state and GUI accordingly.
-     *
-     * @param card The Wild Draw Two card played.
-     */
-    private void handleWildDrawTwoChallenge(Card card) {
-        Player currentPlayer = game.getCurrentPlayer();
-        Player nextPlayer = game.getNextPlayer();
-
-        boolean challengeAccepted = promptForChallenge(nextPlayer);
-
-        if (challengeAccepted) {
-            tf = true;
-            boolean challengeResult = game.challengeWildDrawTwo(nextPlayer, currentPlayer, card.getColor());
-
-            if (challengeResult) {
-                gui.getStatusTextArea().setText(currentPlayer.getName() + " played Wild Draw Two illegally. They draw 2 cards.");
-            } else {
-                gui.getStatusTextArea().setText(nextPlayer.getName() + " challenged incorrectly. They draw 4 cards.");
-            }
-
-
-            gui.updatePlayerHand(currentPlayer);
-            gui.updatePlayerHand(nextPlayer);
-        } else {
-            tf = false;
-
-        }
-    }
 
     /**
      * Prompts the specified player with a confirmation dialog to determine if they
@@ -312,8 +277,7 @@ public class Controller implements ActionListener {
                 }
                 break;
             case WILDDRAWTWO:
-                // Changing current color of cards being played based on user input
-                frame.setVisible(true);
+                // Allow the player to choose a color
                 newColor = (String) JOptionPane.showInputDialog(frame,
                         "Choose the color",
                         "Color selection",
@@ -322,35 +286,44 @@ public class Controller implements ActionListener {
                         choose,
                         0);
 
-                if(tf == false){
-                    for (int i = 0; i < 2; i++){
+                if (newColor != null) {
+                    // Set the chosen color
+                    switch (newColor) {
+                        case "Red": game.getCurrentCard().setColor(Card.Color.RED); break;
+                        case "Green": game.getCurrentCard().setColor(Card.Color.GREEN); break;
+                        case "Blue": game.getCurrentCard().setColor(Card.Color.BLUE); break;
+                        case "Yellow": game.getCurrentCard().setColor(Card.Color.YELLOW); break;
+                    }
+                    gui.getStatusTextArea().setText("The color has been changed to " + newColor.toLowerCase());
+                } else {
+                    game.getCurrentCard().setColor(game.getCurrentCard().getColor());
+                    gui.getStatusTextArea().setText("The color has not been changed");
+                }
+
+                Player currentPlayer = game.getCurrentPlayer();
+
+                boolean challengeAccepted = promptForChallenge(nextPlayer);
+
+                if (challengeAccepted) {
+                    tf = true;
+                    boolean challengeResult = game.challengeWildDrawTwo(nextPlayer, currentPlayer, game.getCurrentCard().getColor());
+
+                    if (challengeResult) {
+                        gui.getStatusTextArea().setText(currentPlayer.getName() + " played Wild Draw Two illegally. They draw 2 cards.");
+                    } else {
+                        gui.getStatusTextArea().setText(nextPlayer.getName() + " challenged incorrectly. They draw 4 cards.");
+                    }
+                } else {
+                    tf = false;
+                    // Next player draws two cards if the challenge is not accepted
+                    for (int i = 0; i < 2; i++) {
                         nextPlayer.drawCard(game.getTheDeck());
                     }
                 }
 
-                if (newColor != null && newColor.equals("Red")) {
-                    game.getCurrentCard().setColor(Card.Color.RED);
-                    gui.getStatusTextArea().setText("The color has been changed to red");
-                }
-                else if (newColor != null && newColor.equals("Green")) {
-                    game.getCurrentCard().setColor(Card.Color.GREEN);
-                    gui.getStatusTextArea().setText("The color has changed to green");
-                }
-                else if (newColor != null && newColor.equals("Blue")) {
-                    game.getCurrentCard().setColor(Card.Color.BLUE);
-                    gui.getStatusTextArea().setText("The color has changed to blue");
-                }
-                else if (newColor != null && newColor.equals("Yellow")) {
-                    game.getCurrentCard().setColor(Card.Color.YELLOW);
-                    gui.getStatusTextArea().setText("The color has been changed to yellow.");
-                }
-                else {
-                    game.getCurrentCard().setColor(game.getCurrentCard().getColor());
-                    gui.getStatusTextArea().setText("The color has not been changed");
-                    gui.getNextPlayerButton().setEnabled(false);
-                    cardFunctionality(playedCard);
-                    gui.getStatusTextArea().setText("Please select the wild card again");
-                }
+                gui.updatePlayerHand(currentPlayer);
+                gui.updatePlayerHand(nextPlayer);
+                gui.updateCurrentCard(game.getCurrentCard());
                 break;
 
             case FLIP:
@@ -441,10 +414,10 @@ public class Controller implements ActionListener {
                     gui.getStatusTextArea().setText("Please select the wild card again");
                 }
 
-                Player currentPlayer = game.getCurrentPlayer();
+                currentPlayer = game.getCurrentPlayer();
                 Card.Color chosenColor = convertStringToColor(newColor);
 
-                boolean challengeAccepted = promptForChallenge(nextPlayer);
+                challengeAccepted = promptForChallenge(nextPlayer);
 
                 if(challengeAccepted){
                     if(currentPlayer.hasMatchingColorCards(chosenColor)){
