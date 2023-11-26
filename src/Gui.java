@@ -20,11 +20,13 @@ public class Gui {
     private JButton nextPlayerButton;
     private JButton drawCardButton;
     private JTextArea statusTextArea;
+    private boolean mode;
 
     /**
      * Constructor for the GUI class which sets up the frame.
      */
     public Gui() {
+        mode = true;
         frame1 = new JFrame();
         boolean validSelection = false;
 
@@ -342,18 +344,31 @@ public class Gui {
         return false;
     }
 
-    public void updateAIHand(AIPlayer aiPlayer) {
+    public void updateAIHand(AIPlayer aiPlayer, boolean mode) {
         handPanel.removeAll();
 
         for (Card card : aiPlayer.getHand().getCards()) {
             JButton cardButton = new JButton(card.stringCard());
-            String filePath = "small\\" + card.getFileNameForCard(card.getValue(), card.getColor()) + ".png";
-            ImageIcon icon = new ImageIcon(filePath);
-            cardButton.setIcon(icon);
-            cardButton.setEnabled(false);
-            handPanel.add(cardButton);
-        }
+            if(this.mode != mode){
+                this.mode = mode;
+            }
 
+            if(mode == true){
+                String filePath = "small\\" + card.getFileNameForCard(card.getValue(), card.getColor()) + ".png";
+                ImageIcon icon = new ImageIcon(filePath);
+                cardButton.setIcon(icon);
+                cardButton.setEnabled(false);
+                handPanel.add(cardButton);
+            }
+            else{
+                String filePath = "dark\\" + card.getFileNameForCard(card.getValue(), card.getColor()) + ".png";
+                ImageIcon icon = new ImageIcon(filePath);
+                cardButton.setIcon(icon);
+                cardButton.setEnabled(false);
+                handPanel.add(cardButton);
+
+            }
+        }
         handPanel.revalidate();
         handPanel.repaint();
     }

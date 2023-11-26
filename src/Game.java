@@ -304,4 +304,8 @@ public class Game {
 
         return playersInGame.get(nextPlayerIndex);
     }
+
+    public boolean getIsLightSide(){
+        return isLightSide;
+    }
 }
