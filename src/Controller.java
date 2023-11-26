@@ -75,7 +75,7 @@ public class Controller implements ActionListener {
 
         if (currentPlayer instanceof AIPlayer) {
             AIPlayer aiPlayer = (AIPlayer) currentPlayer;
-            gui.updateAIHand(aiPlayer);
+            gui.updateAIHand(aiPlayer, game.getIsLightSide());
 
             boolean shouldDrawCard = aiPlayer.shouldDrawCard(game.getCurrentCard(), game);
             if (shouldDrawCard) {
@@ -87,7 +87,7 @@ public class Controller implements ActionListener {
             }
 
             gui.updateCurrentCard(game.getCurrentCard());
-            gui.updateAIHand(aiPlayer);
+            gui.updateAIHand(aiPlayer, game.getIsLightSide());
 
         } else {
             // Human player logic
@@ -375,7 +375,12 @@ public class Controller implements ActionListener {
 
                     //gui.updatePlayerHand(currentPlayer);
                     for(Player player: game.getPlayersInGame()){
-                        gui.updatePlayerHand(player);
+                        if(player instanceof AIPlayer) {
+                            gui.updateAIHand((AIPlayer) player, game.getIsLightSide());
+                        }
+                        else {
+                            gui.updatePlayerHand(player);
+                        }
                     }
                     gui.updateCurrentCard(playedCard);
                 }
@@ -396,7 +401,10 @@ public class Controller implements ActionListener {
             case SKIPALL:
                 if (game.isPlayable(playedCard)){
                     int currentPlayerIndex = game.getCurrentTurn();
-                    game.setCurrentTurn(currentPlayerIndex);
+                    if(currentPlayerIndex-1 < 0){
+                        currentPlayerIndex = game.getPlayersInGame().size();
+                    }
+                    game.setCurrentTurn(currentPlayerIndex-1);
                 }
                 break;
 
@@ -432,7 +440,6 @@ public class Controller implements ActionListener {
                     cardFunctionality(playedCard);
                     gui.getStatusTextArea().setText("Please select the wild card again");
                 }
-                ////----------------------------------------------------------------------------------
 
                 Player currentPlayer = game.getCurrentPlayer();
                 Card.Color chosenColor = convertStringToColor(newColor);
