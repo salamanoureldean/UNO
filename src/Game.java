@@ -168,41 +168,51 @@ public class Game {
      *
      * @return The calculated score of the winner.
      */
-    public int winnerScore(){
+    public int winnerScore() {
         int winnerScore = 0;
-        //Iterating through each player to calculate their hand's score
+
+        // Iterating through each player to calculate their hand's score
         for (int i = 0; i < playersInGame.size(); i++) {
             int sumOfPlayer = 0;
 
-            //Iterating through each card in players (i) hand
+            // Iterating through each card in player's (i) hand
             for (Card card : playersInGame.get(i).getHand().getCards()) {
                 int cardValue = card.getValue().ordinal();
 
-                //Checking the value of each card (j)
-                if (cardValue >= 0 && cardValue < 10) {
+                if (cardValue >= 0 && cardValue < 10) { // Numbered cards
                     sumOfPlayer += cardValue;
                 } else {
                     switch (cardValue) {
-                        case 10:
+                        case 10: // Draw One
+                            sumOfPlayer += 10;
+                            break;
+                        case 11: // Reverse/Skip/Flip
                             sumOfPlayer += 20;
                             break;
-                        case 11:
+                        case 12: // Draw Five
+                            sumOfPlayer += 20;
+                            break;
+                        case 13: // Skip Everyone
                             sumOfPlayer += 30;
                             break;
-                        case 12:
+                        case 14: // Wild
                             sumOfPlayer += 40;
                             break;
-                        case 13:
+                        case 15: // Wild Draw Two
                             sumOfPlayer += 50;
+                            break;
+                        case 16: // Wild Draw Color
+                            sumOfPlayer += 60;
                             break;
                     }
                 }
             }
-            //Adding total value of player(i) score into the winner's score
             winnerScore += sumOfPlayer;
         }
+
         return winnerScore;
     }
+
 
 
     /**
