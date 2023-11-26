@@ -14,6 +14,7 @@ The Uno Flip Card Game is an enhanced Java GUI-based implementation of the class
 ## Features
 
 - Supports 2 to 12 players with an interactive graphical user interface.
+- Includes an AI player option, allowing for for up to 6 AI's.
 - Combines standard Uno with the light and dark sides of Uno Flip, offering a dynamic gameplay experience.
 - Enhanced gameplay experience through mouse interactions in a JFrame environment.
 - Includes a "Next Player" button to facilitate controlled game progression.
