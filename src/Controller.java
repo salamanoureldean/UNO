@@ -432,7 +432,9 @@ public class Controller implements ActionListener {
                     }else {
                         drawUntilColorFound(nextPlayer, chosenColor);
                         nextPlayer.drawCard(game.getTheDeck());
+                        game.getNextPlayer().getLastCard().getCardButton().addActionListener(this);
                         nextPlayer.drawCard(game.getTheDeck());
+                        game.getNextPlayer().getLastCard().getCardButton().addActionListener(this);
                         gui.updatePlayerHand(nextPlayer);
                         break;
                     }
