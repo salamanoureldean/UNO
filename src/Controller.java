@@ -439,10 +439,13 @@ public class Controller implements ActionListener {
                     //challengeResult = handleWildDrawColorChallenge(playedCard, chosenColor);
                 //}
                 if (!challengeResult){
-                    drawUntilColorFound(game.getNextPlayer(), chosenColor);
-                    game.nextPlayer();
+                    nextPlayerIndex = (game.getCurrentTurn() + 1) % game.getPlayersInGame().size();
+                    nextPlayer = game.getPlayersInGame().get(nextPlayerIndex);
+                    //drawUntilColorFound(game.getNextPlayer(), chosenColor);
+                    drawUntilColorFound(nextPlayer, chosenColor);
 
-                    gui.updatePlayerHand(game.getNextPlayer());
+                    gui.updatePlayerHand(nextPlayer);
+                    //game.nextPlayer();
                 }
                 break;
 
@@ -535,6 +538,7 @@ public class Controller implements ActionListener {
         boolean found = false;
         while (!found) {
             player.drawCard(game.getTheDeck());
+            player.getLastCard().getCardButton().addActionListener(this);
             Card lastDrawnCard = player.getLastCard();
             if (lastDrawnCard.getColor() == chosenColor) {
                 found = true;

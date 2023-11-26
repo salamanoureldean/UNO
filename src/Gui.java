@@ -337,7 +337,7 @@ public class Gui {
             handPanel.remove(cardToPlay.getCardButton());
             handPanel.revalidate();
             handPanel.repaint();
-            return  true;
+            return true;
         }
         return false;
     }
