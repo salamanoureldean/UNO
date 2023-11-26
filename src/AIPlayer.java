@@ -1,3 +1,8 @@
+/**
+ * @author: Mahad Mohamed Yonis 101226808, Pietro Adamvoski 101238885
+ * @date: 11/25/2023
+ * @version: 3.00
+ */
 public class AIPlayer extends Player {
 
     private Hand hand;      // A players hand made up of cards

@@ -1,7 +1,7 @@
 /**
  * @author: Abody Majeed 101227327, Mahad Mohamed Yonis 101226808, Salama Noureldean 101154365, Pietro Adamvoski 101238885
- * @date: 11/14/2023
- * @version: 1.00
+ * @date: 11/25/2023
+ * @version: 3.00
  */
 
 import javax.swing.*;
@@ -12,6 +12,8 @@ public class Controller implements ActionListener {
     private Game game;
     private Gui gui;
     private boolean tf;
+    private boolean gameStart = true;
+    private int round =1;
 
     /**
      * Constructs a new Controller object that manages the interaction between the
@@ -34,6 +36,10 @@ public class Controller implements ActionListener {
      * @param e The ActionEvent triggered by a GUI component.
      */
     public void actionPerformed(ActionEvent e) {
+        round += 1;
+        if(round > 1){
+            gameStart = false;
+        }
         if (e.getSource() == gui.getDrawCardButton()) {
             handleDrawCardAction();
         } else if (e.getSource() == gui.getNextPlayerButton()) {
@@ -157,7 +163,6 @@ public class Controller implements ActionListener {
         if (gui.removeCardFromHand(card)) {
             cardFunctionality(card);
             handleSuccessfulCardPlacement();
-            gui.disableHand();
         } else {
             //SHOW INVALID MOVE IN STATUS
             gui.getStatusTextArea().setText("Invalid Move!");
@@ -366,6 +371,7 @@ public class Controller implements ActionListener {
 
                 for (int i = 0; i < 5; i++){
                     nextPlayer.drawCard(game.getTheDeck());
+                    nextPlayer.getLastCard().getCardButton().addActionListener(this);
                 }
                 gui.updatePlayerHand(nextPlayer);
 
@@ -426,7 +432,9 @@ public class Controller implements ActionListener {
                     }else {
                         drawUntilColorFound(nextPlayer, chosenColor);
                         nextPlayer.drawCard(game.getTheDeck());
+                        game.getNextPlayer().getLastCard().getCardButton().addActionListener(this);
                         nextPlayer.drawCard(game.getTheDeck());
+                        game.getNextPlayer().getLastCard().getCardButton().addActionListener(this);
                         gui.updatePlayerHand(nextPlayer);
                         break;
                     }
@@ -434,12 +442,22 @@ public class Controller implements ActionListener {
                 break;
 
             case DRAWONE:
-                nextPlayerIndex = (game.getCurrentTurn() + 1) % game.getPlayersInGame().size();
-                nextPlayer = game.getPlayersInGame().get(nextPlayerIndex);
+                if(gameStart == true){
+                    nextPlayer = game.getCurrentPlayer();
 
-                nextPlayer.drawCard(game.getTheDeck());
+                    nextPlayer.drawCard(game.getTheDeck());
+                    nextPlayer.getLastCard().getCardButton().addActionListener(this);
 
-                gui.updatePlayerHand(nextPlayer);
+                    gui.updatePlayerHand(nextPlayer);
+                }
+                else {
+                    nextPlayer = game.getNextPlayer();
+
+                    nextPlayer.drawCard(game.getTheDeck());
+                    nextPlayer.getLastCard().getCardButton().addActionListener(this);
+
+                    gui.updatePlayerHand(nextPlayer);
+                }
                 break;
 
             case WILDDARK:
@@ -479,28 +497,6 @@ public class Controller implements ActionListener {
                 break;
         }
 
-
-    }
-
-    private boolean handleWildDrawColorChallenge(Card playedCard, Card.Color newColor) {
-        Player currentPlayer = game.getCurrentPlayer();
-        Player nextPlayer = game.getNextPlayer();
-
-        boolean challengeAccepted = promptForChallenge(nextPlayer);
-
-        if(challengeAccepted){
-            if(currentPlayer.hasMatchingColorCards(newColor)){
-                drawUntilColorFound(currentPlayer, newColor);
-                return true;
-            }else {
-                drawUntilColorFound(nextPlayer, newColor);
-                nextPlayer.drawCard(game.getTheDeck());
-                nextPlayer.drawCard(game.getTheDeck());
-                gui.updatePlayerHand(nextPlayer);
-                return false;
-            }
-        }
-        return false;
 
     }
 

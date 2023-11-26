@@ -1,7 +1,12 @@
+/**
+ * @author: Abody Majeed 101227327, Mahad Mohamed Yonis 101226808, Salama Noureldean 101154365
+ * @date: 11/25/2023
+ * @version: 3.00
+ */
+
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
-
 
 public class Gui {
     private static JFrame frame1;
