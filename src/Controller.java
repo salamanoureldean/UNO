@@ -26,6 +26,7 @@ public class Controller implements ActionListener {
     public Controller(Game game, Gui gui) {
         this.game = game;
         this.gui = gui;
+        gui.getUndoButton().addActionListener(this);
     }
 
     /**
@@ -36,6 +37,7 @@ public class Controller implements ActionListener {
      * @param e The ActionEvent triggered by a GUI component.
      */
     public void actionPerformed(ActionEvent e) {
+
         round += 1;
         if(round > 1){
             gameStart = false;
@@ -44,7 +46,18 @@ public class Controller implements ActionListener {
             handleDrawCardAction();
         } else if (e.getSource() == gui.getNextPlayerButton()) {
             handleNextPlayerAction();
-        } else {
+        } else if(e.getSource() == gui.getUndoButton()){
+            //==================================================================================================================================
+            gui.getUndoButton().setEnabled(false);
+            System.out.println("reached handleUndoAction in controller");
+            game.undoTurn();
+            processTurn();
+            gui.updateCurrentCard(game.getCurrentCard());
+            gui.getUndoButton().setEnabled(false);
+            gui.getStatusTextArea().setText("Turn has been Undone.\nCurrent Card: " + game.getCurrentCard().stringCard());
+            //handleUndoAction();
+        }
+        else {
             handleCardAction(e);
         }
     }
@@ -61,6 +74,7 @@ public class Controller implements ActionListener {
         game.getCurrentPlayer().getLastCard().getCardButton().addActionListener(this);
         gui.getDrawCardButton().setEnabled(false);
         gui.getNextPlayerButton().setEnabled(true);
+        gui.getNextPlayerButton().setEnabled(true);
         gui.updateStatusDraw(game.getCurrentPlayer());
         gui.disableHand();
     }
@@ -73,6 +87,16 @@ public class Controller implements ActionListener {
     private void handleNextPlayerAction() {
         game.nextPlayer();
         processTurn();
+        gui.getUndoButton().setEnabled(true);
+    }
+
+    private void handleUndoAction() {
+        gui.getUndoButton().setEnabled(false);
+        System.out.println("reached handleUndoAction in controller");
+        game.undoTurn();
+        processTurn();
+        gui.getUndoButton().setEnabled(false);
+        gui.getStatusTextArea().setText("Turn has been Undone.\nCurrent Card: " + game.getCurrentCard().stringCard());
     }
 
     private void processTurn() {

@@ -4,6 +4,7 @@
  * @version: 3.00
  */
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class Game {
     private boolean isLightSide;
@@ -12,6 +13,12 @@ public class Game {
     private boolean winner = false;
     private Card currentCard;
     private int currentTurn = 0;
+    private Stack<Card> discardPile = new Stack<>();
+    private Player lastPlayer;
+    private Deck lastDeck;
+    private int lastTurn;
+
+
 
     /**
      * Constructs a new Game instance with a specified number of players.
@@ -38,6 +45,7 @@ public class Game {
 
         isLightSide = true;
         currentCard = theDeck.draw();
+        discardPile.add(currentCard);
     }
 
 
@@ -62,6 +70,8 @@ public class Game {
     public boolean removeCardFromHand(Card cardToPlay) {
         Player currentPlayer = getCurrentPlayer();
         if (cardToPlay != null && isPlayable(cardToPlay)) {
+            //add current card before card is played to card pile
+            this.discardPile.add(currentCard);
             currentCard = cardToPlay;
             theDeck.place(cardToPlay);
             currentPlayer.playCard(cardToPlay);
@@ -221,6 +231,17 @@ public class Game {
      * @return The index of the next player.
      */
     public void nextPlayer() {
+        //make the current player the last player
+        lastPlayer = getCurrentPlayer();
+        //save current hand state to resort to
+        lastPlayer.storeStateBeforeTurn();
+        //save the current deck
+        lastDeck = getTheDeck();
+        //save last turn
+        lastTurn = getCurrentTurn();
+
+        //-----------------------------------------------------------------------------------
+        //update current turn for normal playing procedures
         currentTurn = (currentTurn+1) % playersInGame.size();
     }
 
@@ -316,5 +337,41 @@ public class Game {
      */
     public boolean getIsLightSide(){
         return isLightSide;
+    }
+
+
+    public void undoTurn() {
+        if (!discardPile.isEmpty()) {
+            System.out.print("Reached undoTurn method in game");
+            //get the last played card
+            Card lastPlayedCard = discardPile.pop();
+
+            //restore the current card
+            setCurrentCard(lastPlayedCard);
+
+            //reset the deck to the state it was one turn before
+            theDeck = lastDeck;
+
+            //reset the turn to one turn back
+            currentTurn = lastTurn;
+
+            lastPlayer.restoreStateBeforeTurn();
+        }
+/*
+        // Update GUI and other necessary components
+        gui.updateCurrentCard(lastPlayedCard);
+        gui.updatePlayerHand(lastPlayer);
+
+        // Enable Redo button
+        gui.getRedoButton().setEnabled(true);
+
+
+        // Disable Undo button
+        gui.getUndoButton().setEnabled(false);
+
+        // Update status
+        gui.getStatusTextArea().setText("Turn undone.");
+
+ */
     }
 }

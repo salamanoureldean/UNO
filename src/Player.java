@@ -9,6 +9,7 @@ public class Player {
     private boolean unoCalled;  // Indicates whether Uno has been called by the player
 
     private String name;
+    private Hand beforeTurnHand;
 
     /**
      * Constructs a new player with an empty hand, a score of 0, and Uno not called.
@@ -18,6 +19,7 @@ public class Player {
         this.score = 0;        // Initialize the player's score
         this.unoCalled = false; // Uno is initially not called
         this.name = name;
+        this.beforeTurnHand = null;
     }
 
     /**
@@ -87,6 +89,8 @@ public class Player {
      * @param card The card to play.
      */
     public void playCard(Card card) {
+        //store state before playing a card
+        storeStateBeforeTurn();
         hand.removeCard(card);
     }
 
@@ -142,4 +146,26 @@ public class Player {
         }
         return false;
     }
+
+    public void storeStateBeforeTurn() {
+        // Store the state before playing a card
+        beforeTurnHand = getHand();
+    }
+
+    public void restoreStateBeforeTurn() {
+        // Restore the state before the last turn
+        if (beforeTurnHand != null) {
+            hand.setCards(beforeTurnHand.getCards());
+        }
+    }
+    public void undo() {
+        if (beforeTurnHand != null) {
+            hand.setCards(beforeTurnHand.getCards());
+            beforeTurnHand = null;  //Reset the state before the turn after undo
+        }
+    }
+
+
+
+
 }

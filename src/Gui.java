@@ -24,6 +24,7 @@ public class Gui {
     private Game model;
     private JButton nextPlayerButton;
     private JButton drawCardButton;
+    private JButton undoButton;
     private JTextArea statusTextArea;
     private boolean mode;
 
@@ -120,6 +121,11 @@ public class Gui {
         leftPanel.add(nextPlayerButton, BorderLayout.SOUTH);
         bottomPanel.add(leftPanel, BorderLayout.WEST);
         nextPlayerButton.setEnabled(false);
+
+        // Add a button to undo a turn
+        undoButton = new JButton("Undo");
+        leftPanel.add(undoButton);
+        undoButton.setEnabled(false);
 
         // Create a panel to display current player's hand using buttons
         handPanel = new JPanel(new GridLayout(1, 0));
@@ -370,6 +376,7 @@ public class Gui {
                 cardButton.setIcon(icon);
                 cardButton.setEnabled(false);
                 handPanel.add(cardButton);
+                handPanel.add(cardButton);
             }
             else{
                 String filePath = "dark\\" + card.getFileNameForCard(card.getValue(), card.getColor()) + ".png";
@@ -400,5 +407,9 @@ public class Gui {
      */
     public JPanel getHandPanel() {
         return handPanel;
+    }
+
+    public JButton getUndoButton() {
+        return undoButton;
     }
 }

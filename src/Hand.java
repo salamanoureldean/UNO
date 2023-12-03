@@ -21,6 +21,12 @@ public class Hand {
             cardNum += 1;
         }
     }
+    
+    //copy constructor
+    public Hand(Hand otherHand) {
+        this.cards = new ArrayList<>(otherHand.cards);
+        this.cardNum = otherHand.cardNum;
+    }
 
     /**
      * Constructor that allows for
@@ -75,4 +81,8 @@ public class Hand {
      */
     public ArrayList<Card> getCards(){return cards;}
 
+    public void setCards(ArrayList<Card> cards) {
+        this.cards = new ArrayList<>(cards);
+        this.cardNum = cards.size();
+    }
 }
