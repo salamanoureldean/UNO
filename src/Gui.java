@@ -128,32 +128,10 @@ public class Gui implements Serializable {
         nextPlayerButton.setEnabled(false);
 
         saveGameButton = new JButton("Save Game");
-        saveGameButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                model.saveGame();
-            }
-        });
 
         leftPanel.add(saveGameButton);
 
         loadGameButton = new JButton("Load Game");
-        loadGameButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Game loadedGame = Game.loadGame();
-                if(loadedGame != null) {
-                    model = loadedGame;
-
-                    //update gui components
-                    updateCurrentCard(model.getCurrentCard());
-                    for (Player player : model.getPlayersInGame()) {
-                        updatePlayerHand(player);
-                    }
-                    updatePlayerTurnLabel(model.getCurrentTurn());
-                }
-            }
-        });
 
         leftPanel.add(loadGameButton);
 
@@ -446,5 +424,13 @@ public class Gui implements Serializable {
 
     public JButton getUndoButton() {
         return undoButton;
+    }
+
+    public JButton getSaveButton() {
+        return saveGameButton;
+    }
+
+    public JButton getLoadButton(){
+        return loadGameButton;
     }
 }

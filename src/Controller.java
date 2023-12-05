@@ -58,6 +58,24 @@ public class Controller implements ActionListener, Serializable {
             gui.getStatusTextArea().setText("Turn has been Undone.\nCurrent Card: " + game.getCurrentCard().stringCard());
             //handleUndoAction();
         }
+        else if(e.getSource() == gui.getSaveButton()){
+            game.saveGame();
+        }
+        else if(e.getSource() == gui.getLoadButton()){
+            Game loadedGame = Game.loadGame();
+            if(loadedGame != null) {
+                game = loadedGame;
+
+
+                gui.updatePlayerTurnLabel(game.getCurrentTurn());
+                gui.getStatusTextArea().setText("Current Card: " + game.getCurrentCard());
+                gui.updateCurrentCard(game.getCurrentCard());
+
+                for (int i = 0; i < game.getPlayersInGame().size(); i++){
+                    gui.updatePlayerHand(game.getPlayersInGame().get(i));
+                }
+            }
+        }
         else {
             handleCardAction(e);
         }
