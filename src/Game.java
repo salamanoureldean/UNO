@@ -3,10 +3,11 @@
  * @date: 11/25/2023
  * @version: 3.00
  */
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class Game {
+public class Game implements Serializable {
     private boolean isLightSide;
     private Deck theDeck;
     private ArrayList<Player> playersInGame;
@@ -17,6 +18,8 @@ public class Game {
     private Player lastPlayer;
     private Deck lastDeck;
     private int lastTurn;
+
+    private String gameState;
 
 
 
@@ -48,7 +51,16 @@ public class Game {
         discardPile.add(currentCard);
     }
 
+    public void saveGame() {
+        String fileName = "game_state.ser";
+        SerializationUtil.saveGame(this, fileName);
+    }
 
+
+    public static Game loadGame() {
+        String fileName = "game_state.ser";
+        return SerializationUtil.loadGame(fileName);
+    }
     /**
      * Adds a card to the current player's hand.
      *

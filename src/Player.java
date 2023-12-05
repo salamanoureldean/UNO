@@ -1,9 +1,11 @@
+import java.io.Serializable;
+
 /**
  * @author: Abody Majeed 101227327, Mahad Mohamed Yonis 101226808, Salama Noureldean 101154365, Pietro Adamvoski 101238885
  * @date: 11/25/2023
  * @version: 3.00
  */
-public class Player {
+public class Player implements Serializable {
     private Hand hand;      // A player's hand made up of cards
     private int score;      // Player's score
     private boolean unoCalled;  // Indicates whether Uno has been called by the player

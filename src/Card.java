@@ -5,8 +5,9 @@
  */
 
 import javax.swing.*;
+import java.io.Serializable;
 
-public class Card {
+public class Card implements Serializable {
     public enum Value { ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, DRAWONE, REVERSE, SKIP, FLIP, DRAWFIVE, SKIPALL, WILD, WILDDRAWTWO, WILDDRAWCOLOR, WILDDARK; }
     public enum Color{RED, GREEN, BLUE, YELLOW, BLANK, PINK, PURPLE, TEAL, ORANGE};
 

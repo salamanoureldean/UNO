@@ -1,9 +1,11 @@
+import java.io.Serializable;
+
 /**
  * @author: Mahad Mohamed Yonis 101226808, Pietro Adamvoski 101238885
  * @date: 11/25/2023
  * @version: 3.00
  */
-public class AIPlayer extends Player {
+public class AIPlayer extends Player implements Serializable {
 
     private Hand hand;      // A players hand made up of cards
     private int score;     // Players score

@@ -5,10 +5,13 @@
  */
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.*;
 
-public class Gui {
+public class Gui implements Serializable {
     private static JFrame frame1;
     private JFrame gameFrame;
     private int numberOfPlayers;
@@ -27,6 +30,8 @@ public class Gui {
     private JButton undoButton;
     private JTextArea statusTextArea;
     private boolean mode;
+    private JButton saveGameButton;
+    private JButton loadGameButton;
 
     /**
      * Constructor for the GUI class which sets up the frame.
@@ -121,6 +126,36 @@ public class Gui {
         leftPanel.add(nextPlayerButton, BorderLayout.SOUTH);
         bottomPanel.add(leftPanel, BorderLayout.WEST);
         nextPlayerButton.setEnabled(false);
+
+        saveGameButton = new JButton("Save Game");
+        saveGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.saveGame();
+            }
+        });
+
+        leftPanel.add(saveGameButton);
+
+        loadGameButton = new JButton("Load Game");
+        loadGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Game loadedGame = Game.loadGame();
+                if(loadedGame != null) {
+                    model = loadedGame;
+
+                    //update gui components
+                    updateCurrentCard(model.getCurrentCard());
+                    for (Player player : model.getPlayersInGame()) {
+                        updatePlayerHand(player);
+                    }
+                    updatePlayerTurnLabel(model.getCurrentTurn());
+                }
+            }
+        });
+
+        leftPanel.add(loadGameButton);
 
         // Add a button to undo a turn
         undoButton = new JButton("Undo");

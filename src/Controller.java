@@ -6,9 +6,10 @@
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.Serializable;
 import java.util.Collections;
 
-public class Controller implements ActionListener {
+public class Controller implements ActionListener, Serializable {
     private Game game;
     private Gui gui;
     private boolean tf;

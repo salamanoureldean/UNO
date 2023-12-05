@@ -5,10 +5,11 @@
  * @version: 1.00
  */
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Stack;
 
-public class Deck {
+public class Deck implements Serializable {
 
     private Stack<Card> completeDeck = new Stack<Card>();
     private Stack<Card> discardPile = new Stack<Card>();
