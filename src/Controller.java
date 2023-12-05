@@ -74,6 +74,7 @@ public class Controller implements ActionListener, Serializable {
                 for (int i = 0; i < game.getPlayersInGame().size(); i++){
                     gui.updatePlayerHand(game.getPlayersInGame().get(i));
                 }
+                refreshActionListeners();
             }
         }
         else {
@@ -579,6 +580,14 @@ public class Controller implements ActionListener, Serializable {
                 found = true;
             }
             gui.updatePlayerHand(player);
+        }
+    }
+
+    private void refreshActionListeners(){
+        for (int i = 0; i < game.getPlayersInGame().size(); i++) {
+            for (int j = 0; j < game.getPlayersInGame().get(i).getHand().getCards().size(); j++) {
+                game.getPlayersInGame().get(i).getHand().getCards().get(j).getCardButton().addActionListener(this);
+            }
         }
     }
 
