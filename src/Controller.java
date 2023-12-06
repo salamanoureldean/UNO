@@ -55,16 +55,23 @@ public class Controller implements ActionListener, Serializable {
             game.saveGame();
         }
         else if(e.getSource() == gui.getLoadButton()){
-            Game loadedGame = Game.loadGame();
-            if(loadedGame != null) {
-                game = loadedGame;
-                gui.updateGameState(loadedGame); //update game state
-                gui.refreshGuiComponents(); //refresh gui
-                refreshActionListeners(); //refresh action listeners.
-            }
+            handleLoadAction();
         }
         else {
             handleCardAction(e);
+        }
+    }
+
+    /**
+     * This method handles what happens when load is pressed.
+     */
+    private void handleLoadAction() {
+        Game loadedGame = Game.loadGame();
+        if(loadedGame != null) {
+            game = loadedGame;
+            gui.updateGameState(loadedGame); //update game state
+            gui.refreshGuiComponents(); //refresh gui
+            refreshActionListeners(); //refresh action listeners.
         }
     }
 
