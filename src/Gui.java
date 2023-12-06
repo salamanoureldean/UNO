@@ -433,4 +433,28 @@ public class Gui implements Serializable {
     public JButton getLoadButton(){
         return loadGameButton;
     }
+
+    public void refreshGuiComponents() {
+        turnLabel.setText("Current Player: " + model.getCurrentPlayer().getName());
+        statusTextArea.setText("Current Card: " + model.getCurrentCard().stringCard());
+        updatePlayerHand(model.getCurrentPlayer());
+        updateCurrentCard(model.getCurrentCard());
+
+        handPanel.revalidate();
+        handPanel.repaint();
+        topCardPanel.revalidate();
+        topCardPanel.repaint();
+        bottomPanel.revalidate();
+        bottomPanel.repaint();
+    }
+
+    public void updateGameState(Game loadedGame) {
+        this.numberOfPlayers = loadedGame.getPlayersInGame().size();
+        this.model = loadedGame;
+
+        updatePlayerHand(loadedGame.getCurrentPlayer());
+        updateCurrentCard(loadedGame.getCurrentCard());
+    }
+
+
 }

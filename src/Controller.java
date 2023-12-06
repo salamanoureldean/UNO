@@ -65,16 +65,9 @@ public class Controller implements ActionListener, Serializable {
             Game loadedGame = Game.loadGame();
             if(loadedGame != null) {
                 game = loadedGame;
-
-
-                gui.updatePlayerTurnLabel(game.getCurrentTurn());
-                gui.getStatusTextArea().setText("Current Card: " + game.getCurrentCard());
-                gui.updateCurrentCard(game.getCurrentCard());
-
-                for (int i = 0; i < game.getPlayersInGame().size(); i++){
-                    gui.updatePlayerHand(game.getPlayersInGame().get(i));
-                }
-                refreshActionListeners();
+                gui.updateGameState(loadedGame); //update game state
+                gui.refreshGuiComponents(); //refresh gui
+                refreshActionListeners(); //refresh action listeners.
             }
         }
         else {
