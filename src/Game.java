@@ -18,7 +18,8 @@ public class Game implements Serializable {
     private Player lastPlayer;
     private Deck lastDeck;
     private int lastTurn;
-
+    private boolean lastMode;
+    private Card  lastPlayedCard;
     private String gameState;
 
 
@@ -70,6 +71,7 @@ public class Game implements Serializable {
         Player currentPlayer = getCurrentPlayer();
         theDeck.isZero(currentCard);
         currentPlayer.drawCard(theDeck);
+        //storeGameState();
         return true;
     }
 
@@ -80,10 +82,12 @@ public class Game implements Serializable {
      * @return true if the card is successfully played; false otherwise.
      */
     public boolean removeCardFromHand(Card cardToPlay) {
+        //storeGameState();
         Player currentPlayer = getCurrentPlayer();
         if (cardToPlay != null && isPlayable(cardToPlay)) {
-            //add current card before card is played to card pile
+            //add current card before new card is played to card pile
             this.discardPile.add(currentCard);
+
             currentCard = cardToPlay;
             theDeck.place(cardToPlay);
             currentPlayer.playCard(cardToPlay);
@@ -243,18 +247,26 @@ public class Game implements Serializable {
      * @return The index of the next player.
      */
     public void nextPlayer() {
+        //update current turn for normal playing procedures
+        currentTurn = (currentTurn+1) % playersInGame.size();
+    }
+
+    public void storeGameState(){
+        System.out.println("REACHED STOREGAMESTATE IN GAME CLASS");
         //make the current player the last player
         lastPlayer = getCurrentPlayer();
-        //save current hand state to resort to
-        lastPlayer.storeStateBeforeTurn();
+        //save current hand state to restore to
+        lastPlayer.storeHandBeforeTurn();
         //save the current deck
         lastDeck = getTheDeck();
         //save last turn
         lastTurn = getCurrentTurn();
+        //save last mode (light or dark)
+        lastMode = getIsLightSide();
+    }
 
-        //-----------------------------------------------------------------------------------
-        //update current turn for normal playing procedures
-        currentTurn = (currentTurn+1) % playersInGame.size();
+    public boolean getLastMode(){
+        return lastMode;
     }
 
     /**
@@ -351,12 +363,17 @@ public class Game implements Serializable {
         return isLightSide;
     }
 
+    public Player getLastPlayer(){
+        return lastPlayer;
+    }
 
     public void undoTurn() {
         if (!discardPile.isEmpty()) {
             System.out.print("Reached undoTurn method in game");
             //get the last played card
-            Card lastPlayedCard = discardPile.pop();
+            lastPlayedCard = discardPile.pop();
+            //add played card back to the last player's hand
+            lastPlayer.getHand().addPreviousCard(currentCard);
 
             //restore the current card
             setCurrentCard(lastPlayedCard);
@@ -367,23 +384,13 @@ public class Game implements Serializable {
             //reset the turn to one turn back
             currentTurn = lastTurn;
 
-            lastPlayer.restoreStateBeforeTurn();
+            //reset the side of the game (light or dark)
+            isLightSide = getLastMode();
+            System.out.println(isLightSide);
         }
-/*
-        // Update GUI and other necessary components
-        gui.updateCurrentCard(lastPlayedCard);
-        gui.updatePlayerHand(lastPlayer);
+    }
 
-        // Enable Redo button
-        gui.getRedoButton().setEnabled(true);
-
-
-        // Disable Undo button
-        gui.getUndoButton().setEnabled(false);
-
-        // Update status
-        gui.getStatusTextArea().setText("Turn undone.");
-
- */
+    public Card getLastPlayedCard(){
+        return lastPlayedCard;
     }
 }

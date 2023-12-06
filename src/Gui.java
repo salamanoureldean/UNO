@@ -413,7 +413,7 @@ public class Gui implements Serializable {
         return topCardPanel;
     }
 
-     /**
+    /**
      * Retrieves the hand panel.
      *
      * @return The hand panel.

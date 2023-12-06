@@ -50,6 +50,7 @@ public class Hand implements Serializable {
         cardNum +=1;
     }
 
+
     /**
      * removeCard method, removes a card
      * @param card - removes specified card in the param
@@ -85,5 +86,9 @@ public class Hand implements Serializable {
     public void setCards(ArrayList<Card> cards) {
         this.cards = new ArrayList<>(cards);
         this.cardNum = cards.size();
+    }
+
+    public void addPreviousCard(Card card){
+        cards.add(card);
     }
 }

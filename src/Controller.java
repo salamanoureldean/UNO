@@ -49,14 +49,7 @@ public class Controller implements ActionListener, Serializable {
             handleNextPlayerAction();
         } else if(e.getSource() == gui.getUndoButton()){
             //==================================================================================================================================
-            gui.getUndoButton().setEnabled(false);
-            System.out.println("reached handleUndoAction in controller");
-            game.undoTurn();
-            processTurn();
-            gui.updateCurrentCard(game.getCurrentCard());
-            gui.getUndoButton().setEnabled(false);
-            gui.getStatusTextArea().setText("Turn has been Undone.\nCurrent Card: " + game.getCurrentCard().stringCard());
-            //handleUndoAction();
+            handleUndoAction();
         }
         else if(e.getSource() == gui.getSaveButton()){
             game.saveGame();
@@ -85,6 +78,9 @@ public class Controller implements ActionListener, Serializable {
             gui.addLatestCardToHandDisplay();
         }
         game.getCurrentPlayer().getLastCard().getCardButton().addActionListener(this);
+
+        game.storeGameState();
+
         gui.getDrawCardButton().setEnabled(false);
         gui.getNextPlayerButton().setEnabled(true);
         gui.getNextPlayerButton().setEnabled(true);
@@ -106,10 +102,49 @@ public class Controller implements ActionListener, Serializable {
     private void handleUndoAction() {
         gui.getUndoButton().setEnabled(false);
         System.out.println("reached handleUndoAction in controller");
+        //game.getLastPlayer().restoreStateBeforeTurn();
         game.undoTurn();
-        processTurn();
+
+        gui.refreshGuiComponents(); //refresh gui
+        refreshActionListeners(); //refresh action listeners.
+
+        //cardFunctionality(game.getLastPlayedCard());
+
+        processUndoTurn();
+        gui.updateCurrentCard(game.getCurrentCard());
         gui.getUndoButton().setEnabled(false);
         gui.getStatusTextArea().setText("Turn has been Undone.\nCurrent Card: " + game.getCurrentCard().stringCard());
+    }
+
+    private void processUndoTurn() {
+        Player currentPlayer = game.getCurrentPlayer();
+        gui.updatePlayerTurnLabel(game.getCurrentTurn());
+
+        if (currentPlayer instanceof AIPlayer) {
+            AIPlayer aiPlayer = (AIPlayer) currentPlayer;
+            gui.updateAIHand(aiPlayer, game.getIsLightSide());
+
+            boolean shouldDrawCard = aiPlayer.shouldDrawCard(game.getCurrentCard(), game);
+            if (shouldDrawCard) {
+                game.addCardToHand();
+                handleDrawCardAction();
+            } else {
+                Card playedCard = aiPlayer.makeMove(game.getCurrentCard(), game);
+                cardFunctionality(playedCard);
+            }
+
+            gui.updateCurrentCard(game.getCurrentCard());
+            gui.updateAIHand(aiPlayer, game.getIsLightSide());
+
+        } else {
+            // Human player logic
+            gui.updatePlayerHand(game.getLastPlayer());
+            gui.getDrawCardButton().setEnabled(true);
+            gui.getNextPlayerButton().setEnabled(false);
+        }
+
+        gui.getStatusTextArea().setText("Current Card: " + game.getCurrentCard().stringCard());
+        checkForGameWinner();
     }
 
     private void processTurn() {
@@ -197,6 +232,7 @@ public class Controller implements ActionListener, Serializable {
      * @param card The card to be placed in the game.
      */
     private void processCardPlacement(Card card) {
+        game.storeGameState();
         if (gui.removeCardFromHand(card)) {
             cardFunctionality(card);
             handleSuccessfulCardPlacement();
@@ -205,7 +241,6 @@ public class Controller implements ActionListener, Serializable {
             gui.getStatusTextArea().setText("Invalid Move!");
         }
     }
-
 
     /**
      * Prompts the specified player with a confirmation dialog to determine if they

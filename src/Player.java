@@ -92,7 +92,7 @@ public class Player implements Serializable {
      */
     public void playCard(Card card) {
         //store state before playing a card
-        storeStateBeforeTurn();
+        //storeStateBeforeTurn();
         hand.removeCard(card);
     }
 
@@ -149,13 +149,13 @@ public class Player implements Serializable {
         return false;
     }
 
-    public void storeStateBeforeTurn() {
-        // Store the state before playing a card
+    public void storeHandBeforeTurn() {
+        //store the state before playing a card
         beforeTurnHand = getHand();
     }
 
     public void restoreStateBeforeTurn() {
-        // Restore the state before the last turn
+        //restore the state before the last turn
         if (beforeTurnHand != null) {
             hand.setCards(beforeTurnHand.getCards());
         }
@@ -167,7 +167,9 @@ public class Player implements Serializable {
         }
     }
 
-
+    public Hand getbeforeTurnHand(){
+        return this.beforeTurnHand;
+    }
 
 
 }
