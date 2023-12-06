@@ -254,7 +254,12 @@ public class Game implements Serializable {
     public void storeGameState(){
         System.out.println("REACHED STOREGAMESTATE IN GAME CLASS");
         //make the current player the last player
-        lastPlayer = getCurrentPlayer();
+        if(currentTurn == playersInGame.size()){
+            lastPlayer = playersInGame.get(currentTurn-1);
+        }
+        else{
+            lastPlayer = getCurrentPlayer();
+        }
         //save current hand state to restore to
         lastPlayer.storeHandBeforeTurn();
         //save the current deck

@@ -185,8 +185,6 @@ public class Controller implements ActionListener, Serializable {
         checkForGameWinner();
     }
 
-
-
     /**
      * Handles the action triggered by selecting a card button. It identifies the
      * selected card from the ActionEvent, processes its placement if it is a valid move,
@@ -282,7 +280,22 @@ public class Controller implements ActionListener, Serializable {
      */
     private void checkForGameWinner() {
         if (game.checkWinner()) {
-            JOptionPane.showMessageDialog(gui.getGameFrame(), "Congratulations " + game.getCurrentPlayer().getName() + " you WON with a score of: " + game.winnerScore());
+            int playerWon = 0;
+            for(int i=0; i < game.getPlayersInGame().size(); i++){
+                if(game.getCurrentPlayer().equals(game.getPlayersInGame().get(i))){
+                    if(i == game.getPlayersInGame().size()-1){
+                        playerWon = 0;
+                        break;
+                    } else if (i == 0) {
+                        playerWon = game.getPlayersInGame().size()-1;
+                        break;
+                    } else{
+                        playerWon = i;
+                        break;
+                    }
+                }
+            }
+            JOptionPane.showMessageDialog(gui.getGameFrame(), "Congratulations " + game.getPlayersInGame().get(playerWon).getName() + " you WON with a score of: " + game.winnerScore());
             System.exit(0);
         }
     }
