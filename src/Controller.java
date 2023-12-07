@@ -48,7 +48,6 @@ public class Controller implements ActionListener, Serializable {
         } else if (e.getSource() == gui.getNextPlayerButton()) {
             handleNextPlayerAction();
         } else if(e.getSource() == gui.getUndoButton()){
-            //==================================================================================================================================
             handleUndoAction();
         }
         else if(e.getSource() == gui.getSaveButton()){
@@ -110,6 +109,34 @@ public class Controller implements ActionListener, Serializable {
         gui.getUndoButton().setEnabled(false);
         System.out.println("reached handleUndoAction in controller");
         //game.getLastPlayer().restoreStateBeforeTurn();
+        if(game.getLastMode() != game.getIsLightSide()){
+            System.out.println("\nFLIPPED GAME STATE AFTER UNDO");
+            game.flipGameState();
+            game.undoTurn();
+            //flip the complete deck so that when a card is drawn, it is a dark/light card according to the gameState
+            for(Card card: game.getTheDeck().getCompleteDeck()){
+                card.flipCard();
+            }
+
+            //flip each player's hand
+            for(Player player : game.getPlayersInGame()) {
+                for (Card card : player.getHand().getCards()) {
+                    card.flipCard();
+                }
+            }
+
+            gui.refreshGuiComponents(); //refresh gui
+            refreshActionListeners(); //refresh action listeners.
+
+            //cardFunctionality(game.getLastPlayedCard());
+
+            processUndoTurn();
+            gui.updateCurrentCard(game.getCurrentCard());
+            gui.getUndoButton().setEnabled(false);
+            gui.getStatusTextArea().setText("Turn has been Undone.\nCurrent Card: " + game.getCurrentCard().stringCard());
+            return;
+        }
+
         game.undoTurn();
 
         gui.refreshGuiComponents(); //refresh gui
