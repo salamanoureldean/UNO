@@ -209,7 +209,6 @@ public class Controller implements ActionListener, Serializable {
         if (game.getCurrentPlayer() instanceof AIPlayer) {
             handleSuccessfulCardPlacement();
         }
-
     }
 
     /**
@@ -296,7 +295,12 @@ public class Controller implements ActionListener, Serializable {
                 }
             }
             JOptionPane.showMessageDialog(gui.getGameFrame(), "Congratulations " + game.getPlayersInGame().get(playerWon).getName() + " you WON with a score of: " + game.winnerScore());
-            System.exit(0);
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    ExitMenuGUI exitMenu = new ExitMenuGUI();
+                    exitMenu.setVisible(true);
+                }
+            });
         }
     }
 
