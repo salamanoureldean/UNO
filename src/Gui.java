@@ -28,6 +28,7 @@ public class Gui implements Serializable {
     private JButton nextPlayerButton;
     private JButton drawCardButton;
     private JButton undoButton;
+    private JButton redoButton;
     private JTextArea statusTextArea;
     private boolean mode;
     private JButton saveGameButton;
@@ -139,6 +140,11 @@ public class Gui implements Serializable {
         undoButton = new JButton("Undo");
         leftPanel.add(undoButton);
         undoButton.setEnabled(false);
+
+        //Add a button to redo a turn
+        redoButton = new JButton("Redo");
+        leftPanel.add(redoButton);
+        redoButton.setEnabled(false);
 
         // Create a panel to display current player's hand using buttons
         handPanel = new JPanel(new GridLayout(1, 0));
@@ -424,6 +430,9 @@ public class Gui implements Serializable {
 
     public JButton getUndoButton() {
         return undoButton;
+    }
+    public JButton getRedoButton() {
+        return redoButton;
     }
 
     public JButton getSaveButton() {

@@ -28,6 +28,7 @@ public class Controller implements ActionListener, Serializable {
         this.game = game;
         this.gui = gui;
         gui.getUndoButton().addActionListener(this);
+        gui.getRedoButton().addActionListener(this);
     }
 
     /**
@@ -55,6 +56,9 @@ public class Controller implements ActionListener, Serializable {
         }
         else if(e.getSource() == gui.getLoadButton()){
             handleLoadAction();
+        }
+        else if(e.getSource() == gui.getRedoButton()){
+            handleRedoAction();
         }
         else {
             handleCardAction(e);
@@ -105,8 +109,20 @@ public class Controller implements ActionListener, Serializable {
         gui.getUndoButton().setEnabled(true);
     }
 
+    private void handleRedoAction(){
+        gui.getUndoButton().setEnabled(true);
+        gui.getRedoButton().setEnabled(false);
+        game.redoTurn();
+        Player currentPlayer = game.getCurrentPlayer();
+        gui.updateCurrentCard(game.getCurrentCard());
+        gui.updatePlayerHand(currentPlayer);
+        gui.disableHand();
+        gui.refreshGuiComponents(); //refresh gui
+        refreshActionListeners(); //refresh action listeners.
+    }
     private void handleUndoAction() {
         gui.getUndoButton().setEnabled(false);
+        gui.getRedoButton().setEnabled(true);
         System.out.println("reached handleUndoAction in controller");
         //game.getLastPlayer().restoreStateBeforeTurn();
         if(game.getLastMode() != game.getIsLightSide()){

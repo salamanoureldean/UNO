@@ -22,6 +22,8 @@ public class Game implements Serializable {
     private Card  lastPlayedCard;
     private String gameState;
 
+    private Card currentCardBeforeUndo;
+
 
 
     /**
@@ -375,16 +377,12 @@ public class Game implements Serializable {
     public void undoTurn() {
         if (!discardPile.isEmpty()) {
             System.out.print("Reached undoTurn method in game");
-            //reset the side of the game (light or dark)
-            if(getLastMode() != getIsLightSide()){
-                System.out.println("\nFLIPPED GAME STATE AFTER UNDO");
-                flipGameState();
-            }
             //get the last played card
             lastPlayedCard = discardPile.pop();
             //add played card back to the last player's hand
             lastPlayer.getHand().addPreviousCard(currentCard);
 
+            currentCardBeforeUndo = currentCard;
             //restore the current card
             setCurrentCard(lastPlayedCard);
 
@@ -394,9 +392,16 @@ public class Game implements Serializable {
             //reset the turn to one turn back
             currentTurn = lastTurn;
 
-            //isLightSide = getLastMode();
-            System.out.println("\nisLightSide is " + isLightSide);
+            //reset the side of the game (light or dark)
+            isLightSide = getLastMode();
+            System.out.println(isLightSide);
         }
+    }
+
+    public void redoTurn(){
+        discardPile.add(currentCard);
+        setCurrentCard(currentCardBeforeUndo);
+        getCurrentPlayer().getHand().removeCard(currentCardBeforeUndo);
     }
 
     public Card getLastPlayedCard(){
