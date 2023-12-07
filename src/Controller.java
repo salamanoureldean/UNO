@@ -116,9 +116,11 @@ public class Controller implements ActionListener, Serializable {
         Player currentPlayer = game.getCurrentPlayer();
         gui.updateCurrentCard(game.getCurrentCard());
         gui.updatePlayerHand(currentPlayer);
-        gui.disableHand();
+
         gui.refreshGuiComponents(); //refresh gui
         refreshActionListeners(); //refresh action listeners.
+        gui.getNextPlayerButton().setEnabled(true);
+        gui.disableHand();
     }
     private void handleUndoAction() {
         gui.getUndoButton().setEnabled(false);
