@@ -33,6 +33,8 @@ public class Gui implements Serializable {
     private boolean mode;
     private JButton saveGameButton;
     private JButton loadGameButton;
+    private JButton replayButton;
+    private Restart restart;
 
     /**
      * Constructor for the GUI class which sets up the frame.
@@ -135,6 +137,11 @@ public class Gui implements Serializable {
         loadGameButton = new JButton("Load Game");
 
         leftPanel.add(loadGameButton);
+
+        // Replay button
+        replayButton = new JButton("Replay");
+        leftPanel.add(replayButton);
+        restart = new Restart(replayButton);
 
         // Add a button to undo a turn
         undoButton = new JButton("Undo");
@@ -465,5 +472,11 @@ public class Gui implements Serializable {
         updateCurrentCard(loadedGame.getCurrentCard());
     }
 
+    public JButton getReplayButton() {
+        return replayButton;
+    }
 
+    public Restart getRestart() {
+        return restart;
+    }
 }

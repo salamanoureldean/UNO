@@ -102,6 +102,7 @@ public class MainMenuGUI extends JFrame {
         gui.getNextPlayerButton().addActionListener(controller);
         gui.getSaveButton().addActionListener(controller);
         gui.getLoadButton().addActionListener(controller);
+        gui.getReplayButton().addActionListener(controller);
         controller.cardFunctionality(game.getCurrentCard());
     }
 

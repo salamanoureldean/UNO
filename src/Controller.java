@@ -60,6 +60,9 @@ public class Controller implements ActionListener, Serializable {
         else if(e.getSource() == gui.getRedoButton()){
             handleRedoAction();
         }
+        else if(e.getSource() == gui.getReplayButton()){
+            gui.getRestart().restartGame(gui.getGameFrame());
+        }
         else {
             handleCardAction(e);
         }
@@ -687,5 +690,7 @@ public class Controller implements ActionListener, Serializable {
             }
         }
     }
+
+
 
 }
