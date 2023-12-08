@@ -15,6 +15,7 @@ public class Controller implements ActionListener, Serializable {
     private boolean tf;
     private boolean gameStart = true;
     private int round =1;
+    private boolean flipCheck=false;
 
     /**
      * Constructs a new Controller object that manages the interaction between the
@@ -115,6 +116,21 @@ public class Controller implements ActionListener, Serializable {
     private void handleRedoAction(){
         gui.getUndoButton().setEnabled(true);
         gui.getRedoButton().setEnabled(false);
+
+        if (flipCheck == true) {
+            game.flipGameState();
+            for(Card card: game.getTheDeck().getCompleteDeck()){
+                card.flipCard();
+            }
+
+            //flip each player's hand
+            for(Player player : game.getPlayersInGame()) {
+                for (Card card : player.getHand().getCards()) {
+                    card.flipCard();
+                }
+            }
+        }
+
         game.redoTurn();
         Player currentPlayer = game.getCurrentPlayer();
         gui.updateCurrentCard(game.getCurrentCard());
@@ -131,6 +147,7 @@ public class Controller implements ActionListener, Serializable {
         System.out.println("reached handleUndoAction in controller");
         //game.getLastPlayer().restoreStateBeforeTurn();
         if(game.getLastMode() != game.getIsLightSide()){
+            flipCheck = true;
             System.out.println("\nFLIPPED GAME STATE AFTER UNDO");
             game.flipGameState();
             game.undoTurn();
