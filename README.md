@@ -8,18 +8,24 @@ The Uno Flip Card Game is an enhanced Java GUI-based implementation of the class
 - [Getting Started](#getting-started)
 - [How to Play](#how-to-play)
 - [Challenging UNO Flip Rules](#challenging-uno-flip-rules)
+- [Save/Load Game](#save-load-game)
+- [Redo/Undo Move](#redo-undo-move)
+- [Replay Game](#replay-game)
 - [Contributing](#contributing)
 - [License](#license)
 
 ## Features
 
 - Supports 2 to 12 players with an interactive graphical user interface.
-- Includes an AI player option, allowing for for up to 6 AI's.
+- Includes an AI player option, allowing for up to 6 AIs.
 - Combines standard Uno with the light and dark sides of Uno Flip, offering a dynamic gameplay experience.
 - Enhanced gameplay experience through mouse interactions in a JFrame environment.
 - Includes a "Next Player" button to facilitate controlled game progression.
 - Flip Card to switch between light and dark sides of the deck.
 - User-friendly and visually appealing design for an immersive playing experience.
+- Save and load game function.
+- Redo/Undo move feature.
+- Replay game option.
 
 ## Game Rules
 
@@ -69,11 +75,20 @@ Players can challenge Wild Draw Two and Wild Draw Color cards if they suspect th
 In case of a successful challenge, the player who played the action card draws cards instead.
 If the challenge is unsuccessful, the challenger draws additional cards as per the rules of the challenged card.
 
+## Save/Load Game
+New: Save and load game function allows players to save the current state of the game and resume it later.
+
+## Redo/Undo Move
+New: Redo/Undo move feature enables players to undo their last move or redo a previously undone move.
+
+## Replay Game
+New: Replay game option lets players restart the game from the beginning for a fresh gaming experience.
+
 ## Contributing
 
 ### Contributors
 - Mahad Mohamed Yonis
-- Abody Majeed - JavaDocs
+- Abody Majeed
 - Salama Noureldean
 - Pietro Adamvoski
 
