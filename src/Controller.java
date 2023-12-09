@@ -113,6 +113,11 @@ public class Controller implements ActionListener, Serializable {
         gui.getUndoButton().setEnabled(true);
     }
 
+    /**
+     * Handles the redo action in the game, enabling and disabling GUI buttons as needed,
+     * flipping cards if specified, redoing the turn, updating GUI components, and refreshing
+     * actionListeners.
+     */
     private void handleRedoAction(){
         gui.getUndoButton().setEnabled(true);
         gui.getRedoButton().setEnabled(false);
@@ -141,6 +146,11 @@ public class Controller implements ActionListener, Serializable {
         gui.getNextPlayerButton().setEnabled(true);
         gui.disableHand();
     }
+
+    /**
+     * Handles the undo action in the game, updating GUI buttons, flipping the game state
+     * if necessary, and undoing the last turn.
+     */
     private void handleUndoAction() {
         gui.getUndoButton().setEnabled(false);
         gui.getRedoButton().setEnabled(true);
@@ -188,6 +198,11 @@ public class Controller implements ActionListener, Serializable {
         gui.getStatusTextArea().setText("Turn has been Undone.\nCurrent Card: " + game.getCurrentCard().stringCard());
     }
 
+
+    /**
+     * Handles the undo action in the game, updating GUI buttons, flipping the game state
+     * if necessary, and undoing the last turn.
+     */
     private void processUndoTurn() {
         Player currentPlayer = game.getCurrentPlayer();
         gui.updatePlayerTurnLabel(game.getCurrentTurn());
@@ -219,6 +234,11 @@ public class Controller implements ActionListener, Serializable {
         checkForGameWinner();
     }
 
+    /**
+     * Processes the current turn, updating the player's turn label, handling AI player moves,
+     * and enabling/disabling relevant GUI components. It also updates the current card in the GUI,
+     * displays the current card information in the status text area, and checks for a game winner.
+     */
     private void processTurn() {
         Player currentPlayer = game.getCurrentPlayer();
         gui.updatePlayerTurnLabel(game.getCurrentTurn());
@@ -700,6 +720,10 @@ public class Controller implements ActionListener, Serializable {
         }
     }
 
+    /**
+     * Refreshes action listeners for the card buttons in each player's hand.
+     * Iterates through all players and their hands, adding action listeners to each card button.
+     */
     private void refreshActionListeners(){
         for (int i = 0; i < game.getPlayersInGame().size(); i++) {
             for (int j = 0; j < game.getPlayersInGame().get(i).getHand().getCards().size(); j++) {

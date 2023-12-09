@@ -7,9 +7,19 @@ public class Restart implements Serializable {
     private Game game;
     private Controller controller;
     private JButton restartButton;
+
+
+    /**
+     * Constructor for the Restart class.
+     */
     public Restart(JButton restartButton){
         this.restartButton = restartButton;
     }
+
+    /**
+     * Restarts the game by disposing of the current JFrame, creating a new GUI, and setting up
+     * a new game instance with corresponding controllers and action listeners.
+     */
     public void restartGame(JFrame frame) {
         frame.dispose();
         gui = new Gui();

@@ -149,27 +149,16 @@ public class Player implements Serializable {
         return false;
     }
 
-    public void storeHandBeforeTurn() {
-        //store the state before playing a card
-        beforeTurnHand = getHand();
-    }
-
-    public void restoreStateBeforeTurn() {
-        //restore the state before the last turn
-        if (beforeTurnHand != null) {
-            hand.setCards(beforeTurnHand.getCards());
+    /**
+     * Stores the current state of the player's hand before taking a turn.
+     * This method is typically used in a card game to capture the state of the player's
+     * hand before playing a card or making a move, allowing for potential undo or
+     * comparison of the hand state after the turn.
+     */
+     public void storeHandBeforeTurn() {
+            //store the state before playing a card
+            beforeTurnHand = getHand();
         }
-    }
-    public void undo() {
-        if (beforeTurnHand != null) {
-            hand.setCards(beforeTurnHand.getCards());
-            beforeTurnHand = null;  //Reset the state before the turn after undo
-        }
-    }
-
-    public Hand getbeforeTurnHand(){
-        return this.beforeTurnHand;
-    }
 
 
 }

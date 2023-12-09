@@ -54,16 +54,24 @@ public class Game implements Serializable {
         discardPile.add(currentCard);
     }
 
+    /**
+     * Saves the current game state to a file using object serialization.
+     */
     public void saveGame() {
         String fileName = "game_state.ser";
         SerializationUtil.saveGame(this, fileName);
     }
 
 
+    /**
+     * Loads a serialized game state from a file using object deserialization.
+     * @return The loaded Game object.
+     */
     public static Game loadGame() {
         String fileName = "game_state.ser";
         return SerializationUtil.loadGame(fileName);
     }
+
     /**
      * Adds a card to the current player's hand.
      *
@@ -253,6 +261,9 @@ public class Game implements Serializable {
         currentTurn = (currentTurn+1) % playersInGame.size();
     }
 
+    /**
+     * Stores the current game state for potential future restoration.
+     */
     public void storeGameState(){
         System.out.println("REACHED STOREGAMESTATE IN GAME CLASS");
         //make the current player the last player
@@ -272,6 +283,10 @@ public class Game implements Serializable {
         lastMode = getIsLightSide();
     }
 
+    /**
+     * Gets the last mode (light or dark) stored in the game state.
+     * @return The last mode (light or dark).
+     */
     public boolean getLastMode(){
         return lastMode;
     }
@@ -370,10 +385,17 @@ public class Game implements Serializable {
         return isLightSide;
     }
 
+    /**
+     * Gets the last player stored in the game state.
+     * @return The last player.
+     */
     public Player getLastPlayer(){
         return lastPlayer;
     }
 
+    /**
+     * Undoes the last turn in the game, restoring the game state to the state one turn before.
+     */
     public void undoTurn() {
         if (!discardPile.isEmpty()) {
             System.out.print("Reached undoTurn method in game");
@@ -398,13 +420,12 @@ public class Game implements Serializable {
         }
     }
 
+    /**
+     * Redoes the last turn in the game, restoring the game state to the state after the last undo.
+     */
     public void redoTurn(){
         discardPile.add(currentCard);
         setCurrentCard(currentCardBeforeUndo);
         getCurrentPlayer().getHand().removeCard(currentCardBeforeUndo);
-    }
-
-    public Card getLastPlayedCard(){
-        return lastPlayedCard;
     }
 }

@@ -9,6 +9,9 @@ public class ExitMenuGUI extends JFrame {
     private Game game;
     private Controller controller;
 
+    /**
+     * Constructor for the ExitMenuGUI.
+     */
     public ExitMenuGUI() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
@@ -27,6 +30,10 @@ public class ExitMenuGUI extends JFrame {
         panel.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
 
+
+    /**
+     * Adds a styled JButton to a JPanel with the specified text, ActionListener, and mouse hover effects.
+     */
     private void addButton(JPanel panel, String text, ActionListener actionListener) {
         JButton button = new JButton(text);
         button.setMaximumSize(new Dimension(300, 60));
@@ -47,6 +54,9 @@ public class ExitMenuGUI extends JFrame {
         panel.add(Box.createRigidArea(new Dimension(0, 15)));
     }
 
+    /**
+     * Styles the specified JButton with a specified font, text color, background color, and alignment.
+     */
     private void styleButton(JButton button, String buttonText) {
         button.setFont(new Font("Segoe UI", Font.BOLD, 20));
         button.setForeground(Color.WHITE);
@@ -69,10 +79,18 @@ public class ExitMenuGUI extends JFrame {
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
 
-
+    /**
+     * Exits the application by terminating the Java Virtual Machine with a status code of 0.
+     */
     private void quit() {
         System.exit(0);
     }
+
+    /**
+     * Initializes the game by creating a new GUI, game model, and controller.
+     * Adds action listeners to relevant components and invokes card functionality for the
+     * current card in the game.
+     */
     private void initialize() {
         gui = new Gui();
         game = gui.getModel();

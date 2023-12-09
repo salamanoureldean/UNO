@@ -418,38 +418,44 @@ public class Gui implements Serializable {
     }
 
     /**
-     * Retrieves the top card panel.
+     * Retrieves the JButton instance associated with undoing an action.
      *
-     * @return The top card panel.
+     * @return The JButton instance representing the button used to undo an action.
      */
-    public JPanel getTopCardPanel() {
-        return topCardPanel;
-    }
-
-    /**
-     * Retrieves the hand panel.
-     *
-     * @return The hand panel.
-     */
-    public JPanel getHandPanel() {
-        return handPanel;
-    }
-
     public JButton getUndoButton() {
         return undoButton;
     }
+
+    /**
+     * Retrieves the JButton instance associated with redoing an action.
+     *
+     * @return The JButton instance representing the button used to redo an action.
+     */
     public JButton getRedoButton() {
         return redoButton;
     }
 
+    /**
+     * Retrieves the JButton instance associated with saving a game.
+     * @return The JButton instance representing the button used to save a game.
+     */
     public JButton getSaveButton() {
         return saveGameButton;
     }
 
+    /**
+     * Retrieves the JButton instance associated with loading a game.
+     * @return The JButton instance representing the button used to load a game.
+     */
     public JButton getLoadButton(){
         return loadGameButton;
     }
 
+    /**
+     * Refreshes the graphical user interface (GUI) components of the card game.
+     * This method updates various GUI elements such as player information, current card,
+     * player hand display, and the panels containing these components.
+     */
     public void refreshGuiComponents() {
         turnLabel.setText("Current Player: " + model.getCurrentPlayer().getName());
         statusTextArea.setText("Current Card: " + model.getCurrentCard().stringCard());
@@ -464,6 +470,10 @@ public class Gui implements Serializable {
         bottomPanel.repaint();
     }
 
+    /**
+     * Updates the current game state based on the loaded game.
+     * @param loadedGame The loaded game whose state will be used to update the current game state.
+     */
     public void updateGameState(Game loadedGame) {
         this.numberOfPlayers = loadedGame.getPlayersInGame().size();
         this.model = loadedGame;
@@ -472,10 +482,18 @@ public class Gui implements Serializable {
         updateCurrentCard(loadedGame.getCurrentCard());
     }
 
+    /**
+     * Gets the JButton representing the replay button in the game.
+     * @return The JButton representing the replay button.
+     */
     public JButton getReplayButton() {
         return replayButton;
     }
 
+    /**
+     * Gets the Restart object associated with the restart functionality in the game.
+     * @return The Restart object associated with the restart functionality.
+     */
     public Restart getRestart() {
         return restart;
     }
