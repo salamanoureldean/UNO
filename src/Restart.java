@@ -1,6 +1,7 @@
 import javax.swing.*;
+import java.io.Serializable;
 
-public class Restart {
+public class Restart implements Serializable {
 
     private Gui gui;
     private Game game;
