@@ -1,4 +1,4 @@
-# Uno FLip Card Game
+# Uno Flip Card Game
 
 The Uno Flip Card Game is an enhanced Java GUI-based implementation of the classic Uno game, integrating the exciting Uno Flip variant. This README provides an overview of the Uno Flip game's GUI version, highlighting its unique features, game rules, instructions on how to play, and the technicalities involved in the GUI and game logic.
 
